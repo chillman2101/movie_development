@@ -1,0 +1,38 @@
+  <% if Current.user %>
+  
+<div class="container">
+    <%= link_to  add_producer_path, class:'btn btn-primary btn-rounded' do %>
+     <span class="fa fa-plus-square "> Add Producer</span>
+    <%end%>
+	<table id="example" class="table table-striped table-bordered" style="width: 1000px;">
+		<thead>
+			<th>Producer Name</th>
+			<th>Born</th>
+      <th>Action</th>
+		</thead>
+		<tbody>
+			
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#example').DataTable({
+  ajax: {
+    url: '/get_dataproducer',
+    dataSrc: '',
+    serverSide: true,
+  },
+  columns: [
+    {title: 'Producer Name', data: 'name'},
+    {title: 'Born', data: 'born'},
+      {title: 'Action',data: 'id', render: function(data, type, row){<%= @film %>return "<a href='"+ data + "/producer/edit/'>Edit</a>"}},
+  ]
+});
+  });
+</script>
+    <% else %>
+    <%= link_to 'Sign Up', sign_up_path %>
+    or
+    <%= link_to 'Login', sign_in_path %>
+  <% end %>

@@ -1,0 +1,15 @@
+<h1>Edit Producer</h1>
+  <%= form_with model: @producer, url: update_producer_path do |f| %>
+    <p>
+    <%= f.label 'name' %><br>
+    <%= f.text_field :name %>
+    </p>
+    <p>
+    <%= f.label 'born' %><br>
+    <%= f.text_field :born %>
+    </p>
+    <p>
+    <p>
+    <%= f.submit 'Edit Producer' %>
+    </p>
+  <% end %>

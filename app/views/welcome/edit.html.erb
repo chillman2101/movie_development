@@ -1,0 +1,34 @@
+<h1>Edit Movie</h1>
+  <%= form_with model: @film, url: update_movie_path do |f| %>
+    <p>
+    <%= f.label 'title' %><br>
+    <%= f.text_field :title %>
+    </p>
+    <p>
+    <%= f.label 'release_date' %><br>
+    <%= f.text_field :release_date %>
+    </p>
+    <p>
+    <%= f.label 'rating' %><br>
+    <%= f.text_field :rating %>
+    </p>
+    <p>
+    <%= f.label 'genre' %><br>
+    <% if @genre.present? %>
+        <%= f.select( :genre_id, options_for_select(@genre.collect { |c| [c.name, c.id] }, {:selected => @film.genre_id})) %>
+    <% else %>
+        <%= f.select(:genre_id, options_for_select(@genre.collect { |c| [c.name, c.id] }) )%>
+    <% end %>
+    </p>
+    <p>
+    <%= f.label 'producer' %><br>
+    <% if @producer.present? %>
+        <%= f.select(:producer_id, options_for_select(@producer.collect { |c| [c.name, c.id] }, {:selected => @film.producer_id})) %>
+    <% else %>
+        <%= f.select(:producer_id, options_for_select(@producer.collect { |c| [c.name, c.id] })) %>
+    <% end %>
+    </p>
+    <p>
+    <%= f.submit 'Edit Movie' %>
+    </p>
+  <% end %>

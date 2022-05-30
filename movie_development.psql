@@ -1,0 +1,2466 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.11 (Ubuntu 12.11-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.11 (Ubuntu 12.11-0ubuntu0.20.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.ar_internal_metadata OWNER TO postgres;
+
+--
+-- Name: films; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.films (
+    id bigint NOT NULL,
+    title character varying,
+    release_date character varying,
+    rating character varying,
+    genre_id integer,
+    producer_id integer,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.films OWNER TO postgres;
+
+--
+-- Name: films_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.films_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.films_id_seq OWNER TO postgres;
+
+--
+-- Name: films_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.films_id_seq OWNED BY public.films.id;
+
+
+--
+-- Name: genres; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.genres (
+    id bigint NOT NULL,
+    name character varying,
+    description character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.genres OWNER TO postgres;
+
+--
+-- Name: genres_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.genres_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.genres_id_seq OWNER TO postgres;
+
+--
+-- Name: genres_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.genres_id_seq OWNED BY public.genres.id;
+
+
+--
+-- Name: producers; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.producers (
+    id bigint NOT NULL,
+    name character varying,
+    born character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.producers OWNER TO postgres;
+
+--
+-- Name: producers_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.producers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.producers_id_seq OWNER TO postgres;
+
+--
+-- Name: producers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.producers_id_seq OWNED BY public.producers.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO postgres;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users (
+    id bigint NOT NULL,
+    email character varying,
+    name character varying,
+    password_digest character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: films id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.films ALTER COLUMN id SET DEFAULT nextval('public.films_id_seq'::regclass);
+
+
+--
+-- Name: genres id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.genres ALTER COLUMN id SET DEFAULT nextval('public.genres_id_seq'::regclass);
+
+
+--
+-- Name: producers id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.producers ALTER COLUMN id SET DEFAULT nextval('public.producers_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Data for Name: ar_internal_metadata; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.ar_internal_metadata (key, value, created_at, updated_at) FROM stdin;
+environment	development	2022-05-29 12:31:16.260204	2022-05-29 12:31:16.260204
+\.
+
+
+--
+-- Data for Name: films; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.films (id, title, release_date, rating, genre_id, producer_id, created_at, updated_at) FROM stdin;
+1	Seventh Cross, The	1999	5	1	4	2022-04-08 00:00:00	2021-05-31 00:00:00
+2	Jessabelle	2007	4	3	4	2021-09-29 00:00:00	2022-01-02 00:00:00
+3	American Mary	2000	1	1	2	2021-11-23 00:00:00	2022-01-02 00:00:00
+4	Veronika Decides to Die	2003	5	1	4	2021-12-17 00:00:00	2021-10-08 00:00:00
+5	Crime and Punishment	2008	5	2	2	2022-01-02 00:00:00	2021-11-23 00:00:00
+6	Impostor	2012	4	4	1	2021-12-04 00:00:00	2021-12-13 00:00:00
+7	Monitors, The	1998	5	3	1	2022-01-02 00:00:00	2021-10-14 00:00:00
+8	Horse Feathers	2008	2	2	4	2022-05-01 00:00:00	2021-12-12 00:00:00
+9	Other One, The	1992	1	2	1	2022-05-18 00:00:00	2022-04-11 00:00:00
+10	Central Station (Central do Brasil)	2005	2	3	4	2021-08-03 00:00:00	2022-01-07 00:00:00
+11	India: Matri Bhumi	2002	5	2	3	2021-12-29 00:00:00	2022-02-18 00:00:00
+12	Outfoxed: Rupert Murdoch's War on Journalism	2010	2	2	2	2021-10-28 00:00:00	2021-12-07 00:00:00
+13	Memory Lane	2007	2	3	3	2021-09-09 00:00:00	2021-07-09 00:00:00
+14	The Final Girl	2010	3	2	3	2022-05-04 00:00:00	2021-12-11 00:00:00
+15	White Christmas	1989	2	1	2	2022-01-26 00:00:00	2021-06-03 00:00:00
+16	Giorgino	1994	2	1	2	2021-08-31 00:00:00	2021-12-14 00:00:00
+17	Eiger Sanction, The	1987	5	1	2	2022-04-19 00:00:00	2021-08-31 00:00:00
+18	Pier, The (Jetée, La)	1996	4	1	3	2021-07-26 00:00:00	2022-04-13 00:00:00
+19	Katalin Varga	2000	1	2	4	2021-12-18 00:00:00	2022-01-29 00:00:00
+20	Boys and Girls	2002	4	3	2	2021-10-08 00:00:00	2021-07-24 00:00:00
+21	Belarmino	1984	2	2	2	2021-07-13 00:00:00	2021-09-18 00:00:00
+22	Venus & Fleur	2012	4	4	2	2022-02-04 00:00:00	2022-03-03 00:00:00
+23	Ciao Bella	2006	5	1	2	2022-01-23 00:00:00	2022-05-04 00:00:00
+24	Man from Earth, The	2011	1	3	1	2021-09-02 00:00:00	2021-10-01 00:00:00
+25	Doomsday	1978	1	3	1	2022-04-24 00:00:00	2021-11-05 00:00:00
+26	Darktown Strutters (Get Down and Boogie)	1996	4	2	2	2022-05-08 00:00:00	2022-02-10 00:00:00
+27	Man of Her Dreams (a.k.a. The Fiancé)	2003	5	2	2	2022-01-28 00:00:00	2021-08-04 00:00:00
+28	Sin City: A Dame to Kill For	2009	5	2	4	2021-06-14 00:00:00	2022-04-13 00:00:00
+29	It's Alive	1995	2	3	3	2021-10-05 00:00:00	2022-05-15 00:00:00
+30	Psyhi vathia (a.k.a. Deep Soul)	2005	5	1	2	2021-06-01 00:00:00	2022-02-16 00:00:00
+31	Send a Bullet (Manda Bala)	2007	3	3	3	2021-08-16 00:00:00	2021-11-08 00:00:00
+32	Held Up	2001	4	2	1	2021-08-04 00:00:00	2021-10-24 00:00:00
+33	Blade, The (Dao)	1986	3	1	4	2022-05-14 00:00:00	2021-10-25 00:00:00
+34	Games People Play: New York	2005	5	3	2	2022-02-23 00:00:00	2021-12-17 00:00:00
+35	Streets of Fire	2009	5	2	4	2021-06-25 00:00:00	2022-04-24 00:00:00
+36	First Nudie Musical, The	1994	4	1	3	2021-11-13 00:00:00	2021-09-23 00:00:00
+37	Act of Seeing with One's Own Eyes, The 	2001	3	2	1	2022-03-02 00:00:00	2021-08-01 00:00:00
+38	Foodfight!	2007	3	4	1	2021-11-21 00:00:00	2022-01-22 00:00:00
+39	Suburban Gothic	2008	4	3	3	2022-03-27 00:00:00	2022-04-16 00:00:00
+40	Little Women	1993	4	4	2	2022-04-20 00:00:00	2021-07-25 00:00:00
+41	Hamlet	1966	5	4	3	2021-09-02 00:00:00	2021-06-30 00:00:00
+42	Adventures of Mary-Kate and Ashley, The: The Case of the United States Navy Adventure	2009	1	2	4	2021-12-21 00:00:00	2021-09-01 00:00:00
+43	Mother and Son (Mat i syn)	1996	5	4	2	2021-07-22 00:00:00	2021-09-28 00:00:00
+44	Burning Plain, The	1996	1	4	3	2021-07-02 00:00:00	2022-04-15 00:00:00
+45	Very Harold & Kumar 3D Christmas, A	2007	5	1	3	2021-08-10 00:00:00	2021-09-10 00:00:00
+46	Very Good Girls	2007	3	1	2	2021-07-06 00:00:00	2022-02-02 00:00:00
+47	Abbott and Costello in the Foreign Legion	2005	4	1	2	2022-03-18 00:00:00	2022-04-20 00:00:00
+48	Satan's School for Girls	1995	5	3	3	2022-01-20 00:00:00	2021-09-09 00:00:00
+49	Don't Drink the Water	1998	5	3	2	2022-02-17 00:00:00	2021-12-10 00:00:00
+50	Nude for Satan (Nuda per Satana)	2011	2	1	3	2022-05-07 00:00:00	2022-05-15 00:00:00
+51	Bucket of Blood, A (Dark Secrets) (Death Artist, The)	1993	5	4	4	2021-12-14 00:00:00	2022-03-26 00:00:00
+52	Importance of Being Earnest, The	2004	3	2	4	2021-11-20 00:00:00	2021-11-07 00:00:00
+53	American Me	2006	5	3	3	2022-04-25 00:00:00	2022-05-14 00:00:00
+54	Flirtation Walk	2006	5	2	2	2021-09-12 00:00:00	2021-12-29 00:00:00
+55	Passion of Ayn Rand, The	2003	2	3	4	2021-08-12 00:00:00	2021-11-19 00:00:00
+56	Reeds, The	1999	4	3	2	2021-11-12 00:00:00	2022-02-21 00:00:00
+57	Wild Women	2009	5	4	1	2021-11-02 00:00:00	2021-12-26 00:00:00
+58	Deranged	2006	3	3	1	2021-06-12 00:00:00	2021-10-30 00:00:00
+59	Good Time Girls, The (Bonnes femmes, Les)	1990	5	4	4	2021-08-08 00:00:00	2021-09-19 00:00:00
+60	Andalusian Dog, An (Chien andalou, Un)	2004	1	3	2	2021-08-31 00:00:00	2021-12-05 00:00:00
+62	Chump at Oxford, A	1997	4	2	2	2021-12-28 00:00:00	2022-01-11 00:00:00
+63	Rocky IV	1992	1	1	4	2021-10-23 00:00:00	2021-06-11 00:00:00
+64	Spook Who Sat by the Door, The	1993	4	1	3	2021-07-22 00:00:00	2022-04-15 00:00:00
+66	Kiss of the Vampire, The	2012	2	1	3	2021-11-28 00:00:00	2022-02-15 00:00:00
+67	Bostonians, The	2000	4	2	4	2021-09-23 00:00:00	2022-01-30 00:00:00
+68	The Last Train through Harecastle Tunnel	2008	1	1	1	2021-07-22 00:00:00	2022-03-06 00:00:00
+69	Tall Tale	2009	2	1	4	2022-04-09 00:00:00	2021-10-30 00:00:00
+70	Summer of '42	2001	3	1	1	2021-11-08 00:00:00	2021-10-11 00:00:00
+71	Night of the Creeps	1996	1	3	4	2022-03-01 00:00:00	2022-02-06 00:00:00
+72	Leslie, My Name is Evil (Manson, My Name is Evil)	1993	5	2	4	2021-12-19 00:00:00	2022-01-23 00:00:00
+73	The Vanishing American	1991	5	1	3	2022-04-01 00:00:00	2022-04-24 00:00:00
+74	Johnny Stecchino	1991	5	3	3	2021-09-02 00:00:00	2021-09-20 00:00:00
+75	Hot Rods to Hell	1989	2	3	4	2022-01-28 00:00:00	2022-01-31 00:00:00
+76	Letters to Juliet	2008	4	3	2	2022-04-23 00:00:00	2021-07-13 00:00:00
+77	Legend of the Black Scorpion (a.k.a. The Banquet) (Ye yan)	1985	2	1	4	2021-10-22 00:00:00	2022-03-25 00:00:00
+78	Michael Jackson: Life of a Superstar	2007	4	4	3	2021-06-16 00:00:00	2022-02-25 00:00:00
+79	Shot in the Dark, A	2005	5	3	4	2022-03-27 00:00:00	2021-06-20 00:00:00
+80	To Be and to Have (Être et avoir)	2000	3	1	4	2022-05-10 00:00:00	2022-03-23 00:00:00
+81	Meet Me in St. Louis	1993	5	4	4	2021-10-31 00:00:00	2022-02-03 00:00:00
+82	Woman on the Beach, The	1986	4	1	1	2021-07-23 00:00:00	2021-10-15 00:00:00
+83	Finances of the Grand Duke, The (Die Finanzen des Großherzogs)	1988	2	1	1	2021-08-15 00:00:00	2022-01-25 00:00:00
+84	High on Crack Street: Lost Lives in Lowell	1986	4	1	2	2021-08-04 00:00:00	2021-08-17 00:00:00
+85	Tormento	1999	5	1	3	2022-05-10 00:00:00	2022-03-09 00:00:00
+86	Tree Grows in Brooklyn, A	2003	3	3	3	2021-10-16 00:00:00	2021-09-24 00:00:00
+65	Adventures of Milo and Otis, The (Koneko monogatari)	2009	5	6	3	2022-03-17 00:00:00	2022-05-30 06:13:39.984999
+87	Four Flies on Grey Velvet	1995	5	3	4	2021-11-24 00:00:00	2021-09-08 00:00:00
+88	Call, The	1986	3	1	4	2021-11-05 00:00:00	2022-02-25 00:00:00
+91	Confessions of a Shopaholic	2011	3	2	2	2022-04-16 00:00:00	2022-03-14 00:00:00
+92	Sgt. Pepper's Lonely Hearts Club Band	1996	1	1	4	2022-02-01 00:00:00	2021-12-24 00:00:00
+93	Hi-Line, The	1986	4	4	1	2022-01-29 00:00:00	2021-08-22 00:00:00
+94	Match King, The	2006	1	1	2	2022-04-22 00:00:00	2021-10-02 00:00:00
+95	Fire	2009	2	4	3	2021-09-16 00:00:00	2021-11-08 00:00:00
+96	But Forever in My Mind	2008	2	3	2	2022-03-09 00:00:00	2021-12-08 00:00:00
+97	Soldiers of Fortune	1998	2	2	2	2021-06-01 00:00:00	2021-06-17 00:00:00
+98	Exhibition	2011	1	4	4	2022-01-03 00:00:00	2022-05-04 00:00:00
+99	Superbad	2007	2	3	3	2022-03-09 00:00:00	2021-10-18 00:00:00
+100	Ultimate Accessory,The (100% cachemire)	1993	5	1	4	2021-12-16 00:00:00	2021-09-15 00:00:00
+89	A Flintstones Christmas Carol	2009	5	6	6	2021-06-22 00:00:00	2022-05-30 06:15:05.356883
+108	Morgan!	1992	4	4	5	2021-06-09 00:00:00	2021-10-16 00:00:00
+109	Now and Forever	2009	1	1	3	2021-07-12 00:00:00	2021-09-15 00:00:00
+110	Fritz the Cat	2011	2	4	3	2022-04-12 00:00:00	2021-08-24 00:00:00
+111	Dr. Mabuse: The Gambler (Dr. Mabuse, der Spieler)	2001	5	4	3	2022-03-06 00:00:00	2021-12-16 00:00:00
+112	Ordinary People	1986	4	4	5	2022-03-17 00:00:00	2021-07-19 00:00:00
+113	Bon Cop, Bad Cop	2010	2	1	1	2021-06-26 00:00:00	2022-04-21 00:00:00
+114	Garden Party	2009	4	1	1	2021-08-11 00:00:00	2021-10-29 00:00:00
+115	Sour Grapes	2003	5	3	4	2021-11-24 00:00:00	2022-01-16 00:00:00
+116	Don Juan	2007	4	4	2	2021-06-03 00:00:00	2022-03-22 00:00:00
+117	Dad Savage	2010	5	5	3	2022-01-19 00:00:00	2021-08-06 00:00:00
+118	Faithful	1980	3	5	3	2022-04-08 00:00:00	2022-04-15 00:00:00
+119	Coelacanth: The Fish That Time Forgot	1992	2	2	1	2021-09-04 00:00:00	2021-12-24 00:00:00
+120	Home for the Holidays	2011	5	5	2	2021-08-23 00:00:00	2022-03-12 00:00:00
+121	Demonlover	2006	4	3	5	2021-07-09 00:00:00	2022-03-25 00:00:00
+122	Middle Men	1994	2	4	4	2021-06-12 00:00:00	2022-01-02 00:00:00
+123	Paris by Night	1999	1	2	4	2021-12-28 00:00:00	2021-08-27 00:00:00
+124	Freaks	2013	4	2	5	2022-01-21 00:00:00	2021-09-01 00:00:00
+125	Anne of Green Gables: The Sequel (a.k.a. Anne of Avonlea)	2003	2	2	1	2021-08-05 00:00:00	2021-09-09 00:00:00
+126	Locals, The	2010	4	1	3	2022-03-22 00:00:00	2021-09-15 00:00:00
+127	Just Like Heaven	1990	5	2	4	2021-12-01 00:00:00	2022-04-30 00:00:00
+128	Abraham Lincoln	1999	4	3	1	2022-04-16 00:00:00	2022-03-08 00:00:00
+129	Taking of Power by Louis XIV, The (Prise de pouvoir par Louis XIV, La)	2003	5	5	2	2022-01-12 00:00:00	2021-09-25 00:00:00
+130	Scarlet Diva	2003	5	3	2	2022-04-14 00:00:00	2022-05-27 00:00:00
+131	Circumstance	1991	1	5	2	2021-06-10 00:00:00	2021-11-05 00:00:00
+132	Whole Wide World, The	2011	2	3	4	2021-12-17 00:00:00	2022-04-11 00:00:00
+133	Hellbound: Hellraiser II	2009	5	2	5	2021-12-08 00:00:00	2022-01-14 00:00:00
+134	Tie That Binds, The	1996	4	4	5	2021-07-12 00:00:00	2021-09-03 00:00:00
+135	20 Feet from Stardom (Twenty Feet from Stardom)	2012	3	5	3	2021-11-06 00:00:00	2021-10-26 00:00:00
+136	At the Devil's Door	2003	5	2	2	2021-12-29 00:00:00	2022-01-14 00:00:00
+137	Frozen	2007	1	4	2	2021-09-01 00:00:00	2022-05-04 00:00:00
+138	King Corn	1997	3	5	2	2021-12-26 00:00:00	2022-04-25 00:00:00
+139	Plans for Tomorrow (Planes para mañana)	2012	4	3	1	2021-06-22 00:00:00	2022-01-13 00:00:00
+140	Evening Star, The	2007	3	3	2	2021-07-24 00:00:00	2022-03-16 00:00:00
+141	Enough	2008	5	5	3	2022-04-28 00:00:00	2021-10-29 00:00:00
+142	Mahabharata, The	1996	4	2	4	2021-10-11 00:00:00	2022-01-28 00:00:00
+143	Cry Baby Lane	1994	4	4	4	2022-02-02 00:00:00	2021-08-11 00:00:00
+144	Defiance	2010	2	2	5	2022-05-10 00:00:00	2022-03-19 00:00:00
+145	Trailer Park Boys: Countdown to Liquor Day	2001	5	1	3	2021-10-07 00:00:00	2021-11-05 00:00:00
+146	Smoke on the Potato Fields (Dým bramborové nate)	2000	4	1	2	2021-12-04 00:00:00	2021-08-04 00:00:00
+147	Civil Brand	2008	3	1	3	2022-03-07 00:00:00	2021-06-28 00:00:00
+148	Land Ho!	2012	5	3	2	2021-08-06 00:00:00	2021-12-31 00:00:00
+149	Notorious C.H.O.	2010	1	4	1	2021-12-29 00:00:00	2022-02-10 00:00:00
+150	Blood into Wine	2010	5	4	5	2022-02-15 00:00:00	2021-06-07 00:00:00
+151	Manufacturing Reality: Slavoj Zizek and the Reality of the Virtual (Slavoj Zizek: The Reality of the Virtual)	2006	2	1	2	2021-09-28 00:00:00	2021-11-20 00:00:00
+152	Line, The (La linea)	2008	4	4	4	2021-09-01 00:00:00	2021-10-23 00:00:00
+153	Dumb and Dumber To	2002	1	3	2	2022-03-03 00:00:00	2021-10-17 00:00:00
+154	Undefeated	2012	1	1	2	2021-12-09 00:00:00	2021-11-25 00:00:00
+155	Just Go with It	2000	2	3	4	2021-07-10 00:00:00	2021-09-21 00:00:00
+156	Warm December, A	2013	5	2	5	2021-11-10 00:00:00	2022-02-28 00:00:00
+157	Shutter	1997	5	2	4	2021-06-04 00:00:00	2022-05-24 00:00:00
+158	Johnny Handsome	2004	4	4	5	2022-01-29 00:00:00	2022-04-23 00:00:00
+159	Hot Dog... The Movie	1993	5	5	4	2021-12-07 00:00:00	2021-12-22 00:00:00
+160	Identification of a Woman (Identificazione di una donna)	2011	1	3	2	2021-10-09 00:00:00	2022-02-28 00:00:00
+161	Canciones de amor en Lolita's Club	2007	3	1	1	2021-10-11 00:00:00	2021-06-27 00:00:00
+162	Sundown	1998	1	2	5	2022-03-09 00:00:00	2021-07-08 00:00:00
+163	Werner - Gekotzt wird später	2011	2	4	1	2021-10-02 00:00:00	2021-11-14 00:00:00
+164	Bring It On Again	2010	4	1	3	2021-09-30 00:00:00	2022-01-30 00:00:00
+165	Nömadak TX	1993	5	3	5	2021-06-05 00:00:00	2021-10-30 00:00:00
+166	Battle of Shaker Heights, The	1995	4	2	4	2021-08-09 00:00:00	2021-11-17 00:00:00
+167	Goal! The Dream Begins (Goal!)	1994	2	2	1	2021-06-17 00:00:00	2021-09-22 00:00:00
+168	Four Shades of Brown (Fyra nyanser av brunt)	1998	5	1	4	2021-08-30 00:00:00	2022-05-07 00:00:00
+169	Lucy	1989	3	1	4	2021-08-12 00:00:00	2021-06-13 00:00:00
+170	Between Two Worlds	2009	5	1	1	2021-07-14 00:00:00	2022-03-31 00:00:00
+171	Empire of Passion (a.k.a. In the Realm of Passion) (a.k.a. Phantom Love) (Ai No Borei)	2011	5	4	4	2021-08-23 00:00:00	2021-07-13 00:00:00
+172	Morning of the Earth	2006	3	5	2	2022-02-25 00:00:00	2022-01-06 00:00:00
+173	The Forgotten Faces	1999	5	1	5	2021-07-16 00:00:00	2022-03-04 00:00:00
+174	Drive Angry	1998	1	4	3	2021-07-25 00:00:00	2022-05-03 00:00:00
+175	Irina Palm	1988	1	2	4	2022-03-07 00:00:00	2021-11-25 00:00:00
+176	Letter, The	1994	2	2	3	2021-08-10 00:00:00	2021-11-24 00:00:00
+177	Prince and the Pauper, The	2007	3	3	5	2021-06-19 00:00:00	2022-05-20 00:00:00
+178	Geography Club	2000	1	2	4	2022-03-11 00:00:00	2021-12-31 00:00:00
+179	Fever in the Blood, A	2009	3	1	5	2021-06-07 00:00:00	2021-07-24 00:00:00
+180	That Day (Ce jour-là)	1990	4	3	5	2022-03-03 00:00:00	2022-02-15 00:00:00
+181	Hole, The	2010	1	1	5	2021-09-28 00:00:00	2022-02-04 00:00:00
+182	Of Freaks and Men (Pro urodov i lyudey)	1993	2	2	4	2022-04-29 00:00:00	2022-03-16 00:00:00
+183	Mischief	1997	1	4	3	2022-01-05 00:00:00	2022-01-29 00:00:00
+184	Body of Evidence	2006	2	2	2	2022-04-10 00:00:00	2021-08-30 00:00:00
+185	Live Nude Girls Unite!	2010	5	2	4	2021-10-27 00:00:00	2021-11-17 00:00:00
+186	Street Fight	1999	1	2	1	2021-12-23 00:00:00	2021-06-22 00:00:00
+187	Far Cry	1997	5	3	1	2021-09-28 00:00:00	2021-12-10 00:00:00
+188	Division III: Football's Finest	2009	5	1	1	2022-03-31 00:00:00	2021-12-21 00:00:00
+189	Fast Food	1994	5	1	4	2022-01-30 00:00:00	2022-02-09 00:00:00
+190	Double Tide	2005	3	4	1	2021-11-25 00:00:00	2022-02-12 00:00:00
+191	Friday Night (Vendredi Soir)	1997	3	5	3	2022-02-05 00:00:00	2021-12-22 00:00:00
+192	Oliver & Company	2000	5	3	5	2021-11-26 00:00:00	2022-03-29 00:00:00
+193	Food of the Gods, The	2001	4	3	5	2021-06-04 00:00:00	2022-01-27 00:00:00
+194	Carancho	2000	1	3	4	2021-06-27 00:00:00	2022-05-15 00:00:00
+195	Nomi Song, The	1996	4	4	2	2021-06-24 00:00:00	2021-10-29 00:00:00
+196	Alphaville (Alphaville, une étrange aventure de Lemmy Caution)	2002	4	5	5	2021-08-10 00:00:00	2022-01-06 00:00:00
+197	Affair of Love, An (Liaison pornographique, Une)	1999	4	1	2	2021-07-13 00:00:00	2021-06-01 00:00:00
+198	Saving Santa	1998	2	2	2	2022-05-25 00:00:00	2022-05-29 00:00:00
+199	Narcissus	1999	1	1	4	2022-04-17 00:00:00	2022-01-07 00:00:00
+200	American Tail, An	2008	3	2	4	2022-05-23 00:00:00	2022-04-24 00:00:00
+201	Bright Leaves	1984	5	3	4	2021-11-15 00:00:00	2021-12-13 00:00:00
+202	Strongest Man in the World, The	2003	4	2	4	2021-09-25 00:00:00	2022-03-18 00:00:00
+203	Hell's Gate 11:11	1993	5	3	4	2021-07-16 00:00:00	2022-05-09 00:00:00
+204	Live Free or Die	2000	4	5	1	2022-02-15 00:00:00	2021-06-15 00:00:00
+205	Death Watch (La Mort en Direct)	2011	1	2	1	2021-12-18 00:00:00	2022-03-30 00:00:00
+206	Nightwatching	2012	5	4	2	2021-08-16 00:00:00	2021-09-22 00:00:00
+207	Zaza	2002	5	2	2	2021-11-15 00:00:00	2021-10-25 00:00:00
+208	Before I Go to Sleep	1992	4	5	5	2021-10-17 00:00:00	2022-02-04 00:00:00
+209	Wet Parade, The	1992	4	5	3	2022-04-23 00:00:00	2022-04-13 00:00:00
+210	Monsturd	1992	2	3	1	2021-07-11 00:00:00	2021-10-06 00:00:00
+211	Mudge Boy, The	2006	2	2	3	2021-09-15 00:00:00	2022-02-01 00:00:00
+212	Miss Farkku-Suomi	2007	3	2	1	2021-10-08 00:00:00	2022-04-07 00:00:00
+213	2 ou 3 choses que je sais d'elle (2 or 3 Things I Know About Her)	2005	5	5	3	2021-12-30 00:00:00	2021-09-25 00:00:00
+214	Jerky Boys, The	2007	2	4	4	2021-08-21 00:00:00	2021-07-31 00:00:00
+215	Wavelength	2005	2	3	5	2022-05-16 00:00:00	2022-02-06 00:00:00
+216	À l'aventure	1990	1	1	5	2021-06-01 00:00:00	2021-11-11 00:00:00
+217	Decade Under the Influence, A	2006	1	4	2	2021-06-22 00:00:00	2021-09-27 00:00:00
+218	Best of Everything, The	1992	1	1	5	2022-04-25 00:00:00	2021-12-31 00:00:00
+219	Eleventh Year, The (Odinnadtsatyy) 	2004	2	5	5	2022-01-09 00:00:00	2022-03-12 00:00:00
+220	Night of the Demons	2004	3	4	3	2021-10-25 00:00:00	2021-08-02 00:00:00
+221	Jungo Goes Bananas: Jungo III (Jungledyret Hugo: Fræk, flabet og fri)	2013	3	1	2	2021-09-04 00:00:00	2022-03-04 00:00:00
+222	Hellion	2000	1	5	5	2021-09-09 00:00:00	2022-03-01 00:00:00
+223	Super Troopers	1999	1	2	2	2021-10-22 00:00:00	2022-04-19 00:00:00
+224	Once in the Life	2004	2	4	1	2021-06-27 00:00:00	2022-05-28 00:00:00
+225	Viola	1998	4	5	4	2022-04-28 00:00:00	2021-09-25 00:00:00
+226	Allan Quatermain and the Temple of Skulls	2012	1	5	1	2022-03-24 00:00:00	2021-08-22 00:00:00
+227	Shamus	2004	1	5	2	2021-07-02 00:00:00	2021-07-14 00:00:00
+228	Osama	2011	4	4	4	2021-06-09 00:00:00	2022-03-15 00:00:00
+229	Ruby Red	1999	4	3	3	2021-06-29 00:00:00	2021-11-11 00:00:00
+230	Bear with Me	2003	4	3	4	2021-08-14 00:00:00	2022-02-28 00:00:00
+231	Fantastic Voyage	1999	2	4	4	2022-02-17 00:00:00	2021-07-17 00:00:00
+232	Fright Night 2: New Blood	2002	4	2	1	2022-05-07 00:00:00	2022-05-15 00:00:00
+233	Bronson	2002	4	1	2	2022-03-22 00:00:00	2022-03-29 00:00:00
+234	Re-Animator	2003	2	3	2	2021-06-26 00:00:00	2022-04-18 00:00:00
+235	Executioners from Shaolin	1992	2	4	3	2021-07-23 00:00:00	2022-03-22 00:00:00
+236	Robber, The (Der Räuber)	2010	5	5	1	2022-01-07 00:00:00	2021-11-19 00:00:00
+237	Once Upon a Forest	1986	3	4	4	2021-10-18 00:00:00	2021-08-01 00:00:00
+238	Great Gatsby, The	2007	1	2	4	2021-10-13 00:00:00	2021-06-09 00:00:00
+239	Minnie and Moskowitz	2000	5	3	4	2021-11-02 00:00:00	2022-04-04 00:00:00
+240	Bishop's Wife, The	1998	4	1	3	2021-08-23 00:00:00	2021-07-16 00:00:00
+241	The Six Million Dollar Man	1999	2	3	4	2021-11-21 00:00:00	2021-07-01 00:00:00
+242	Blue Max, The	1997	1	4	4	2021-08-15 00:00:00	2022-03-27 00:00:00
+243	Trail of the Lonesome Pine, The	1969	3	1	1	2022-01-08 00:00:00	2021-11-21 00:00:00
+244	Under the Rainbow	2004	2	4	4	2021-08-31 00:00:00	2022-04-19 00:00:00
+245	Bye-Bye	1994	2	3	4	2021-08-19 00:00:00	2021-12-19 00:00:00
+246	Mississippi Grind	2002	4	5	4	2021-06-24 00:00:00	2022-02-22 00:00:00
+247	Dragonball Evolution	1996	3	3	5	2021-06-21 00:00:00	2021-07-08 00:00:00
+248	Ghost from the Machine (Phasma Ex Machina)	2006	2	2	2	2022-05-18 00:00:00	2021-09-25 00:00:00
+249	We Have a Pope (Habemus Papam)	1996	1	5	5	2022-01-03 00:00:00	2022-03-10 00:00:00
+250	Highway 	2008	2	3	4	2021-08-17 00:00:00	2022-01-19 00:00:00
+251	Malice in Wonderland	1989	1	5	1	2021-06-16 00:00:00	2021-10-28 00:00:00
+252	Victory	2003	3	1	3	2021-12-18 00:00:00	2022-04-19 00:00:00
+253	Sharknado	1989	2	2	5	2022-05-26 00:00:00	2021-07-24 00:00:00
+254	The Emperor of California	1996	1	2	1	2021-09-29 00:00:00	2021-09-30 00:00:00
+255	Beyond Enemy Lines (Framom främsta linjen)	2010	3	4	2	2021-11-30 00:00:00	2021-08-19 00:00:00
+256	Sunday in the Country, A (Un dimanche à la campagne)	2008	5	2	5	2022-03-26 00:00:00	2021-07-25 00:00:00
+257	Pig Hunt 	1992	3	2	4	2022-03-04 00:00:00	2021-07-05 00:00:00
+258	Code of Silence	2010	4	4	5	2021-06-08 00:00:00	2022-04-13 00:00:00
+259	Forced Vengeance	1998	4	1	3	2021-11-15 00:00:00	2021-09-23 00:00:00
+260	End of St. Petersburg, The (Konets Sankt-Peterburga)	2000	1	2	4	2022-04-10 00:00:00	2021-06-24 00:00:00
+261	Police, Adjective (Politist, adj.)	2009	5	1	5	2021-10-23 00:00:00	2021-11-17 00:00:00
+262	Angie	2011	3	1	5	2021-10-26 00:00:00	2022-03-27 00:00:00
+263	Bandits (Bandidos)	1997	3	5	3	2022-02-16 00:00:00	2022-02-25 00:00:00
+264	Net Worth	1998	4	3	1	2021-08-05 00:00:00	2022-01-07 00:00:00
+265	C(r)ook (Basta - Rotwein Oder Totsein)	2001	1	2	1	2021-11-15 00:00:00	2021-05-31 00:00:00
+266	The Perfect World of Kai	2011	3	4	5	2022-04-20 00:00:00	2022-02-03 00:00:00
+267	Einstein and Eddington	1987	4	5	1	2021-11-27 00:00:00	2022-03-10 00:00:00
+268	The Gardener	1992	2	1	2	2021-10-28 00:00:00	2021-12-06 00:00:00
+269	Wuthering Heights	2006	3	3	5	2021-10-23 00:00:00	2021-12-27 00:00:00
+270	Time Without Pity	1997	2	3	4	2021-08-11 00:00:00	2021-09-01 00:00:00
+271	Silencers, The	1999	4	1	2	2021-12-28 00:00:00	2022-03-05 00:00:00
+272	Bandolero!	2010	5	4	4	2022-03-20 00:00:00	2021-11-24 00:00:00
+273	Golden Child, The	1992	2	4	2	2021-08-09 00:00:00	2021-09-30 00:00:00
+274	Going Clear: Scientology and the Prison of Belief	1997	4	2	2	2022-02-12 00:00:00	2021-10-04 00:00:00
+275	Old Gringo	1993	1	4	3	2021-12-30 00:00:00	2021-06-14 00:00:00
+276	Monkey's Tale, A (Château des singes, Le)	2003	1	1	4	2021-12-11 00:00:00	2021-11-26 00:00:00
+277	Freedom Writers	2010	4	1	1	2021-12-25 00:00:00	2021-08-12 00:00:00
+278	Track of the Cat	2006	4	4	4	2022-04-30 00:00:00	2021-07-25 00:00:00
+279	Emma's Bliss (Emmas Glück)	1994	5	4	5	2022-02-10 00:00:00	2022-01-15 00:00:00
+280	Holy Motors	1996	4	4	4	2022-02-11 00:00:00	2022-03-17 00:00:00
+281	I am Von Höfler (Variation on Werther - Private Hungary 15)	1991	5	4	4	2021-09-11 00:00:00	2021-06-30 00:00:00
+282	Double Trouble	1995	5	1	3	2022-03-04 00:00:00	2021-10-12 00:00:00
+283	Wizard, The	2003	5	5	1	2022-01-06 00:00:00	2021-06-25 00:00:00
+284	Men Without Women	2008	1	1	4	2021-12-10 00:00:00	2021-07-25 00:00:00
+285	Galaxy Express 999 (Ginga tetsudô Three-Nine)	2010	3	2	2	2022-01-18 00:00:00	2022-01-05 00:00:00
+286	Star Wars: Episode III - Revenge of the Sith	2010	3	1	2	2021-08-03 00:00:00	2021-08-23 00:00:00
+287	Letter Never Sent (Neotpravlennoye pismo)	1991	2	3	2	2022-05-17 00:00:00	2021-08-22 00:00:00
+288	Darby's Rangers	1999	4	1	1	2022-03-25 00:00:00	2021-07-25 00:00:00
+289	Lili's Apron	1992	5	4	1	2021-09-25 00:00:00	2022-01-11 00:00:00
+290	Finisterrae	2011	4	2	3	2021-08-07 00:00:00	2022-05-22 00:00:00
+291	Horror Planet (a.k.a. Inseminoid)	1990	3	5	2	2021-12-13 00:00:00	2022-01-06 00:00:00
+292	Element of Crime, The (Forbrydelsens Element)	2005	3	4	3	2021-08-04 00:00:00	2021-08-25 00:00:00
+293	Breath (Soom)	2001	5	2	3	2021-11-26 00:00:00	2021-06-16 00:00:00
+294	Midsummer Night's Dream, A	1989	4	5	1	2021-11-27 00:00:00	2021-06-23 00:00:00
+295	Super Sucker	2007	5	2	1	2022-03-04 00:00:00	2021-09-19 00:00:00
+296	Final Destination 5	2007	2	3	1	2021-12-24 00:00:00	2022-02-19 00:00:00
+297	Stranger, The (Agantuk) (Visitor, The)	2001	1	1	5	2021-06-18 00:00:00	2022-04-05 00:00:00
+298	Murders in the Zoo	1991	1	3	2	2021-06-30 00:00:00	2021-11-16 00:00:00
+299	Brubaker	1995	3	5	3	2022-03-05 00:00:00	2022-05-23 00:00:00
+300	1984 (Nineteen Eighty-Four)	1990	4	4	2	2022-05-25 00:00:00	2022-02-26 00:00:00
+301	From the Journals of Jean Seberg	2009	2	5	3	2022-04-14 00:00:00	2022-03-30 00:00:00
+302	Jackass 2.5	2007	4	5	3	2022-04-30 00:00:00	2022-03-08 00:00:00
+303	Brother (Brat)	2004	1	1	5	2022-03-24 00:00:00	2021-11-15 00:00:00
+304	He Loves Me... He Loves Me Not (À la folie... pas du tout)	2011	3	3	2	2021-08-31 00:00:00	2022-02-09 00:00:00
+305	Bring on the Night	2010	2	4	2	2021-07-05 00:00:00	2022-04-16 00:00:00
+306	House on Haunted Hill	2004	1	5	1	2022-01-12 00:00:00	2021-06-30 00:00:00
+307	The Magic Crystal	2005	3	2	3	2022-03-02 00:00:00	2022-02-20 00:00:00
+308	Brainstorm (Bicho de Sete Cabeças)	2004	3	2	3	2021-10-18 00:00:00	2022-02-06 00:00:00
+309	Grizzly Man	2008	3	3	1	2022-04-14 00:00:00	2021-11-20 00:00:00
+310	Dylan Moran: Yeah, Yeah	1993	1	3	4	2021-06-09 00:00:00	2022-01-02 00:00:00
+311	I Saw What You Did	1992	1	2	2	2022-03-12 00:00:00	2022-02-08 00:00:00
+312	Final Fantasy VII: Advent Children	2003	5	3	1	2021-10-28 00:00:00	2021-09-26 00:00:00
+313	Ray	1977	3	5	1	2021-12-03 00:00:00	2021-08-15 00:00:00
+314	Cleanflix	2007	1	5	3	2021-07-18 00:00:00	2022-05-16 00:00:00
+315	Of Love and Shadows	2006	5	5	2	2022-03-31 00:00:00	2021-09-29 00:00:00
+316	Blue Valentine	2004	4	1	4	2021-06-23 00:00:00	2022-05-06 00:00:00
+317	36 fillette	2001	4	4	3	2021-06-13 00:00:00	2021-11-08 00:00:00
+318	Simon Birch	2006	4	5	3	2021-09-29 00:00:00	2021-07-17 00:00:00
+319	A Gun for Jennifer	1997	2	5	5	2021-10-27 00:00:00	2021-10-31 00:00:00
+320	Birds, the Bees and the Italians, The (Signore & signori)	2008	5	4	5	2022-05-26 00:00:00	2022-03-18 00:00:00
+321	Man There Was, A (Terje Vigen)	2010	3	5	3	2021-06-26 00:00:00	2021-10-18 00:00:00
+322	Running Out of Time (Am zin)	1994	2	5	4	2021-10-29 00:00:00	2021-08-30 00:00:00
+323	Tiger Eyes	1992	1	3	2	2022-04-01 00:00:00	2021-07-11 00:00:00
+324	Clint Eastwood: Out of the Shadows	2009	5	5	5	2022-02-16 00:00:00	2022-02-16 00:00:00
+325	Porky's	2012	2	5	1	2022-04-05 00:00:00	2022-02-15 00:00:00
+326	Countess from Hong Kong, A	1992	5	3	3	2021-12-11 00:00:00	2021-09-11 00:00:00
+327	Beyond Justice	1986	1	4	1	2021-09-23 00:00:00	2021-11-30 00:00:00
+328	Happy Feet Two	1996	4	3	4	2021-06-10 00:00:00	2022-03-08 00:00:00
+329	Small Time Crooks	1991	4	5	4	2021-12-23 00:00:00	2021-12-19 00:00:00
+330	Restless	1994	3	1	4	2021-06-08 00:00:00	2022-01-13 00:00:00
+331	Flash Gordon Conquers the Universe	2011	4	1	3	2022-04-12 00:00:00	2021-09-26 00:00:00
+332	Big Wednesday	2008	2	5	5	2021-09-05 00:00:00	2022-01-26 00:00:00
+333	Crimes of the Future	1997	4	3	2	2021-10-14 00:00:00	2022-01-16 00:00:00
+334	Mighty Macs, The	1991	1	2	1	2021-09-28 00:00:00	2021-07-14 00:00:00
+335	Show Boat	2006	2	2	3	2022-01-21 00:00:00	2021-07-30 00:00:00
+336	Almost an Angel	1999	3	5	4	2022-03-28 00:00:00	2021-11-25 00:00:00
+337	Mother of Mine (Äideistä parhain)	1983	3	4	4	2022-05-28 00:00:00	2021-07-07 00:00:00
+338	Little Engine That Could, The	2005	1	1	3	2021-09-29 00:00:00	2022-01-16 00:00:00
+339	Informer, The	2004	1	2	4	2021-09-09 00:00:00	2021-12-10 00:00:00
+340	Cimarron	2006	3	4	3	2022-02-05 00:00:00	2022-04-15 00:00:00
+341	Meilleur espoir féminin	2001	2	3	4	2021-07-18 00:00:00	2022-03-16 00:00:00
+342	Dracula: Prince of Darkness	1999	2	3	4	2022-04-10 00:00:00	2022-04-07 00:00:00
+343	From Dad to Son	2011	4	1	3	2022-05-19 00:00:00	2021-11-03 00:00:00
+344	Talking Picture, A (Um Filme Falado)	2003	2	5	3	2022-03-31 00:00:00	2021-06-28 00:00:00
+345	Edge of Heaven, The (Auf der anderen Seite)	2012	5	2	5	2021-05-31 00:00:00	2022-04-22 00:00:00
+346	6 Days to Air: The Making of South Park	1990	5	3	2	2021-10-07 00:00:00	2022-02-03 00:00:00
+347	Great Sinner, The	2003	3	2	4	2022-03-23 00:00:00	2021-11-12 00:00:00
+348	Prodigal Son, The (Tuhlaajapoika)	1997	4	5	5	2022-04-13 00:00:00	2021-11-30 00:00:00
+349	Final Inquiry, The (Inquiry, The) (inchiesta, L')	1994	5	2	1	2022-04-14 00:00:00	2021-06-11 00:00:00
+350	Our Vinyl Weighs a Ton: This Is Stones Throw Records	2009	3	5	4	2022-02-25 00:00:00	2022-05-01 00:00:00
+351	Point, The	1987	1	2	2	2021-10-05 00:00:00	2021-10-26 00:00:00
+352	Wrong Arm of the Law, The	1991	3	2	1	2022-04-19 00:00:00	2022-05-07 00:00:00
+353	Love in Another Language (Baska Dilde Ask)	1995	4	3	5	2021-07-08 00:00:00	2021-10-30 00:00:00
+354	Tough Ones, The (Häjyt)	2005	4	4	4	2022-01-23 00:00:00	2021-12-29 00:00:00
+355	Violette (Violette Nozière)	1986	4	5	2	2021-08-08 00:00:00	2021-10-24 00:00:00
+356	Jersey Boys	2008	2	4	1	2022-04-25 00:00:00	2022-04-18 00:00:00
+357	Strawberries in the Supermarket (Jagoda u supermarketu) 	1992	3	2	3	2022-04-22 00:00:00	2022-04-21 00:00:00
+358	Last American Hero, The	1987	2	2	3	2022-03-19 00:00:00	2022-04-14 00:00:00
+359	Break Up	1992	5	3	2	2022-01-11 00:00:00	2021-10-12 00:00:00
+360	Repeaters 	1994	3	3	4	2022-05-21 00:00:00	2022-03-22 00:00:00
+361	Kivski Freski	1993	2	4	1	2022-03-22 00:00:00	2022-05-17 00:00:00
+362	Grace Unplugged	1997	5	5	4	2021-10-24 00:00:00	2021-12-28 00:00:00
+363	Unstrung Heroes	2004	5	1	2	2021-05-30 00:00:00	2021-07-26 00:00:00
+364	Saint John of Las Vegas	1987	4	3	4	2021-06-30 00:00:00	2021-08-02 00:00:00
+365	Tarzan the Fearless	1962	5	5	5	2021-11-04 00:00:00	2022-05-13 00:00:00
+366	Rosewood Lane	1998	5	2	3	2021-12-30 00:00:00	2022-05-28 00:00:00
+367	Noise	1999	1	1	3	2021-06-29 00:00:00	2021-10-06 00:00:00
+368	Hail the Conquering Hero	2005	5	1	2	2021-12-31 00:00:00	2022-01-03 00:00:00
+369	Education, An	1999	5	1	1	2022-04-22 00:00:00	2021-09-20 00:00:00
+370	Armour of God II: Operation Condor (Operation Condor) (Fei ying gai wak)	1984	1	2	3	2022-04-23 00:00:00	2021-06-02 00:00:00
+371	Vampire Bat, The	2002	5	4	3	2022-03-17 00:00:00	2021-11-24 00:00:00
+372	Napoleon and Samantha	2008	5	5	2	2021-08-15 00:00:00	2022-02-21 00:00:00
+373	Beauty in Trouble (Kráska v nesnázích)	1997	4	2	1	2021-07-22 00:00:00	2021-08-14 00:00:00
+374	Crisis	1989	4	1	3	2021-07-13 00:00:00	2021-08-21 00:00:00
+375	Happiest Days of Your Life, The	2001	3	4	5	2022-04-26 00:00:00	2021-07-14 00:00:00
+376	Letter to Momo, A (Momo e no tegami)	1997	5	3	3	2022-04-19 00:00:00	2021-06-15 00:00:00
+377	Anna Karenina	2002	4	5	1	2021-11-16 00:00:00	2021-06-22 00:00:00
+378	Laughing Policeman, The	1989	2	1	4	2022-03-03 00:00:00	2022-01-21 00:00:00
+379	Ponterosa	1987	2	4	3	2022-05-01 00:00:00	2021-11-12 00:00:00
+380	Border Incident	2005	4	4	1	2022-04-11 00:00:00	2021-08-13 00:00:00
+381	Family Band: The Cowsills Story 	1993	2	3	2	2022-05-25 00:00:00	2021-11-05 00:00:00
+382	Forever	2006	1	2	1	2022-04-07 00:00:00	2021-09-08 00:00:00
+383	Iceman, The	1987	1	5	5	2021-07-24 00:00:00	2021-10-29 00:00:00
+384	Woman in Black, The	2008	4	2	2	2021-11-23 00:00:00	2022-01-17 00:00:00
+385	Norbit	1999	2	2	5	2021-12-18 00:00:00	2021-07-14 00:00:00
+386	Ulee's Gold	2012	4	4	4	2021-09-25 00:00:00	2021-12-12 00:00:00
+387	Crash Reel, The	1996	3	1	1	2022-03-26 00:00:00	2021-10-15 00:00:00
+388	Extraterrestrial (Extraterrestre)	1990	3	5	2	2021-11-03 00:00:00	2021-07-10 00:00:00
+389	Flodder	2012	1	2	5	2021-12-19 00:00:00	2022-05-01 00:00:00
+390	Planet of the Vampires (Terrore nello spazio)	1998	4	4	2	2021-08-25 00:00:00	2021-11-05 00:00:00
+391	Mr. Deeds	1999	4	2	2	2021-10-14 00:00:00	2021-11-03 00:00:00
+392	Orchestra Wives	1995	4	5	2	2021-05-31 00:00:00	2021-08-18 00:00:00
+393	Chaser, The (Chugyeogja)	2009	5	2	5	2021-09-13 00:00:00	2022-01-15 00:00:00
+394	Reluctant Debutante, The	1963	1	5	5	2022-02-20 00:00:00	2022-04-30 00:00:00
+395	Rocketeer, The	2012	5	4	3	2021-12-06 00:00:00	2021-06-25 00:00:00
+396	Spanish Apartment, The (L'auberge espagnole)	1995	2	5	3	2021-10-08 00:00:00	2022-04-19 00:00:00
+397	Repeaters 	1992	4	2	5	2021-12-23 00:00:00	2021-11-08 00:00:00
+398	Bookies	2003	4	1	1	2021-07-13 00:00:00	2022-02-01 00:00:00
+399	Pastoral Hide and Seek (Den-en ni shisu)	1992	5	3	2	2021-10-04 00:00:00	2022-02-09 00:00:00
+400	Outrage	2012	2	5	3	2022-04-08 00:00:00	2022-01-15 00:00:00
+401	Toothless	2006	5	5	3	2021-08-30 00:00:00	2021-09-05 00:00:00
+402	20th Century Boys - Chapter 1: Beginning of the End	1993	3	5	5	2022-02-27 00:00:00	2022-02-17 00:00:00
+403	The Winslow Boy	2005	2	2	2	2022-05-06 00:00:00	2022-04-30 00:00:00
+404	Imagine: John Lennon	2008	1	1	1	2022-03-27 00:00:00	2022-05-24 00:00:00
+405	Moon-Spinners, The	1992	1	5	3	2021-08-22 00:00:00	2021-08-26 00:00:00
+406	Place in the Sun, A (En plats i solen)	1994	2	3	2	2021-07-06 00:00:00	2021-12-10 00:00:00
+407	Amar Akbar Anthony	2011	3	2	1	2022-01-26 00:00:00	2022-03-06 00:00:00
+408	Gold of Rome (L'oro di Roma)	1986	1	5	1	2022-01-25 00:00:00	2021-12-04 00:00:00
+409	Bridesmaids	1995	5	5	1	2021-11-02 00:00:00	2021-10-17 00:00:00
+410	Skhizein	1996	1	4	5	2022-03-11 00:00:00	2021-07-03 00:00:00
+411	Dinner Rush	1997	5	2	3	2022-03-04 00:00:00	2022-03-02 00:00:00
+412	Good Year, A	2003	3	3	1	2021-10-14 00:00:00	2021-09-08 00:00:00
+413	Rambling Rose	2006	5	5	4	2021-10-01 00:00:00	2022-05-23 00:00:00
+414	Sunset Blvd. (a.k.a. Sunset Boulevard)	1984	1	1	3	2021-09-15 00:00:00	2021-06-01 00:00:00
+415	Tom at the Farm (Tom à la ferme)	1993	2	2	5	2022-03-28 00:00:00	2022-03-14 00:00:00
+416	Woman Who Wasn't There, The	1994	1	3	2	2021-07-04 00:00:00	2021-05-30 00:00:00
+417	...tick... tick... tick...	2006	2	2	2	2021-11-27 00:00:00	2021-09-19 00:00:00
+418	Sebastian	2003	2	2	3	2021-12-13 00:00:00	2022-04-05 00:00:00
+419	Last Man on Earth, The (Ultimo uomo della Terra, L')	1999	4	4	5	2021-06-03 00:00:00	2021-09-01 00:00:00
+420	Red Hill	1985	4	4	3	2022-05-17 00:00:00	2022-05-02 00:00:00
+421	Smart Set, The	2005	2	1	5	2022-01-04 00:00:00	2022-03-16 00:00:00
+422	Anatahan	2008	3	1	5	2021-08-13 00:00:00	2021-07-16 00:00:00
+423	Fear and Loathing in Las Vegas	2013	3	1	3	2021-07-23 00:00:00	2021-11-12 00:00:00
+424	Black Eagle	2000	2	5	2	2022-03-16 00:00:00	2021-06-03 00:00:00
+425	Prince of Central Park, The	2010	4	1	5	2021-08-26 00:00:00	2021-08-17 00:00:00
+426	Hurricane, The	2011	4	1	5	2021-11-22 00:00:00	2022-04-10 00:00:00
+427	Five Pennies, The	1998	2	5	1	2021-11-26 00:00:00	2022-05-27 00:00:00
+428	Love Crime (Crime d'amour)	2006	4	1	4	2022-04-04 00:00:00	2021-06-19 00:00:00
+429	Defender, The (a.k.a. Bodyguard from Beijing, The) (Zhong Nan Hai bao biao)	2002	3	4	3	2021-10-23 00:00:00	2021-10-04 00:00:00
+430	Psych-Out	1996	3	4	3	2021-09-08 00:00:00	2021-08-06 00:00:00
+431	Campus Radio	2010	3	5	2	2022-02-02 00:00:00	2021-11-27 00:00:00
+432	Everything	1997	4	4	2	2022-03-13 00:00:00	2022-01-05 00:00:00
+433	Enforcer, The	1994	2	5	2	2022-03-27 00:00:00	2021-08-21 00:00:00
+434	Let It Snow	1998	2	1	2	2021-09-11 00:00:00	2022-04-21 00:00:00
+435	Something New	2000	1	5	2	2021-11-30 00:00:00	2021-08-06 00:00:00
+436	Mother of George	1997	3	4	4	2021-06-19 00:00:00	2021-10-31 00:00:00
+437	Hester Street	2008	4	1	2	2022-03-31 00:00:00	2022-01-07 00:00:00
+438	The Little Death	2003	2	5	3	2022-05-02 00:00:00	2022-04-27 00:00:00
+439	Little Engine That Could, The	2003	1	1	1	2021-08-13 00:00:00	2022-03-12 00:00:00
+440	Mating Habits of the Earthbound Human, The	1967	1	1	3	2022-03-04 00:00:00	2021-08-17 00:00:00
+441	Borrowers, The	2005	2	4	1	2021-06-19 00:00:00	2021-12-21 00:00:00
+442	Berlin Alexanderplatz	1991	3	3	3	2021-10-21 00:00:00	2022-04-19 00:00:00
+443	The Hellions	2011	2	5	1	2022-04-04 00:00:00	2021-07-01 00:00:00
+444	Skeleton Key, The	1989	4	5	4	2021-10-23 00:00:00	2021-09-10 00:00:00
+445	Amsterdamned	1994	3	3	5	2021-11-13 00:00:00	2022-04-08 00:00:00
+446	Rainbow Valley	2007	4	3	5	2022-05-02 00:00:00	2022-01-06 00:00:00
+447	Passion of Ayn Rand, The	2004	5	1	1	2021-10-12 00:00:00	2022-04-14 00:00:00
+448	WALL·E	2012	3	5	2	2021-09-25 00:00:00	2021-08-22 00:00:00
+449	Look Who's Talking Too	2006	1	1	1	2021-10-29 00:00:00	2021-07-31 00:00:00
+450	Empire of the Ants	1994	4	1	4	2022-05-27 00:00:00	2022-05-10 00:00:00
+451	Pelle Svanslös	1993	4	1	3	2022-05-26 00:00:00	2021-11-16 00:00:00
+452	Cut	2012	4	5	5	2021-06-08 00:00:00	2021-10-17 00:00:00
+453	She's the One	1999	1	1	1	2021-12-11 00:00:00	2021-07-05 00:00:00
+454	Fun with Dick and Jane	2008	5	3	1	2021-11-21 00:00:00	2022-01-13 00:00:00
+455	Little Romance, A	2002	3	5	5	2022-03-14 00:00:00	2022-03-08 00:00:00
+456	Ricochet	2004	4	5	4	2022-02-22 00:00:00	2021-09-01 00:00:00
+457	Rise of the Zombies	2010	1	1	4	2021-10-08 00:00:00	2021-07-30 00:00:00
+458	Hearts of the West	2007	4	5	3	2022-05-27 00:00:00	2021-10-11 00:00:00
+459	Tomorrow, When the War Began	1999	3	3	5	2021-10-27 00:00:00	2021-08-28 00:00:00
+460	People Under the Stairs, The	1996	1	2	2	2021-10-20 00:00:00	2021-08-20 00:00:00
+461	I Want to Look Like That Guy	1996	5	2	5	2022-01-21 00:00:00	2022-04-16 00:00:00
+462	Exhibition	1995	3	5	1	2021-12-19 00:00:00	2022-01-31 00:00:00
+463	Taboo (Gohatto)	1989	3	5	4	2022-04-13 00:00:00	2021-11-12 00:00:00
+464	Citadel, The	1994	1	2	3	2021-12-05 00:00:00	2021-10-10 00:00:00
+465	My Own Man	2010	1	3	1	2021-07-10 00:00:00	2021-09-02 00:00:00
+466	Mrs. Henderson Presents	2010	5	2	4	2021-11-10 00:00:00	2021-07-18 00:00:00
+467	Galapagos Affair: Satan Came to Eden, The	2000	4	2	4	2021-06-22 00:00:00	2022-03-10 00:00:00
+468	Flash Gordon	1992	4	4	2	2022-05-16 00:00:00	2021-08-18 00:00:00
+469	Pagemaster, The	1994	5	3	4	2021-12-22 00:00:00	2021-07-18 00:00:00
+470	Something Real and Good	1992	3	5	2	2021-06-19 00:00:00	2022-03-03 00:00:00
+471	Don't Tell Mom the Babysitter's Dead	2006	3	3	2	2021-10-25 00:00:00	2021-10-30 00:00:00
+472	Rich Man's Wife, The	1998	3	5	2	2022-05-27 00:00:00	2021-07-14 00:00:00
+473	Machete Maidens Unleashed!	2013	2	2	2	2022-01-28 00:00:00	2021-08-25 00:00:00
+474	99 Homes	1999	5	4	3	2022-02-23 00:00:00	2021-12-15 00:00:00
+475	Breathe In	2000	1	4	1	2021-11-30 00:00:00	2022-01-18 00:00:00
+476	Business of Fancydancing, The	2000	3	5	5	2022-04-13 00:00:00	2022-01-13 00:00:00
+477	Night Tide	2010	4	2	5	2021-10-03 00:00:00	2022-02-17 00:00:00
+478	Bloody Murder 2: Closing Camp	1997	4	2	5	2022-04-10 00:00:00	2022-02-17 00:00:00
+479	Other Woman, The	1997	2	3	1	2022-05-22 00:00:00	2021-10-27 00:00:00
+480	Limitless	2007	1	4	1	2022-01-07 00:00:00	2022-05-17 00:00:00
+481	Is Paris Burning? (Paris brûle-t-il?)	2001	2	3	1	2021-07-17 00:00:00	2021-07-16 00:00:00
+482	Frozen Days	2003	5	2	1	2021-11-25 00:00:00	2022-05-22 00:00:00
+483	For the Moment	1993	2	4	4	2021-07-05 00:00:00	2021-06-21 00:00:00
+484	Holy Motors	2000	2	3	1	2021-10-03 00:00:00	2021-10-01 00:00:00
+485	Iron Island (Jazireh Ahani)	2010	3	1	2	2022-04-23 00:00:00	2022-02-25 00:00:00
+486	Article 99	2011	4	1	1	2022-01-27 00:00:00	2021-11-11 00:00:00
+487	Repatriation	1991	2	3	2	2022-03-11 00:00:00	2022-03-21 00:00:00
+488	Fitzwilly	1999	5	1	1	2021-09-16 00:00:00	2021-06-14 00:00:00
+489	Blood into Wine	1964	2	3	1	2021-11-21 00:00:00	2021-08-19 00:00:00
+490	Snow (Snijeg)	1967	2	3	3	2021-09-05 00:00:00	2021-12-01 00:00:00
+491	Terry Fator: Live from Las Vegas	1999	5	5	2	2021-09-27 00:00:00	2022-04-25 00:00:00
+492	She Hate Me	2011	3	1	1	2021-06-15 00:00:00	2022-04-10 00:00:00
+493	Ong-Bak: The Thai Warrior (Ong Bak)	1991	1	2	4	2022-02-01 00:00:00	2022-02-20 00:00:00
+494	Asterix & Obelix vs. Caesar (Astérix et Obélix contre César)	2003	1	1	5	2022-03-31 00:00:00	2022-04-30 00:00:00
+495	Rules of Attraction, The	2000	4	4	5	2021-06-20 00:00:00	2022-03-22 00:00:00
+496	15	1989	4	2	1	2021-11-07 00:00:00	2022-04-13 00:00:00
+497	Light Gradient	2011	2	4	4	2021-07-22 00:00:00	2022-04-10 00:00:00
+498	More Dead Than Alive	2002	3	3	4	2021-07-03 00:00:00	2022-05-19 00:00:00
+499	Housebound	2009	3	3	5	2021-11-13 00:00:00	2021-12-10 00:00:00
+500	Stolen Seas	1995	3	4	2	2022-04-01 00:00:00	2021-06-24 00:00:00
+501	Christmas with the Kranks	2002	1	5	4	2022-02-05 00:00:00	2021-09-19 00:00:00
+502	Transporter 2	2001	3	5	2	2022-03-17 00:00:00	2022-04-29 00:00:00
+503	Closer	2004	5	5	4	2021-11-26 00:00:00	2021-10-01 00:00:00
+504	I-See-You.Com	2011	4	1	3	2022-01-02 00:00:00	2022-03-19 00:00:00
+505	Noose, The (Petla)	2003	5	4	4	2022-05-16 00:00:00	2021-10-16 00:00:00
+506	Blood Work	2009	3	2	2	2022-02-22 00:00:00	2021-08-06 00:00:00
+507	Kink	2003	2	2	4	2021-12-01 00:00:00	2021-09-29 00:00:00
+508	To Hell and Back	1997	4	5	5	2021-12-27 00:00:00	2022-04-07 00:00:00
+509	Hamsun	2006	5	4	4	2022-03-24 00:00:00	2021-07-21 00:00:00
+510	Simple Twist of Fate, A	2001	2	3	4	2022-01-07 00:00:00	2021-11-28 00:00:00
+511	City Limits	2007	5	2	5	2021-06-10 00:00:00	2021-12-20 00:00:00
+512	Josephine	2012	3	3	4	2022-05-16 00:00:00	2022-04-27 00:00:00
+513	Young Guns II	1994	4	1	3	2021-07-14 00:00:00	2022-05-15 00:00:00
+514	Zift	1998	1	3	3	2022-02-06 00:00:00	2021-12-06 00:00:00
+515	Ernest Rides Again	2001	1	5	1	2021-08-17 00:00:00	2022-02-27 00:00:00
+516	Bass Ackwards	2006	2	4	3	2022-01-23 00:00:00	2021-08-24 00:00:00
+517	Princess Protection Program	2004	5	2	2	2021-10-09 00:00:00	2021-07-28 00:00:00
+518	Bandidas	2009	2	5	4	2021-06-25 00:00:00	2022-01-14 00:00:00
+519	Ayn Rand: A Sense of Life	2000	2	1	4	2021-11-12 00:00:00	2021-09-13 00:00:00
+520	House of the Rising Sun	2004	2	1	5	2021-11-25 00:00:00	2022-05-24 00:00:00
+521	Subspecies	1994	2	1	4	2021-09-12 00:00:00	2021-06-15 00:00:00
+522	Missing Person, The	1994	3	3	2	2022-03-03 00:00:00	2022-01-19 00:00:00
+523	Great Muppet Caper, The	2005	4	2	2	2022-01-12 00:00:00	2021-12-25 00:00:00
+524	Lay the Favorite	1997	4	3	1	2021-08-22 00:00:00	2022-05-25 00:00:00
+525	If You Love (Jos rakastat)	1999	3	4	4	2022-04-28 00:00:00	2022-05-06 00:00:00
+526	Dampfnudelblues	2000	5	3	5	2022-03-02 00:00:00	2021-09-03 00:00:00
+527	Variety Lights	2010	3	5	2	2021-07-02 00:00:00	2022-02-08 00:00:00
+528	Honor Among Thieves (Adieu l'ami) (Farewell, Friend)	2010	2	5	2	2022-05-06 00:00:00	2021-12-10 00:00:00
+529	Father and Son (Otets i syn)	1995	2	4	5	2021-06-09 00:00:00	2021-10-16 00:00:00
+530	Road North (Tie pohjoiseen)	2006	2	5	3	2021-08-30 00:00:00	2021-06-10 00:00:00
+531	Love and Other Troubles	1988	2	1	5	2022-04-27 00:00:00	2021-07-06 00:00:00
+532	High Anxiety	2000	1	4	1	2021-12-08 00:00:00	2021-10-24 00:00:00
+533	Guy Named Joe, A	2006	1	5	1	2022-01-06 00:00:00	2022-05-26 00:00:00
+534	Nick the Sting	1989	5	1	3	2022-03-26 00:00:00	2021-09-12 00:00:00
+535	City Dark, The	1991	4	3	1	2022-03-16 00:00:00	2021-12-26 00:00:00
+536	The Periwig-Maker	1998	1	3	5	2021-08-03 00:00:00	2021-09-28 00:00:00
+537	Magic Christmas Tree, The	2009	3	5	1	2021-12-01 00:00:00	2022-04-15 00:00:00
+538	3 Holiday Tails (Golden Christmas 2: The Second Tail, A)	2012	1	5	3	2022-01-18 00:00:00	2022-05-23 00:00:00
+539	Just Wright	2007	3	1	3	2022-05-10 00:00:00	2021-09-04 00:00:00
+540	Postcards From the Edge	1995	5	5	3	2022-03-20 00:00:00	2022-05-20 00:00:00
+541	Black Magic (Meeting at Midnight) (Charlie Chan in Meeting at Midnight) (Charlie Chan in Black Magic)	2008	1	5	3	2021-08-11 00:00:00	2021-09-08 00:00:00
+542	Middle of Nowhere	1996	1	3	3	2021-11-08 00:00:00	2021-08-05 00:00:00
+543	Voyeur (Abel)	1985	3	5	2	2022-01-22 00:00:00	2022-03-10 00:00:00
+544	You Killed Me First	2004	5	2	3	2022-04-24 00:00:00	2021-07-19 00:00:00
+545	Journey 2: The Mysterious Island	2006	4	5	1	2021-08-08 00:00:00	2021-08-11 00:00:00
+546	Pervert's Guide to Ideology, The	1988	3	3	2	2021-08-08 00:00:00	2021-08-29 00:00:00
+547	Mr. Death: The Rise and Fall of Fred A. Leuchter, Jr.	2007	2	5	4	2021-08-31 00:00:00	2022-05-20 00:00:00
+548	Farewell My Concubine (Ba wang bie ji)	2008	2	3	4	2022-03-25 00:00:00	2022-01-21 00:00:00
+549	Twenty Days Without War (Dvadtsat dney bez voyny)	1996	4	3	1	2022-01-11 00:00:00	2021-06-21 00:00:00
+550	Will It Snow For Christmas? (Y'aura-t-il de la neige à Noël?)	2000	3	3	5	2021-12-19 00:00:00	2021-10-02 00:00:00
+551	Truth of Lie, The (Die Wahrheit der Lüge)	2008	5	3	5	2021-11-09 00:00:00	2021-12-30 00:00:00
+552	Tarzan the Ape Man	2003	4	4	2	2021-12-25 00:00:00	2021-08-22 00:00:00
+553	Hot Rods to Hell	2005	2	4	2	2022-05-02 00:00:00	2022-03-17 00:00:00
+554	Thr3e (Three)	2007	5	3	3	2021-09-10 00:00:00	2021-07-14 00:00:00
+555	Tom, Tom, the Piper's Son	1995	3	1	4	2022-05-09 00:00:00	2021-08-08 00:00:00
+556	The New Girlfriend	2009	1	5	1	2021-11-07 00:00:00	2022-03-24 00:00:00
+557	Racket, The	2010	3	3	3	2022-05-12 00:00:00	2021-11-21 00:00:00
+558	Man Who Laughs, The	1989	1	2	1	2021-11-04 00:00:00	2022-02-12 00:00:00
+559	Burnt by the Sun 2 (Utomlyonnye solntsem 2)	1990	1	4	2	2021-09-27 00:00:00	2022-04-14 00:00:00
+560	Camp de Thiaroye	2008	3	4	1	2021-06-07 00:00:00	2021-10-05 00:00:00
+561	Hollywood or Bust	2007	1	1	5	2021-10-07 00:00:00	2021-09-22 00:00:00
+562	Short Time	1992	1	4	2	2021-10-13 00:00:00	2021-11-15 00:00:00
+563	Advertising and the End of the World	2006	5	4	3	2021-07-25 00:00:00	2021-10-21 00:00:00
+564	Storm Rider	2009	5	1	3	2021-10-29 00:00:00	2021-11-22 00:00:00
+565	Annabel Takes a Tour (Annabel Takes a Trip)	1998	3	2	5	2022-03-11 00:00:00	2021-09-19 00:00:00
+566	Early Years: Erik Nietzsche Part 1, The (De unge år: Erik Nietzsche)	2002	1	2	5	2022-05-16 00:00:00	2022-02-27 00:00:00
+567	Irina Palm	1995	5	4	4	2021-09-27 00:00:00	2021-12-04 00:00:00
+568	Katt Williams: Priceless: Afterlife	1909	5	3	3	2021-11-19 00:00:00	2021-10-02 00:00:00
+569	Dark Truth, A (Truth, The)	1985	4	4	3	2021-05-30 00:00:00	2022-04-03 00:00:00
+570	Soldier's Sweetheart, A	1996	4	1	3	2021-11-18 00:00:00	2021-10-14 00:00:00
+571	Hesher	1989	4	2	5	2021-07-31 00:00:00	2022-02-23 00:00:00
+572	Juarez	1997	2	4	5	2021-12-11 00:00:00	2021-12-21 00:00:00
+573	7th Heaven (Seventh Heaven)	2003	3	4	1	2021-09-12 00:00:00	2021-06-28 00:00:00
+574	Howl	2009	1	2	5	2021-06-04 00:00:00	2022-05-18 00:00:00
+575	My Gun is Quick	2003	1	4	4	2022-05-19 00:00:00	2022-01-01 00:00:00
+576	Playmobil: The Secret of Pirate Island	2003	2	4	5	2022-01-08 00:00:00	2022-03-14 00:00:00
+577	Flatliners	2001	4	2	3	2021-07-28 00:00:00	2022-01-26 00:00:00
+578	My Brother Is an Only Child (Mio fratello è figlio unico)	1986	3	4	1	2021-06-25 00:00:00	2021-08-25 00:00:00
+579	Apartment, The	1986	5	3	5	2022-01-16 00:00:00	2021-10-17 00:00:00
+580	Maîtresse (Mistress)	2003	5	5	1	2021-09-08 00:00:00	2021-12-02 00:00:00
+581	The Tomb	2004	4	3	3	2021-08-25 00:00:00	2021-12-15 00:00:00
+582	Breaking Upwards	1987	4	1	2	2021-06-22 00:00:00	2022-03-20 00:00:00
+583	First Texan, The	1986	4	1	5	2022-02-19 00:00:00	2021-09-15 00:00:00
+584	Bill Hicks: Relentless	2002	4	2	3	2021-08-31 00:00:00	2021-11-22 00:00:00
+585	RKO 281	1989	2	2	5	2021-07-02 00:00:00	2021-06-09 00:00:00
+586	Innocent Voices (Voces inocentes)	1988	2	4	1	2021-11-30 00:00:00	2021-08-17 00:00:00
+587	R.S.V.P. 	1993	5	4	3	2022-02-15 00:00:00	2021-06-28 00:00:00
+588	The Amazing Screw-On Head	2009	4	2	1	2021-08-06 00:00:00	2022-04-30 00:00:00
+589	Last Action Hero	2010	2	1	4	2021-09-22 00:00:00	2022-03-22 00:00:00
+590	Sign of Four, The	2004	4	2	5	2022-03-02 00:00:00	2022-05-21 00:00:00
+591	Old Man and the Sea, The	2001	1	5	3	2022-05-27 00:00:00	2021-08-22 00:00:00
+592	Thief and the Cobbler, The (a.k.a. Arabian Knight)	2012	3	1	3	2021-10-07 00:00:00	2021-11-30 00:00:00
+593	Silent Sonata	1994	4	4	4	2021-08-03 00:00:00	2022-01-27 00:00:00
+594	Coast Guard, The (Hae anseon)	1996	3	2	4	2022-05-01 00:00:00	2021-07-03 00:00:00
+595	Brother Rat	1988	2	2	4	2022-04-18 00:00:00	2021-09-10 00:00:00
+596	Seeking Asian Female	1992	2	1	1	2021-10-11 00:00:00	2022-03-06 00:00:00
+597	Waltzes from Vienna	1993	3	5	4	2021-12-01 00:00:00	2022-04-14 00:00:00
+598	Lost in Space	1998	4	2	5	2021-11-26 00:00:00	2021-07-30 00:00:00
+599	Count Dracula (Nachts, wenn Dracula erwacht)	2005	1	4	5	2022-01-22 00:00:00	2022-05-06 00:00:00
+600	Diggers	1995	3	1	5	2022-03-18 00:00:00	2022-04-27 00:00:00
+601	Another Year	2001	4	4	5	2021-06-03 00:00:00	2022-04-15 00:00:00
+602	Creature from Black Lake 	1988	4	5	3	2021-07-09 00:00:00	2021-12-23 00:00:00
+603	Devdas	2003	5	3	4	2021-10-29 00:00:00	2022-01-10 00:00:00
+604	Anne of Green Gables	2006	5	3	4	2021-10-23 00:00:00	2021-08-30 00:00:00
+605	Chizuko's Younger Sister (Futari)	2011	4	4	1	2021-10-19 00:00:00	2022-03-06 00:00:00
+606	Emma	1998	4	1	1	2021-10-09 00:00:00	2021-11-05 00:00:00
+607	The Butter Battle Book	2005	2	1	4	2022-04-28 00:00:00	2022-02-21 00:00:00
+608	Splitting Heirs	2012	4	4	4	2022-05-10 00:00:00	2021-07-06 00:00:00
+609	My Last Day Without You (Nie mehr ohne Dich)	1992	1	4	4	2021-09-23 00:00:00	2021-08-30 00:00:00
+610	Hurt	2002	2	5	1	2022-02-04 00:00:00	2022-04-20 00:00:00
+611	Pop Redemption	2012	3	1	2	2022-02-04 00:00:00	2022-05-01 00:00:00
+612	Creature from the Black Lagoon, The	2012	3	5	5	2022-03-30 00:00:00	2021-12-07 00:00:00
+613	Funny Games U.S.	2007	4	4	1	2022-01-30 00:00:00	2021-07-30 00:00:00
+614	Hit by Lightning	2001	4	4	4	2022-05-14 00:00:00	2021-12-23 00:00:00
+615	Cremaster 3	2008	5	3	3	2021-11-01 00:00:00	2021-11-30 00:00:00
+616	Christopher Columbus: The Discovery	1989	4	1	4	2021-08-17 00:00:00	2021-09-01 00:00:00
+617	In the Navy	2009	3	2	4	2022-02-25 00:00:00	2021-07-27 00:00:00
+618	Berserk	1994	1	1	4	2021-08-05 00:00:00	2021-09-18 00:00:00
+619	The Fox and the Hare	1996	3	5	4	2021-06-19 00:00:00	2022-01-26 00:00:00
+620	The War	1999	2	5	5	2021-08-06 00:00:00	2021-07-25 00:00:00
+621	La Legge Violenta Della Squadra Anticrimine	1999	2	2	2	2021-06-01 00:00:00	2021-12-16 00:00:00
+622	Railway Children, The	1988	2	4	5	2021-10-07 00:00:00	2022-01-13 00:00:00
+623	Stranger's Heart, A	2011	5	5	1	2021-09-07 00:00:00	2022-03-10 00:00:00
+624	20 Seconds of Joy	2010	5	2	5	2022-05-13 00:00:00	2021-08-10 00:00:00
+625	The Hire: Star, The	2007	2	1	3	2021-06-08 00:00:00	2021-09-26 00:00:00
+626	Paper Birds (Pájaros de papel)	2010	4	3	5	2022-02-13 00:00:00	2021-11-13 00:00:00
+627	Fixed Bayonets!	2008	1	5	4	2021-06-20 00:00:00	2022-05-17 00:00:00
+628	Tom & Viv	1998	3	3	3	2021-09-18 00:00:00	2021-06-20 00:00:00
+629	Asylum Blackout	1996	4	2	2	2021-10-17 00:00:00	2021-09-07 00:00:00
+630	True Grit	2007	3	1	5	2021-09-26 00:00:00	2021-11-07 00:00:00
+631	Welcome Back, Mr. McDonald (Rajio no jikan)	2005	4	1	1	2021-11-27 00:00:00	2022-05-17 00:00:00
+632	It's the Easter Beagle, Charlie Brown!	1998	3	5	1	2022-03-23 00:00:00	2021-10-12 00:00:00
+633	Eros Plus Massacre (Erosu purasu Gyakusatsu)	2007	4	4	3	2021-12-21 00:00:00	2022-02-04 00:00:00
+634	Why Are the Bells Ringing, Mitica? (a.k.a. Carnival Scenes) (De ce trag clopotele, Mitica?)	1995	1	3	1	2021-06-19 00:00:00	2021-06-07 00:00:00
+635	Dead Hate the Living!, The	1996	4	3	1	2021-06-22 00:00:00	2021-09-10 00:00:00
+636	King of Beggars (Mo jong yuen So Hat-Yi)	2000	2	1	4	2021-07-09 00:00:00	2022-02-09 00:00:00
+637	Agony and the Ecstasy, The	2005	4	1	1	2021-09-17 00:00:00	2021-10-03 00:00:00
+638	Blood on the Sun	2008	5	3	3	2022-03-23 00:00:00	2021-09-29 00:00:00
+639	Cottage, The	2007	3	4	2	2021-08-29 00:00:00	2021-08-08 00:00:00
+640	Bat Whispers, The	2003	3	3	2	2021-09-06 00:00:00	2021-08-05 00:00:00
+641	Muppets Most Wanted	2008	5	1	5	2021-11-04 00:00:00	2022-01-31 00:00:00
+642	Truth About Cats & Dogs, The	2002	2	1	3	2022-03-20 00:00:00	2021-07-30 00:00:00
+643	Rockers	2008	2	1	5	2022-05-14 00:00:00	2021-08-27 00:00:00
+644	Hollywood Shuffle	1988	3	1	1	2021-11-15 00:00:00	2022-04-07 00:00:00
+645	Emperor and the Assassin, The (Jing ke ci qin wang)	1985	1	2	5	2021-09-02 00:00:00	2022-01-20 00:00:00
+646	Chinese Ghost Story, A (Sinnui yauwan)	1990	4	2	1	2022-04-13 00:00:00	2021-11-04 00:00:00
+647	Housefull 2	1989	3	3	1	2021-09-25 00:00:00	2022-05-15 00:00:00
+648	Hollow Reed	2012	1	3	1	2022-02-01 00:00:00	2021-11-05 00:00:00
+649	Brewster McCloud	2010	5	2	1	2022-04-19 00:00:00	2022-05-04 00:00:00
+650	The Loft	2008	4	1	4	2021-08-05 00:00:00	2022-05-18 00:00:00
+651	Russendisko	1988	2	3	1	2021-07-14 00:00:00	2021-08-29 00:00:00
+652	Tell Me Something (Telmisseomding)	1987	2	4	4	2022-04-21 00:00:00	2021-12-14 00:00:00
+653	588 Rue Paradis (Mother)	2006	3	4	1	2021-11-10 00:00:00	2021-08-08 00:00:00
+654	Kung Fu Dunk	2009	4	3	3	2021-08-04 00:00:00	2022-05-02 00:00:00
+655	The Boy in the Mirror	1994	2	3	2	2021-11-11 00:00:00	2021-10-18 00:00:00
+656	Wolf	2001	2	5	2	2021-09-27 00:00:00	2021-12-03 00:00:00
+657	Noel	1992	3	5	1	2022-03-09 00:00:00	2021-08-18 00:00:00
+658	Jönssonligan på Mallorca	1992	3	3	1	2021-11-09 00:00:00	2021-06-29 00:00:00
+659	Unlikely Weapon, An	2011	3	3	3	2022-04-21 00:00:00	2022-02-06 00:00:00
+660	Night Nurse	1994	5	2	1	2022-05-29 00:00:00	2022-04-13 00:00:00
+661	Flywheel	1999	2	4	2	2021-12-21 00:00:00	2022-04-07 00:00:00
+662	Revenge of the Pink Panther	1992	3	1	5	2021-09-26 00:00:00	2021-09-13 00:00:00
+663	Barfi!	2008	1	5	2	2021-12-15 00:00:00	2021-06-07 00:00:00
+664	24th Day, The	2011	5	4	3	2021-11-16 00:00:00	2022-03-30 00:00:00
+665	Three Resurrected Drunkards (Kaette kita yopparai)	2004	1	4	4	2022-03-18 00:00:00	2022-02-16 00:00:00
+666	Andy Hardy's Double Life	2009	5	4	1	2021-10-22 00:00:00	2022-03-22 00:00:00
+667	Cheerleaders, The	2009	2	1	2	2021-06-27 00:00:00	2021-12-22 00:00:00
+668	Ice Castles	2007	3	4	5	2022-03-10 00:00:00	2021-07-09 00:00:00
+669	Two-Way Stretch	2008	3	1	3	2022-04-14 00:00:00	2022-05-15 00:00:00
+670	Main Event, The	2007	2	2	2	2022-04-11 00:00:00	2021-12-29 00:00:00
+671	Buffalo Soldiers	2004	3	5	3	2021-06-17 00:00:00	2021-08-30 00:00:00
+672	Amazon Women on the Moon	2010	5	4	1	2022-05-04 00:00:00	2021-09-16 00:00:00
+673	Plot of Fear	2006	5	5	1	2021-10-07 00:00:00	2022-01-10 00:00:00
+674	Hateship Loveship	1986	1	3	5	2021-12-03 00:00:00	2021-08-03 00:00:00
+675	Lupin III: The Castle Of Cagliostro (Rupan sansei: Kariosutoro no shiro)	2009	2	2	3	2021-09-13 00:00:00	2021-07-18 00:00:00
+676	Belle and Sebastien (Belle et Sébastien)	1992	4	5	3	2021-10-23 00:00:00	2022-05-29 00:00:00
+677	Red Shoes, The	2010	2	5	1	2021-10-28 00:00:00	2021-10-16 00:00:00
+678	51	2001	2	1	4	2022-04-22 00:00:00	2021-12-25 00:00:00
+679	Journey of August King, The	2010	5	2	1	2021-12-30 00:00:00	2021-07-06 00:00:00
+680	Outrage	1994	1	2	5	2021-09-18 00:00:00	2022-03-27 00:00:00
+681	Flower & Garnet	1967	1	3	5	2022-04-21 00:00:00	2022-04-25 00:00:00
+682	Tingler, The	2002	5	3	5	2022-04-29 00:00:00	2022-03-24 00:00:00
+683	Back to the Future Part II	1994	3	2	3	2021-06-27 00:00:00	2022-05-09 00:00:00
+684	Kill Me Again	2005	4	4	5	2021-11-17 00:00:00	2021-08-24 00:00:00
+685	In Vanda's Room (No Quarto da Vanda)	1991	1	4	1	2022-04-18 00:00:00	2022-01-14 00:00:00
+686	Nomad (Köshpendiler)	1967	2	1	5	2021-10-20 00:00:00	2022-04-30 00:00:00
+687	In Bed (En la cama)	1993	3	5	4	2022-04-02 00:00:00	2021-11-12 00:00:00
+688	War Comes to America (Why We Fight, 7)	1994	4	1	1	2022-02-24 00:00:00	2021-07-01 00:00:00
+689	Idiots, The (Idioterne)	2002	4	2	5	2021-10-14 00:00:00	2022-04-21 00:00:00
+690	Riding Giants	2012	1	5	4	2021-12-02 00:00:00	2022-04-25 00:00:00
+691	Mechanic, The	2002	1	1	2	2022-05-23 00:00:00	2021-12-08 00:00:00
+692	Fall of the Republic: The Presidency of Barack H. Obama	1990	2	4	3	2022-01-17 00:00:00	2021-09-03 00:00:00
+693	Vampires Suck	2010	2	2	3	2021-10-28 00:00:00	2022-04-23 00:00:00
+694	Wild Horse, Wild Ride	2009	3	3	3	2021-07-27 00:00:00	2022-01-04 00:00:00
+695	Scarlet Letter, The	1992	1	3	4	2021-07-14 00:00:00	2021-11-26 00:00:00
+696	Fistful of Dollars, A (Per un pugno di dollari)	2007	5	2	4	2022-04-11 00:00:00	2021-11-19 00:00:00
+697	Art of War, The	1996	4	4	4	2021-06-16 00:00:00	2021-08-13 00:00:00
+698	Plastic Paradise: The Great Pacific Garbage Patch	2006	4	2	2	2021-12-17 00:00:00	2022-04-11 00:00:00
+699	House of the Spirits, The	2011	5	2	3	2021-07-06 00:00:00	2021-06-02 00:00:00
+700	Romance in a Minor Key (Romanze in Moll)	1992	1	4	3	2021-08-25 00:00:00	2022-03-30 00:00:00
+701	Honey, We Shrunk Ourselves	2007	5	2	5	2022-04-16 00:00:00	2021-12-26 00:00:00
+702	A Girl Walks Home Alone at Night	1994	3	1	3	2021-10-28 00:00:00	2021-06-08 00:00:00
+703	Love Song for Bobby Long, A	1999	4	4	5	2022-01-06 00:00:00	2022-01-05 00:00:00
+704	Once Upon a Time in America	2005	1	1	1	2021-11-08 00:00:00	2021-09-21 00:00:00
+705	Manchurian Candidate, The	1995	2	1	1	2022-01-05 00:00:00	2022-05-15 00:00:00
+706	Raging Phoenix (Deu suay doo)	1993	1	2	2	2022-05-24 00:00:00	2021-11-18 00:00:00
+707	Chinese Coffee	2000	5	5	5	2021-11-30 00:00:00	2022-04-04 00:00:00
+708	Librarian, The: The Curse of the Judas Chalice	2003	4	5	3	2022-01-27 00:00:00	2022-03-26 00:00:00
+709	Christmas with the Kranks	2008	2	3	1	2021-11-10 00:00:00	2021-12-21 00:00:00
+710	Quartet	2009	3	2	3	2021-07-28 00:00:00	2021-08-20 00:00:00
+711	All of Me	1997	1	1	4	2021-07-21 00:00:00	2022-01-15 00:00:00
+712	Legend No. 17	2006	5	2	3	2021-07-08 00:00:00	2022-01-21 00:00:00
+713	Rhapsody in August (Hachi-gatsu no kyôshikyoku)	1991	2	1	5	2021-11-08 00:00:00	2021-09-17 00:00:00
+714	Louis C.K.: Shameless	2006	1	3	1	2022-04-25 00:00:00	2022-05-28 00:00:00
+715	Bug	1985	1	4	3	2022-03-05 00:00:00	2022-04-29 00:00:00
+716	Death in Buenos Aires (Muerte en Buenos Aires)	1997	5	5	2	2022-03-06 00:00:00	2021-07-29 00:00:00
+717	Quintet	1988	3	1	5	2021-10-28 00:00:00	2022-04-02 00:00:00
+718	Carry on Behind	1992	2	5	4	2022-02-04 00:00:00	2021-07-09 00:00:00
+719	Discovery of Heaven, The	2005	4	5	3	2021-09-26 00:00:00	2022-05-23 00:00:00
+720	Outpost: Black Sun	1985	5	2	1	2022-04-17 00:00:00	2021-10-14 00:00:00
+721	Midnight's Children	1992	1	2	3	2021-10-19 00:00:00	2022-02-09 00:00:00
+722	Snapper, The	2000	2	3	4	2022-02-26 00:00:00	2021-10-08 00:00:00
+723	Stalingrad	2002	5	2	4	2022-05-29 00:00:00	2022-02-11 00:00:00
+724	Alien	2008	1	2	2	2021-10-26 00:00:00	2021-08-14 00:00:00
+725	The Gun That Won the West	1994	1	3	5	2021-09-08 00:00:00	2021-12-08 00:00:00
+726	Hamlet	2000	5	5	5	2021-07-07 00:00:00	2022-02-16 00:00:00
+727	Devour	1993	2	5	5	2022-05-21 00:00:00	2021-07-11 00:00:00
+728	The Year Without a Santa Claus	2007	1	2	5	2021-12-15 00:00:00	2022-05-03 00:00:00
+729	Fine Madness, A	1989	4	2	5	2021-09-15 00:00:00	2021-08-27 00:00:00
+730	Red Dust	2008	1	4	1	2021-12-18 00:00:00	2022-02-23 00:00:00
+731	Phineas and Ferb the Movie: Across the 2nd Dimension	2005	3	2	4	2021-10-20 00:00:00	2021-07-31 00:00:00
+732	One Good Cop	2007	1	3	5	2021-08-25 00:00:00	2021-10-30 00:00:00
+733	Daltry Calhoun	2007	4	5	2	2021-11-09 00:00:00	2022-03-09 00:00:00
+734	Gauntlet, The	2003	1	2	4	2021-09-17 00:00:00	2021-12-08 00:00:00
+735	The Testimony	2007	3	2	5	2021-08-04 00:00:00	2021-09-03 00:00:00
+736	Dreamgirls	2012	3	3	2	2021-11-06 00:00:00	2021-08-23 00:00:00
+737	Harrison's Flowers	2010	2	5	1	2022-04-12 00:00:00	2021-12-20 00:00:00
+738	Before the Devil Knows You're Dead	1989	1	4	5	2022-05-21 00:00:00	2021-11-26 00:00:00
+739	Twonky, The	1995	1	5	2	2022-04-27 00:00:00	2021-07-09 00:00:00
+740	Wallace & Gromit: The Wrong Trousers	2012	4	5	3	2022-02-23 00:00:00	2022-03-16 00:00:00
+741	Without Warning	2012	5	1	4	2022-01-01 00:00:00	2022-01-31 00:00:00
+742	Domino	2011	5	5	3	2021-10-27 00:00:00	2021-08-19 00:00:00
+743	Who Are the DeBolts? [And Where Did They Get 19 Kids?]	2007	1	3	3	2021-12-17 00:00:00	2021-06-30 00:00:00
+744	Toxic Avenger, Part II, The	2006	5	5	3	2021-12-07 00:00:00	2022-03-15 00:00:00
+745	Signal, The	2004	4	1	2	2022-01-29 00:00:00	2021-11-08 00:00:00
+746	Mac and Me	2008	2	4	2	2022-01-25 00:00:00	2022-05-17 00:00:00
+747	Knights of the Round Table	2003	5	1	1	2022-01-04 00:00:00	2021-11-18 00:00:00
+748	Batman: Gotham Knight	2007	5	3	5	2021-07-11 00:00:00	2021-12-04 00:00:00
+749	Grande école	1990	5	1	1	2022-05-28 00:00:00	2022-05-02 00:00:00
+750	Geronimo: An American Legend	1995	3	5	3	2021-06-15 00:00:00	2022-03-22 00:00:00
+751	Celestial Wives of the Meadow Mari (Nebesnye zheny lugovykh mari)	1993	4	4	3	2021-09-03 00:00:00	2022-01-15 00:00:00
+752	Slumber Party '57	2011	5	4	5	2022-03-29 00:00:00	2021-08-04 00:00:00
+753	Spend It All	2008	1	3	1	2022-01-19 00:00:00	2022-03-19 00:00:00
+754	Hail Columbia!	1996	5	5	4	2022-05-16 00:00:00	2021-11-18 00:00:00
+755	Modern Boy (Modeon boi)	2011	5	3	3	2022-03-15 00:00:00	2021-10-20 00:00:00
+756	Skhizein	2006	1	5	3	2021-11-17 00:00:00	2022-01-13 00:00:00
+757	Percy Jackson: Sea of Monsters	1999	5	4	3	2021-06-18 00:00:00	2021-09-25 00:00:00
+758	She No Longer Talks, She Shoots	1993	5	3	3	2021-11-22 00:00:00	2022-03-27 00:00:00
+759	Miracles - Mr. Canton and Lady Rose	2007	1	3	2	2021-11-07 00:00:00	2021-12-01 00:00:00
+760	Lawyer Man	1992	3	4	5	2021-08-27 00:00:00	2021-08-07 00:00:00
+761	Resurrected, The	1992	1	2	4	2022-03-08 00:00:00	2021-11-15 00:00:00
+762	Queen of the Damned	2010	1	4	4	2022-01-28 00:00:00	2022-02-08 00:00:00
+763	009 Re: Cyborg	2009	4	2	2	2021-12-23 00:00:00	2021-07-12 00:00:00
+764	Zombie (a.k.a. Zombie 2: The Dead Are Among Us) (Zombi 2)	2001	1	1	2	2021-08-27 00:00:00	2022-03-01 00:00:00
+765	Deceit	1988	1	4	1	2021-12-19 00:00:00	2021-07-10 00:00:00
+766	Dreamer: Inspired by a True Story	1993	2	3	4	2022-05-19 00:00:00	2021-12-30 00:00:00
+767	Tango Kabaree	1991	5	5	1	2022-02-26 00:00:00	2021-12-03 00:00:00
+768	Westworld	2008	5	1	4	2021-12-12 00:00:00	2021-11-18 00:00:00
+769	Blue in the Face	2007	4	4	2	2022-04-01 00:00:00	2022-02-03 00:00:00
+770	Crac	2003	2	5	4	2021-11-17 00:00:00	2021-08-21 00:00:00
+771	Viva	2006	3	1	3	2021-07-03 00:00:00	2022-01-12 00:00:00
+772	Winnie the Pooh and Tigger Too	1994	5	1	1	2021-09-27 00:00:00	2021-09-20 00:00:00
+773	Day and Night (Dag och natt)	2008	5	2	3	2021-08-05 00:00:00	2021-07-07 00:00:00
+774	Bling Ring, The	1998	2	2	1	2022-03-30 00:00:00	2021-08-24 00:00:00
+775	My Life	1994	2	4	1	2021-08-02 00:00:00	2022-01-06 00:00:00
+776	Living and the Dead, The	1998	5	2	3	2022-03-23 00:00:00	2022-02-27 00:00:00
+777	Passion of Anna, The (Passion, En)	1989	5	3	4	2022-05-17 00:00:00	2021-11-14 00:00:00
+778	Thieves (Voleurs, Les)	2000	4	1	2	2022-02-07 00:00:00	2022-01-05 00:00:00
+779	Vampire Hunter D	1988	3	3	1	2022-02-17 00:00:00	2021-09-28 00:00:00
+780	Likeable Mister R, The (Simpaticul domn R)	1993	4	4	3	2021-08-12 00:00:00	2022-04-06 00:00:00
+781	No Time for Nuts	2002	5	3	5	2021-09-16 00:00:00	2022-04-20 00:00:00
+782	Kevin Smith: Sold Out - A Threevening with Kevin Smith	2002	5	5	4	2022-04-23 00:00:00	2021-09-05 00:00:00
+783	Rat Savior, The (Izbavitelj)	2003	1	5	5	2022-04-30 00:00:00	2021-09-01 00:00:00
+784	13 Lakes	2007	5	3	2	2021-08-05 00:00:00	2021-06-26 00:00:00
+785	Hole in the Soul, A (Rupa u dusi)	2001	4	4	2	2022-04-14 00:00:00	2021-07-06 00:00:00
+786	Batman & Mr. Freeze: Subzero	2003	4	4	3	2021-08-22 00:00:00	2022-04-15 00:00:00
+787	Morgan Pålsson - världsreporter	2002	2	1	2	2021-09-16 00:00:00	2021-11-08 00:00:00
+788	Sophie's World (Sofies verden)	2006	2	2	5	2021-06-04 00:00:00	2022-04-06 00:00:00
+789	And So It Is	1999	4	5	1	2022-02-20 00:00:00	2021-10-19 00:00:00
+790	Tarda estate	1994	2	5	2	2021-10-17 00:00:00	2022-05-04 00:00:00
+791	Porn Theater (Chatte à deux têtes, La)	2009	3	3	5	2021-06-25 00:00:00	2022-04-25 00:00:00
+792	Pigs with a P.38	2011	5	5	2	2021-09-14 00:00:00	2021-12-14 00:00:00
+793	Power of Kangwon Province, The (Kangwon-do ui him)	2008	3	3	4	2021-09-25 00:00:00	2022-05-12 00:00:00
+794	Ruins	2005	2	3	4	2021-10-17 00:00:00	2022-01-21 00:00:00
+795	Erasing David	2005	5	2	2	2021-09-23 00:00:00	2022-05-01 00:00:00
+796	Small Change (Argent de poche, L')	1992	4	5	4	2021-06-16 00:00:00	2021-10-11 00:00:00
+797	Mad Max	2002	5	3	1	2021-08-16 00:00:00	2021-08-25 00:00:00
+798	Dolce Vita, La	2001	3	1	5	2021-06-19 00:00:00	2021-11-25 00:00:00
+799	Grandmother	1991	3	2	5	2021-10-02 00:00:00	2021-08-21 00:00:00
+800	Roadie	2012	2	1	4	2022-05-04 00:00:00	2021-07-03 00:00:00
+801	Bonjour Monsieur Shlomi (Ha-Kochavim Shel Shlomi)	1991	4	3	4	2021-12-17 00:00:00	2021-08-04 00:00:00
+802	Pinocchio and the Emperor of the Night	2009	3	4	5	2022-02-26 00:00:00	2022-05-28 00:00:00
+803	Thirty Day Princess	1992	2	4	5	2021-08-11 00:00:00	2021-11-24 00:00:00
+804	Venus & Fleur	1996	4	5	5	2022-01-23 00:00:00	2022-02-05 00:00:00
+805	Prophet, the Gold and the Transylvanians, The (Profetul, aurul si Ardelenii)	2009	4	3	5	2021-07-08 00:00:00	2021-06-13 00:00:00
+806	Hombre	1993	4	4	1	2021-12-08 00:00:00	2022-02-12 00:00:00
+807	Masquerade	1996	2	4	2	2022-05-10 00:00:00	2021-06-05 00:00:00
+808	Dracula	1993	4	4	5	2022-02-27 00:00:00	2022-03-02 00:00:00
+809	Wonderland	2005	5	4	2	2021-11-24 00:00:00	2022-01-23 00:00:00
+810	Welcome to the Jungle	1997	1	2	3	2021-07-08 00:00:00	2022-01-02 00:00:00
+811	Man in the Chair	1994	2	3	3	2022-01-07 00:00:00	2021-10-11 00:00:00
+812	What's the Worst That Could Happen?	1999	5	1	1	2021-12-09 00:00:00	2021-08-21 00:00:00
+813	To Be Takei	1997	1	5	2	2021-12-31 00:00:00	2021-07-17 00:00:00
+814	Last Supper, The	2003	2	1	1	2022-05-29 00:00:00	2021-07-17 00:00:00
+815	Boulevard	2003	2	2	2	2021-06-14 00:00:00	2021-12-22 00:00:00
+816	Man Apart, A	2008	5	5	3	2021-07-08 00:00:00	2022-03-18 00:00:00
+817	Fat People (Gordos)	2010	5	5	1	2021-06-15 00:00:00	2021-11-09 00:00:00
+818	Spirited Away (Sen to Chihiro no kamikakushi)	1985	3	1	5	2021-11-21 00:00:00	2021-08-11 00:00:00
+819	Tourist, The	1996	3	4	4	2021-11-24 00:00:00	2022-03-09 00:00:00
+820	Evil Dead II (Dead by Dawn)	2013	1	5	5	2021-10-25 00:00:00	2021-11-23 00:00:00
+821	Penguins of Madagascar	2007	2	2	1	2021-12-30 00:00:00	2021-11-05 00:00:00
+822	Fast, Cheap & Out of Control	2011	5	4	4	2021-11-07 00:00:00	2021-12-30 00:00:00
+823	Red Hill	1966	3	3	5	2022-03-04 00:00:00	2022-03-23 00:00:00
+824	Babysitters, The	1997	3	4	2	2021-10-02 00:00:00	2021-12-10 00:00:00
+825	Godzilla's Revenge (Gojira-Minira-Gabara: Oru Kaijû Daishingeki) (All Monsters Attack)	1993	3	3	3	2022-01-23 00:00:00	2022-01-31 00:00:00
+826	Anna Lucasta	2000	5	5	2	2021-07-01 00:00:00	2021-12-25 00:00:00
+827	Clandestine Childhood	2009	3	4	2	2022-02-10 00:00:00	2021-08-08 00:00:00
+828	Leap Year	1999	4	5	2	2021-12-31 00:00:00	2021-06-07 00:00:00
+829	Buddy Holly Story, The	1990	5	1	1	2022-04-28 00:00:00	2022-05-08 00:00:00
+830	Prison (Fängelse) 	2009	5	3	1	2022-05-18 00:00:00	2021-11-29 00:00:00
+831	Man with the Gun	1998	5	2	2	2022-03-22 00:00:00	2022-05-03 00:00:00
+832	Standing Up	2001	2	3	5	2021-12-01 00:00:00	2021-11-22 00:00:00
+833	Frida	2009	4	3	4	2021-06-15 00:00:00	2021-11-15 00:00:00
+834	Uncle Boonmee Who Can Recall His Past Lives (Loong Boonmee raleuk chat)	1993	4	1	1	2022-03-03 00:00:00	2022-04-03 00:00:00
+835	Source, The	2011	3	4	4	2022-02-23 00:00:00	2022-03-17 00:00:00
+836	Man of My Life, The (L'homme de sa vie)	2003	2	3	3	2021-06-28 00:00:00	2021-12-05 00:00:00
+837	The Man Who Lived Again	1987	2	1	2	2022-04-07 00:00:00	2021-12-31 00:00:00
+838	Dare	2007	1	4	5	2021-11-13 00:00:00	2022-01-18 00:00:00
+839	Killers	1994	1	2	1	2022-03-24 00:00:00	2021-07-26 00:00:00
+840	Good Evening, Mr. Wallenberg (God afton, Herr Wallenberg)	2004	1	5	5	2021-08-26 00:00:00	2021-08-11 00:00:00
+841	96 Minutes 	2012	3	2	1	2021-08-09 00:00:00	2022-05-19 00:00:00
+842	Incident at Loch Ness	1988	3	3	1	2021-08-18 00:00:00	2022-05-22 00:00:00
+843	Dear Brigitte	1994	2	2	1	2021-06-24 00:00:00	2021-11-14 00:00:00
+844	Truth or Die 	2005	3	3	2	2022-01-14 00:00:00	2021-12-20 00:00:00
+845	Perfectly Normal	1991	2	3	1	2022-01-13 00:00:00	2022-05-10 00:00:00
+846	India Song	2005	3	1	2	2021-12-11 00:00:00	2021-09-27 00:00:00
+847	Full Metal Jacket	2003	3	4	5	2022-02-09 00:00:00	2022-04-03 00:00:00
+848	Turner & Hooch	2006	1	3	2	2022-05-18 00:00:00	2022-01-26 00:00:00
+849	Snake Eyes	2011	1	2	5	2021-10-19 00:00:00	2022-05-03 00:00:00
+850	Philadelphia Experiment II	2005	5	1	4	2022-01-29 00:00:00	2022-04-11 00:00:00
+851	Teheran 43: Spy Ring (a.k.a. Assassination Attempt) (Tegeran-43)	2003	2	3	2	2021-08-13 00:00:00	2021-08-22 00:00:00
+852	Blackbird	2002	4	2	4	2021-09-19 00:00:00	2021-07-21 00:00:00
+853	Death to Smoochy	2010	4	4	1	2021-07-22 00:00:00	2021-07-25 00:00:00
+854	D-Day	2006	1	5	1	2022-02-26 00:00:00	2021-11-14 00:00:00
+855	Emitai	2010	2	3	2	2021-09-04 00:00:00	2022-05-29 00:00:00
+856	Croupier	1989	2	4	4	2022-01-24 00:00:00	2021-06-05 00:00:00
+857	Along Came a Spider	2004	1	1	5	2021-07-28 00:00:00	2022-01-05 00:00:00
+858	Batman: The Dark Knight Returns, Part 2	2009	2	1	2	2022-01-26 00:00:00	2021-09-04 00:00:00
+859	Prayer for the Dying, A	2000	3	3	1	2021-12-15 00:00:00	2021-10-25 00:00:00
+860	Gappa: The Triphibian Monsters (AKA Monster from a Prehistoric Planet) (Daikyojû Gappa)	2009	4	5	3	2021-10-08 00:00:00	2021-09-17 00:00:00
+861	American Reunion (American Pie 4)	2009	2	5	5	2021-11-10 00:00:00	2021-09-06 00:00:00
+862	The Gamers	2012	4	5	3	2022-05-25 00:00:00	2021-08-01 00:00:00
+863	Villa Rides!	1994	4	1	5	2021-10-11 00:00:00	2021-06-27 00:00:00
+864	Toy Story 2	2009	5	3	5	2022-03-05 00:00:00	2021-09-09 00:00:00
+865	Dead Awake	1990	5	3	4	2022-02-08 00:00:00	2022-02-21 00:00:00
+866	Blueprint for Murder, A	2007	5	3	4	2021-10-28 00:00:00	2021-08-06 00:00:00
+867	Christmas on Mars	2000	5	1	3	2021-09-06 00:00:00	2021-06-27 00:00:00
+868	Crawlspace	1997	3	1	5	2022-01-26 00:00:00	2022-05-21 00:00:00
+869	One Bright Shining Moment	2000	3	3	3	2021-10-16 00:00:00	2021-12-01 00:00:00
+870	Crocodile Dundee in Los Angeles	2008	3	2	4	2022-02-28 00:00:00	2022-05-01 00:00:00
+871	Bluebeard (Barbe-Bleue)	2011	2	5	4	2022-05-13 00:00:00	2021-12-22 00:00:00
+872	Cassandra Crossing, The	2001	2	2	3	2022-03-21 00:00:00	2022-02-25 00:00:00
+873	Bronies: The Extremely Unexpected Adult Fans of My Little Pony	2005	3	1	2	2022-03-05 00:00:00	2021-11-23 00:00:00
+874	Pleasure of Being Robbed, The	2012	2	4	5	2021-07-24 00:00:00	2022-02-26 00:00:00
+875	Barefoot	2008	4	5	3	2022-05-11 00:00:00	2022-04-16 00:00:00
+876	Katie Tippel (Keetje Tippel)	2009	4	5	5	2021-09-15 00:00:00	2022-02-28 00:00:00
+877	Not for or Against (Quite the Contrary) (Ni pour, ni contre (bien au contraire))	1985	4	5	5	2022-01-10 00:00:00	2022-04-16 00:00:00
+878	Against All Odds	1996	4	5	5	2021-08-19 00:00:00	2021-06-16 00:00:00
+879	Outrageous Fortune	1992	1	4	3	2021-06-20 00:00:00	2021-06-17 00:00:00
+880	Welcome to the Jungle	2006	1	1	2	2021-11-06 00:00:00	2021-12-15 00:00:00
+881	Looking for Lenny 	2010	5	4	5	2021-12-23 00:00:00	2022-02-25 00:00:00
+882	End Game	1988	1	5	5	2022-05-03 00:00:00	2022-01-08 00:00:00
+883	Perfect Score, The	2001	3	1	5	2021-08-05 00:00:00	2022-01-21 00:00:00
+884	Cooler, The	2004	3	2	1	2021-07-10 00:00:00	2021-08-01 00:00:00
+885	Scooby-Doo! WrestleMania Mystery	2005	5	3	1	2021-07-02 00:00:00	2021-06-24 00:00:00
+886	Romance & Cigarettes	2002	1	5	5	2021-12-29 00:00:00	2021-09-10 00:00:00
+887	Rumble in Hong Kong (Nu jing cha) (Heroine, The)	2005	1	3	5	2021-06-11 00:00:00	2021-11-01 00:00:00
+888	Lawn Dogs	2011	4	3	3	2021-09-09 00:00:00	2022-02-14 00:00:00
+889	House by the Cemetery, The (Quella villa accanto al cimitero)	2000	2	5	4	2021-07-12 00:00:00	2021-10-14 00:00:00
+890	A Mulher Invisível	2006	4	2	2	2021-07-14 00:00:00	2021-08-24 00:00:00
+891	A Fight For	2012	5	3	3	2022-03-19 00:00:00	2022-03-29 00:00:00
+892	Playground	2011	3	2	5	2021-10-05 00:00:00	2021-12-23 00:00:00
+893	Executive Action	1989	4	1	3	2021-11-02 00:00:00	2022-01-11 00:00:00
+894	Roadside Prophets	1998	2	4	4	2022-01-20 00:00:00	2022-03-24 00:00:00
+895	Man with No Shadow, The (Homme sans ombre, L')	2008	4	4	5	2022-04-18 00:00:00	2021-08-26 00:00:00
+896	Born to Dance	2003	3	3	5	2021-10-24 00:00:00	2021-07-28 00:00:00
+897	Exiled (Fong juk)	2007	3	5	4	2022-03-25 00:00:00	2021-07-25 00:00:00
+898	Each Dawn I Die	2012	5	4	4	2022-03-29 00:00:00	2022-03-20 00:00:00
+899	Ugly, Dirty and Bad (Brutti sporchi e cattivi)	2001	4	4	2	2022-01-21 00:00:00	2021-11-07 00:00:00
+900	Double Jeopardy	1994	5	1	1	2021-08-30 00:00:00	2021-09-08 00:00:00
+901	Trinity: Gambling for High Stakes (Odds and Evens) (Pari e dispari)	1995	3	4	5	2021-08-01 00:00:00	2022-03-08 00:00:00
+902	Send a Bullet (Manda Bala)	2012	5	3	1	2021-06-26 00:00:00	2021-07-02 00:00:00
+903	Whitey: United States of America v. James J. Bulger	2008	5	5	1	2021-07-15 00:00:00	2022-01-27 00:00:00
+904	City Slickers II: The Legend of Curly's Gold	2001	2	5	1	2021-06-09 00:00:00	2022-03-12 00:00:00
+905	Painted Lady	1972	2	2	1	2021-06-24 00:00:00	2022-03-14 00:00:00
+906	Good Guys and the Bad Guys, The	2008	5	2	1	2022-04-21 00:00:00	2021-09-27 00:00:00
+907	Scream 2	1990	5	1	5	2022-04-11 00:00:00	2021-09-25 00:00:00
+908	Purple Butterfly (Zi hudie)	1985	5	4	5	2021-11-02 00:00:00	2021-12-22 00:00:00
+909	Murder, He Says	1997	1	3	2	2022-04-03 00:00:00	2021-12-29 00:00:00
+910	I Love You, Beth Cooper	2002	2	2	1	2021-06-23 00:00:00	2021-06-16 00:00:00
+911	Bling: A Planet Rock	1999	1	2	1	2022-03-25 00:00:00	2022-03-31 00:00:00
+912	41-Year-Old Virgin Who Knocked Up Sarah Marshall and Felt Superbad About It, The	1996	1	5	5	2021-06-23 00:00:00	2022-03-02 00:00:00
+913	Alabama Moon	2012	2	4	3	2022-01-28 00:00:00	2022-01-11 00:00:00
+914	Place in the Sun, A (En plats i solen)	2007	3	2	5	2021-10-25 00:00:00	2021-11-28 00:00:00
+915	Frankenweenie	2011	3	2	5	2021-07-05 00:00:00	2021-09-30 00:00:00
+916	Miraculum	2003	5	2	5	2021-10-27 00:00:00	2022-03-10 00:00:00
+917	My Science Project	2011	5	3	2	2022-05-23 00:00:00	2022-01-01 00:00:00
+918	Black Balloon, The	1989	5	3	1	2022-02-08 00:00:00	2021-05-30 00:00:00
+919	Playing for Keeps	2000	1	5	3	2022-02-11 00:00:00	2022-02-01 00:00:00
+920	Land of the Blind	1994	4	2	1	2021-08-18 00:00:00	2021-10-20 00:00:00
+921	It Runs in the Family	2005	3	4	2	2022-02-16 00:00:00	2021-06-24 00:00:00
+922	The Hire: Follow, The	1997	5	4	4	2021-06-19 00:00:00	2022-03-23 00:00:00
+923	Back to the Garden, Flower Power Comes Full Circle	1986	4	1	3	2022-01-02 00:00:00	2021-08-21 00:00:00
+924	Midnight Lace	1992	2	1	1	2021-06-15 00:00:00	2021-11-04 00:00:00
+925	Amu	1986	3	1	3	2022-02-03 00:00:00	2022-03-23 00:00:00
+926	S.W.A.T.: Firefight	1987	5	3	2	2022-02-11 00:00:00	2022-03-04 00:00:00
+927	50/50	2005	2	1	2	2021-07-04 00:00:00	2022-03-14 00:00:00
+928	Only God Knows (Sólo Dios Sabe)	1998	1	1	4	2021-06-11 00:00:00	2021-06-14 00:00:00
+929	Across the Tracks	1990	3	5	4	2021-07-04 00:00:00	2021-07-14 00:00:00
+930	Slumber Party '57	2002	2	1	1	2021-12-23 00:00:00	2021-09-25 00:00:00
+931	Boys	1995	5	4	5	2021-10-15 00:00:00	2021-10-16 00:00:00
+932	Food of the Gods II	1984	4	5	1	2022-02-09 00:00:00	2021-06-03 00:00:00
+933	Wagon Master	2005	4	3	2	2021-07-19 00:00:00	2022-05-14 00:00:00
+934	Act of Violence	2006	4	1	2	2021-09-15 00:00:00	2021-06-10 00:00:00
+935	Police Academy 3: Back in Training	1999	4	3	1	2021-06-06 00:00:00	2021-11-11 00:00:00
+936	Budd Boetticher: A Man Can Do That	2002	2	2	4	2021-12-30 00:00:00	2021-08-27 00:00:00
+937	The Cat's Out	2003	1	1	3	2021-06-06 00:00:00	2022-05-24 00:00:00
+938	Latin Music USA	2010	4	1	3	2021-07-16 00:00:00	2021-07-11 00:00:00
+939	World According to Dick Cheney, The 	1999	5	3	4	2021-12-23 00:00:00	2021-09-14 00:00:00
+940	Big Town, The	1997	2	3	3	2022-05-15 00:00:00	2021-11-21 00:00:00
+941	Cure for Love, A (Lekarstwo na milosc)	1996	2	1	3	2022-04-09 00:00:00	2021-08-19 00:00:00
+942	Confessions of a Nazi Spy	1958	1	4	2	2022-02-23 00:00:00	2021-10-25 00:00:00
+943	Surviving Christmas	2002	4	2	4	2021-09-25 00:00:00	2021-10-03 00:00:00
+944	Empire of Passion (a.k.a. In the Realm of Passion) (a.k.a. Phantom Love) (Ai No Borei)	1967	2	5	1	2022-01-13 00:00:00	2022-03-17 00:00:00
+945	Hudson Hawk	1989	4	5	4	2021-08-05 00:00:00	2021-07-02 00:00:00
+946	Fat, Sick & Nearly Dead 2	1994	5	3	1	2021-06-01 00:00:00	2021-11-24 00:00:00
+947	Used Cars	2010	2	5	4	2022-05-26 00:00:00	2022-03-27 00:00:00
+948	Front of the Class	2005	1	5	2	2021-09-20 00:00:00	2021-08-07 00:00:00
+949	Mighty, The	1992	5	3	4	2021-12-24 00:00:00	2021-09-24 00:00:00
+950	Fahrenheit 9/11	2012	2	1	4	2021-11-28 00:00:00	2021-09-15 00:00:00
+951	Furry Vengeance	1988	4	3	4	2021-06-19 00:00:00	2021-09-22 00:00:00
+952	Hit, The	2010	4	5	5	2022-01-30 00:00:00	2021-08-10 00:00:00
+953	It Happened on Fifth Avenue	2009	4	5	3	2021-06-20 00:00:00	2022-03-15 00:00:00
+954	Zulu Dawn	2012	1	4	4	2021-09-09 00:00:00	2021-12-26 00:00:00
+955	Hedd Wyn	2012	5	1	3	2021-06-17 00:00:00	2022-05-11 00:00:00
+956	Leatherheads	2005	3	1	3	2021-11-01 00:00:00	2021-06-20 00:00:00
+957	Bobby Deerfield	2011	3	1	5	2021-07-17 00:00:00	2021-09-13 00:00:00
+958	Murphy's Romance	1998	4	4	5	2021-10-19 00:00:00	2021-10-03 00:00:00
+959	Nickelodeon	1989	5	5	4	2021-09-18 00:00:00	2021-09-29 00:00:00
+960	Stage Fright	2004	5	1	2	2021-08-19 00:00:00	2022-04-15 00:00:00
+961	Fiancee, The (Parineeta)	2011	4	2	1	2022-05-16 00:00:00	2022-01-30 00:00:00
+962	Souper, Le (Supper, The)	2006	5	4	3	2022-03-17 00:00:00	2022-02-14 00:00:00
+963	Tart	1999	2	5	3	2021-10-07 00:00:00	2022-04-05 00:00:00
+964	Godzilla vs. King Ghidorah (Gojira vs. Kingu Gidorâ)	2005	5	2	5	2021-09-10 00:00:00	2022-03-07 00:00:00
+965	Return of Django (Son of Django) (Figlio di Django, Il)	2003	2	2	3	2021-07-26 00:00:00	2022-05-01 00:00:00
+966	Room at the Top	2011	3	5	3	2022-02-08 00:00:00	2021-09-18 00:00:00
+967	Dragonfly	1995	5	3	2	2021-12-31 00:00:00	2022-05-19 00:00:00
+968	Fool There Was, A	2002	1	2	3	2022-01-20 00:00:00	2022-02-28 00:00:00
+969	...All the Marbles (California Dolls, The)	1993	3	1	2	2022-05-07 00:00:00	2021-09-03 00:00:00
+970	Inquisitor, The (a.k.a. Under Suspicion) (Garde à vue)	1998	2	4	1	2022-02-06 00:00:00	2022-03-28 00:00:00
+971	SS Experiment Love Camp (Lager SSadis Kastrat Kommandantur)	1993	2	2	4	2021-10-18 00:00:00	2022-02-17 00:00:00
+972	12 Years a Slave	2003	1	4	2	2021-10-20 00:00:00	2021-08-16 00:00:00
+973	Decoy Bride, The	2006	1	4	2	2021-09-24 00:00:00	2021-12-15 00:00:00
+974	Batman Unmasked: The Psychology of the Dark Knight	2008	3	3	3	2021-07-22 00:00:00	2022-03-18 00:00:00
+975	Young Lieutenant, The (Le petit lieutenant)	1994	3	1	5	2021-06-05 00:00:00	2021-11-11 00:00:00
+976	Dumb and Dumber To	2007	1	3	2	2021-07-25 00:00:00	2022-05-21 00:00:00
+977	Butchered	1998	1	2	1	2021-07-14 00:00:00	2022-01-28 00:00:00
+978	Jack the Giant Killer	2000	5	2	2	2022-04-14 00:00:00	2022-02-27 00:00:00
+979	Tangled	1988	2	1	3	2021-12-31 00:00:00	2021-06-20 00:00:00
+980	Jewel Robbery	1958	5	2	5	2022-04-07 00:00:00	2021-07-29 00:00:00
+981	Hoodoo Ann	1966	4	5	5	2021-09-11 00:00:00	2021-09-27 00:00:00
+982	Wild Women	1991	5	2	4	2022-02-11 00:00:00	2021-08-20 00:00:00
+983	Woman in The Septic Tank, The (Ang Babae sa septic tank)	1993	1	5	2	2021-06-22 00:00:00	2021-10-17 00:00:00
+984	Heartburn	2013	5	5	5	2021-08-22 00:00:00	2021-06-28 00:00:00
+985	19th Wife, The	2010	5	2	2	2022-05-19 00:00:00	2021-08-07 00:00:00
+986	Our Song	1998	1	1	4	2022-05-19 00:00:00	2021-10-17 00:00:00
+987	Paimen, piika ja emäntä	2012	1	1	2	2022-04-16 00:00:00	2022-03-28 00:00:00
+988	Dragon Seed	1993	3	5	2	2022-04-30 00:00:00	2022-03-14 00:00:00
+989	Clone (Womb)	2006	2	1	3	2022-03-16 00:00:00	2022-03-01 00:00:00
+990	Deadly Tower, The	2003	1	1	3	2021-11-24 00:00:00	2021-11-01 00:00:00
+991	Adventure in Baltimore	1989	3	4	5	2021-10-21 00:00:00	2022-05-07 00:00:00
+992	Boys Town	2008	3	2	1	2021-11-01 00:00:00	2021-09-07 00:00:00
+993	Sleuth	2006	2	3	4	2022-03-11 00:00:00	2022-02-01 00:00:00
+994	Hearts and Minds	1977	4	1	2	2022-02-03 00:00:00	2021-09-07 00:00:00
+995	Balance, La	2003	1	3	3	2021-07-06 00:00:00	2021-08-17 00:00:00
+996	Broken Arrow	2011	5	4	5	2021-07-02 00:00:00	2021-06-03 00:00:00
+997	Samsara	1989	4	1	4	2021-09-07 00:00:00	2022-03-30 00:00:00
+998	Case départ	2002	4	2	3	2022-01-22 00:00:00	2021-12-17 00:00:00
+999	Colpo in canna	2001	2	4	3	2021-06-18 00:00:00	2021-12-14 00:00:00
+1000	Biggles	1996	2	1	2	2021-10-21 00:00:00	2021-06-06 00:00:00
+1001	Chromophobia	2000	5	4	1	2022-03-06 00:00:00	2022-05-02 00:00:00
+1002	Farewell to Arms, A	2002	4	1	3	2022-04-14 00:00:00	2021-09-01 00:00:00
+1003	Girl Who Talked to Dolphins, The	1991	5	4	1	2021-09-30 00:00:00	2021-09-24 00:00:00
+1004	Road to Morocco	2011	2	3	2	2021-12-30 00:00:00	2022-03-19 00:00:00
+1005	Toast of New Orleans, The	2009	3	2	5	2022-05-19 00:00:00	2022-01-15 00:00:00
+1006	Jane Eyre	1999	5	5	1	2021-08-31 00:00:00	2022-02-15 00:00:00
+1007	Dirty Movie	2008	3	2	2	2022-03-13 00:00:00	2022-01-11 00:00:00
+1008	American Reunion (American Pie 4)	2012	5	3	5	2022-03-13 00:00:00	2021-09-30 00:00:00
+1009	Screwed	1999	4	1	5	2021-06-11 00:00:00	2021-10-28 00:00:00
+1010	Beauty #2	1993	3	2	1	2021-10-02 00:00:00	2022-03-20 00:00:00
+1011	Ascent of Money, The	2010	4	2	1	2022-03-26 00:00:00	2022-02-13 00:00:00
+1012	Tokyo Story (Tôkyô monogatari)	2010	1	1	4	2022-04-18 00:00:00	2022-01-15 00:00:00
+1013	Blue Like Jazz	2003	2	2	3	2021-06-08 00:00:00	2021-11-28 00:00:00
+1014	Electra Glide in Blue	2010	2	1	4	2022-01-27 00:00:00	2021-08-24 00:00:00
+1015	...And Justice for All	2011	1	4	4	2022-03-10 00:00:00	2021-12-12 00:00:00
+1016	Isi & Disi: Amor a lo bestia	1986	4	5	5	2021-08-15 00:00:00	2022-02-21 00:00:00
+1017	Dog Run	2009	4	4	4	2021-08-21 00:00:00	2022-01-25 00:00:00
+1018	Bathory	1995	2	4	4	2021-06-14 00:00:00	2021-08-02 00:00:00
+1019	Love God?, The	2004	2	2	5	2021-12-23 00:00:00	2021-12-13 00:00:00
+1020	Forsaking All Others	2008	5	4	5	2022-04-07 00:00:00	2021-10-29 00:00:00
+1021	Returner (Ritaanaa)	2008	4	2	5	2021-11-23 00:00:00	2021-10-08 00:00:00
+1022	Elephant in the Living Room, The	2011	4	3	5	2022-03-31 00:00:00	2022-01-27 00:00:00
+1023	About Elly (Darbareye Elly)	2007	3	5	3	2022-04-13 00:00:00	2021-08-22 00:00:00
+1024	Badman's Country	2012	1	5	1	2021-10-20 00:00:00	2021-07-16 00:00:00
+1025	Foo Fighters: Back and Forth	2012	3	1	1	2022-04-17 00:00:00	2021-07-26 00:00:00
+1026	Planes: Fire & Rescue	2012	3	5	5	2021-11-28 00:00:00	2021-06-09 00:00:00
+1027	Where Is the Friend's Home? (Where Is My Friend's House?) (Khane-ye doust kodjast?)	2000	2	1	2	2021-08-28 00:00:00	2021-10-11 00:00:00
+1028	Finding a Family	2001	1	1	5	2022-03-16 00:00:00	2022-02-05 00:00:00
+1029	Magic in the Water	2009	3	1	5	2021-12-11 00:00:00	2021-06-25 00:00:00
+1030	Two Women (Ciociara, La)	2006	5	2	2	2021-09-11 00:00:00	2021-09-18 00:00:00
+1031	She's Gotta Have It	2002	1	3	5	2022-03-12 00:00:00	2021-06-01 00:00:00
+1032	Blind Fury	1985	4	1	4	2022-03-10 00:00:00	2021-09-09 00:00:00
+1033	Jackass Presents: Bad Grandpa .5	2006	1	5	1	2022-01-05 00:00:00	2021-06-24 00:00:00
+1034	Private	2008	1	5	2	2021-07-06 00:00:00	2021-10-15 00:00:00
+1035	Landscape Suicide	2000	2	5	1	2021-10-13 00:00:00	2022-03-02 00:00:00
+1036	The Prince	2007	1	4	3	2022-05-16 00:00:00	2022-02-24 00:00:00
+1037	Night Train	2001	3	1	5	2021-09-07 00:00:00	2021-12-30 00:00:00
+1038	Pushover	1965	3	1	4	2022-05-14 00:00:00	2021-12-06 00:00:00
+1039	Facing the Giants	2002	2	5	5	2021-07-11 00:00:00	2022-05-07 00:00:00
+1040	Fever Pitch	2011	3	1	2	2021-08-27 00:00:00	2021-06-17 00:00:00
+1041	Blue and the Gray, The	1988	3	3	1	2021-08-16 00:00:00	2022-02-08 00:00:00
+1042	Nanny McPhee	2010	4	2	3	2022-03-03 00:00:00	2022-02-27 00:00:00
+1043	Fear	1988	2	4	2	2021-11-11 00:00:00	2021-09-21 00:00:00
+1044	International, The	1995	4	2	4	2021-06-05 00:00:00	2021-09-25 00:00:00
+1045	Clean	2008	1	2	1	2022-01-10 00:00:00	2021-08-09 00:00:00
+1046	Kicking and Screaming	2002	3	5	2	2021-08-22 00:00:00	2021-06-13 00:00:00
+1047	Basket Case 3: The Progeny	1995	4	2	3	2021-08-17 00:00:00	2021-06-20 00:00:00
+1048	Ten Shrews, The (Kymmenen riivinrautaa)	2011	5	3	3	2022-03-23 00:00:00	2021-08-27 00:00:00
+1049	Design for Living	1992	3	3	2	2022-04-23 00:00:00	2021-10-14 00:00:00
+1050	Bella	1998	2	3	3	2022-04-06 00:00:00	2021-11-26 00:00:00
+1051	Private Lessons (Élève libre)	2003	4	1	5	2021-09-17 00:00:00	2021-06-17 00:00:00
+1052	Nicotina	2004	2	3	5	2021-06-13 00:00:00	2021-06-27 00:00:00
+1053	Enemy Within, The (O ehthros mou)	2008	5	5	1	2021-10-05 00:00:00	2022-04-16 00:00:00
+1054	Suspicious River	2003	2	3	5	2021-09-13 00:00:00	2022-05-06 00:00:00
+1055	I Know What I Saw	1986	4	5	4	2021-10-04 00:00:00	2022-05-29 00:00:00
+1056	The Adventures of Hercules	1993	3	5	4	2021-09-24 00:00:00	2022-02-23 00:00:00
+1057	Atomic Submarine, The	2010	5	4	4	2021-12-10 00:00:00	2022-04-19 00:00:00
+1058	Fall of the Roman Empire, The	2003	2	2	3	2021-10-25 00:00:00	2022-05-04 00:00:00
+1059	Shanghai Calling	2011	3	1	2	2021-11-12 00:00:00	2021-11-28 00:00:00
+1060	Head Above Water	2012	1	2	4	2021-12-17 00:00:00	2021-07-28 00:00:00
+1061	College Road Trip	2010	5	1	1	2022-05-04 00:00:00	2022-05-20 00:00:00
+1062	Next	1998	4	5	4	2022-02-17 00:00:00	2021-06-11 00:00:00
+1063	Bizarre	2006	5	3	1	2022-01-17 00:00:00	2021-09-18 00:00:00
+1064	See You Tomorrow, Everyone	2012	4	5	5	2021-12-27 00:00:00	2022-05-10 00:00:00
+1065	The Phantom Light	2001	5	4	1	2021-11-18 00:00:00	2022-01-02 00:00:00
+1066	Starship Troopers: Invasion	2006	3	3	5	2022-02-06 00:00:00	2022-05-15 00:00:00
+1067	Hider in the House	2002	2	2	5	2022-01-07 00:00:00	2021-11-07 00:00:00
+1068	Fiancee, The (Parineeta)	1998	4	5	5	2022-02-12 00:00:00	2022-05-13 00:00:00
+1069	Yeh Jawaani Hai Deewani	1967	1	2	4	2022-04-29 00:00:00	2022-04-11 00:00:00
+1070	Little Lord Fauntleroy	2009	3	1	4	2021-11-22 00:00:00	2021-12-08 00:00:00
+1071	Wild Side	1996	5	3	4	2021-09-18 00:00:00	2022-02-06 00:00:00
+1072	Global Metal	2001	4	5	3	2021-09-08 00:00:00	2021-09-25 00:00:00
+1073	Throw Away Your Books, Rally in the Streets	1995	3	1	3	2021-07-20 00:00:00	2022-02-16 00:00:00
+1074	Das Experiment (Experiment, The)	1994	5	2	3	2022-03-11 00:00:00	2021-07-14 00:00:00
+1075	Amish Grace	2007	2	2	2	2022-02-27 00:00:00	2022-01-30 00:00:00
+1076	Pebble and the Penguin, The	2011	3	1	1	2021-12-01 00:00:00	2021-12-14 00:00:00
+1077	Fangs of the Living Dead (Malenka)	2010	4	2	1	2022-02-20 00:00:00	2022-02-08 00:00:00
+1078	Smiley	2008	5	3	5	2022-05-08 00:00:00	2022-03-09 00:00:00
+1079	Eternally Yours	2005	4	4	1	2022-03-10 00:00:00	2021-06-23 00:00:00
+1080	The Inner Circle	1998	5	5	4	2022-04-08 00:00:00	2022-02-25 00:00:00
+1081	Wounds, The (Rane)	1985	4	4	5	2021-09-09 00:00:00	2021-06-29 00:00:00
+1082	Quiet Man, The	2004	4	5	3	2022-04-06 00:00:00	2021-06-17 00:00:00
+1083	Awakening, The	2010	1	5	4	2021-11-03 00:00:00	2021-10-04 00:00:00
+1084	Black Tights (1-2-3-4 ou Les Collants noirs)	1988	5	5	2	2022-03-12 00:00:00	2021-10-01 00:00:00
+1085	Manufacturing Reality: Slavoj Zizek and the Reality of the Virtual (Slavoj Zizek: The Reality of the Virtual)	1998	5	3	1	2022-04-23 00:00:00	2021-08-17 00:00:00
+1086	Anne of Green Gables: The Sequel (a.k.a. Anne of Avonlea)	2002	4	1	2	2021-07-15 00:00:00	2021-09-01 00:00:00
+1087	Stones in Exile	1991	4	2	3	2021-06-29 00:00:00	2021-09-02 00:00:00
+1088	Rabbit Test	2009	2	1	2	2021-08-18 00:00:00	2021-11-01 00:00:00
+1089	Australian Atomic Confessions	1999	1	2	4	2021-06-26 00:00:00	2021-07-15 00:00:00
+1090	Redwood Highway	2008	4	5	1	2022-03-24 00:00:00	2021-10-13 00:00:00
+1091	Don't Look Back	2009	3	5	1	2021-11-05 00:00:00	2022-03-31 00:00:00
+1092	Good Morning, Night (Buongiorno, notte)	2012	4	3	1	2022-02-24 00:00:00	2021-06-22 00:00:00
+1093	Tyler Perry's Madea's Witness Protection	2007	1	4	3	2021-11-18 00:00:00	2022-02-12 00:00:00
+1094	Guys and Dolls	2006	3	3	1	2021-10-07 00:00:00	2021-07-31 00:00:00
+1095	Two of Us, The (Le vieil homme et l'enfant)	2005	4	3	2	2021-10-29 00:00:00	2021-10-30 00:00:00
+1096	Object of My Affection, The	2009	3	2	5	2022-01-23 00:00:00	2022-03-27 00:00:00
+1097	Paradise, Hawaiian Style	2002	3	5	4	2022-02-25 00:00:00	2021-06-18 00:00:00
+1098	That's Entertainment, Part II	2013	1	3	2	2022-01-07 00:00:00	2021-12-10 00:00:00
+1099	Ilsa, She Wolf of the SS	1999	1	1	4	2021-06-06 00:00:00	2022-05-17 00:00:00
+1100	Jim Gaffigan: Obsessed	2010	2	3	3	2022-03-26 00:00:00	2022-04-25 00:00:00
+1101	Four Eyes and Six-Guns	1997	1	3	5	2021-10-11 00:00:00	2021-09-12 00:00:00
+1102	Urban Ghost Story	2012	3	4	2	2021-10-01 00:00:00	2022-02-02 00:00:00
+1103	Vacancy	2006	1	3	3	2022-01-20 00:00:00	2021-10-22 00:00:00
+1104	Desire: The Vampire	2009	2	4	1	2021-11-10 00:00:00	2022-05-18 00:00:00
+1105	Renoir	2009	3	4	4	2022-03-24 00:00:00	2021-08-24 00:00:00
+1106	Earth Girls Are Easy	2004	5	2	3	2021-11-23 00:00:00	2022-01-09 00:00:00
+1107	Housemaid, The (Hanyo)	2011	1	4	2	2022-05-27 00:00:00	2021-11-21 00:00:00
+1108	Morgan!	1992	4	4	5	2021-06-09 00:00:00	2021-10-16 00:00:00
+1109	Now and Forever	2009	1	1	3	2021-07-12 00:00:00	2021-09-15 00:00:00
+1110	Fritz the Cat	2011	2	4	3	2022-04-12 00:00:00	2021-08-24 00:00:00
+1111	Dr. Mabuse: The Gambler (Dr. Mabuse, der Spieler)	2001	5	4	3	2022-03-06 00:00:00	2021-12-16 00:00:00
+1112	Ordinary People	1986	4	4	5	2022-03-17 00:00:00	2021-07-19 00:00:00
+1113	Bon Cop, Bad Cop	2010	2	1	1	2021-06-26 00:00:00	2022-04-21 00:00:00
+1114	Garden Party	2009	4	1	1	2021-08-11 00:00:00	2021-10-29 00:00:00
+1115	Sour Grapes	2003	5	3	4	2021-11-24 00:00:00	2022-01-16 00:00:00
+1116	Don Juan	2007	4	4	2	2021-06-03 00:00:00	2022-03-22 00:00:00
+1117	Dad Savage	2010	5	5	3	2022-01-19 00:00:00	2021-08-06 00:00:00
+1118	Faithful	1980	3	5	3	2022-04-08 00:00:00	2022-04-15 00:00:00
+1119	Coelacanth: The Fish That Time Forgot	1992	2	2	1	2021-09-04 00:00:00	2021-12-24 00:00:00
+1120	Home for the Holidays	2011	5	5	2	2021-08-23 00:00:00	2022-03-12 00:00:00
+1121	Demonlover	2006	4	3	5	2021-07-09 00:00:00	2022-03-25 00:00:00
+1122	Middle Men	1994	2	4	4	2021-06-12 00:00:00	2022-01-02 00:00:00
+1123	Paris by Night	1999	1	2	4	2021-12-28 00:00:00	2021-08-27 00:00:00
+1124	Freaks	2013	4	2	5	2022-01-21 00:00:00	2021-09-01 00:00:00
+1125	Anne of Green Gables: The Sequel (a.k.a. Anne of Avonlea)	2003	2	2	1	2021-08-05 00:00:00	2021-09-09 00:00:00
+1126	Locals, The	2010	4	1	3	2022-03-22 00:00:00	2021-09-15 00:00:00
+1127	Just Like Heaven	1990	5	2	4	2021-12-01 00:00:00	2022-04-30 00:00:00
+1128	Abraham Lincoln	1999	4	3	1	2022-04-16 00:00:00	2022-03-08 00:00:00
+1129	Taking of Power by Louis XIV, The (Prise de pouvoir par Louis XIV, La)	2003	5	5	2	2022-01-12 00:00:00	2021-09-25 00:00:00
+1130	Scarlet Diva	2003	5	3	2	2022-04-14 00:00:00	2022-05-27 00:00:00
+1131	Circumstance	1991	1	5	2	2021-06-10 00:00:00	2021-11-05 00:00:00
+1132	Whole Wide World, The	2011	2	3	4	2021-12-17 00:00:00	2022-04-11 00:00:00
+1133	Hellbound: Hellraiser II	2009	5	2	5	2021-12-08 00:00:00	2022-01-14 00:00:00
+1134	Tie That Binds, The	1996	4	4	5	2021-07-12 00:00:00	2021-09-03 00:00:00
+1135	20 Feet from Stardom (Twenty Feet from Stardom)	2012	3	5	3	2021-11-06 00:00:00	2021-10-26 00:00:00
+1136	At the Devil's Door	2003	5	2	2	2021-12-29 00:00:00	2022-01-14 00:00:00
+1137	Frozen	2007	1	4	2	2021-09-01 00:00:00	2022-05-04 00:00:00
+1138	King Corn	1997	3	5	2	2021-12-26 00:00:00	2022-04-25 00:00:00
+1139	Plans for Tomorrow (Planes para mañana)	2012	4	3	1	2021-06-22 00:00:00	2022-01-13 00:00:00
+1140	Evening Star, The	2007	3	3	2	2021-07-24 00:00:00	2022-03-16 00:00:00
+1141	Enough	2008	5	5	3	2022-04-28 00:00:00	2021-10-29 00:00:00
+1142	Mahabharata, The	1996	4	2	4	2021-10-11 00:00:00	2022-01-28 00:00:00
+1143	Cry Baby Lane	1994	4	4	4	2022-02-02 00:00:00	2021-08-11 00:00:00
+1144	Defiance	2010	2	2	5	2022-05-10 00:00:00	2022-03-19 00:00:00
+1145	Trailer Park Boys: Countdown to Liquor Day	2001	5	1	3	2021-10-07 00:00:00	2021-11-05 00:00:00
+1146	Smoke on the Potato Fields (Dým bramborové nate)	2000	4	1	2	2021-12-04 00:00:00	2021-08-04 00:00:00
+1147	Civil Brand	2008	3	1	3	2022-03-07 00:00:00	2021-06-28 00:00:00
+1148	Land Ho!	2012	5	3	2	2021-08-06 00:00:00	2021-12-31 00:00:00
+1149	Notorious C.H.O.	2010	1	4	1	2021-12-29 00:00:00	2022-02-10 00:00:00
+1150	Blood into Wine	2010	5	4	5	2022-02-15 00:00:00	2021-06-07 00:00:00
+1151	Manufacturing Reality: Slavoj Zizek and the Reality of the Virtual (Slavoj Zizek: The Reality of the Virtual)	2006	2	1	2	2021-09-28 00:00:00	2021-11-20 00:00:00
+1152	Line, The (La linea)	2008	4	4	4	2021-09-01 00:00:00	2021-10-23 00:00:00
+1153	Dumb and Dumber To	2002	1	3	2	2022-03-03 00:00:00	2021-10-17 00:00:00
+1154	Undefeated	2012	1	1	2	2021-12-09 00:00:00	2021-11-25 00:00:00
+1155	Just Go with It	2000	2	3	4	2021-07-10 00:00:00	2021-09-21 00:00:00
+1156	Warm December, A	2013	5	2	5	2021-11-10 00:00:00	2022-02-28 00:00:00
+1157	Shutter	1997	5	2	4	2021-06-04 00:00:00	2022-05-24 00:00:00
+1158	Johnny Handsome	2004	4	4	5	2022-01-29 00:00:00	2022-04-23 00:00:00
+1159	Hot Dog... The Movie	1993	5	5	4	2021-12-07 00:00:00	2021-12-22 00:00:00
+1160	Identification of a Woman (Identificazione di una donna)	2011	1	3	2	2021-10-09 00:00:00	2022-02-28 00:00:00
+1161	Canciones de amor en Lolita's Club	2007	3	1	1	2021-10-11 00:00:00	2021-06-27 00:00:00
+1162	Sundown	1998	1	2	5	2022-03-09 00:00:00	2021-07-08 00:00:00
+1163	Werner - Gekotzt wird später	2011	2	4	1	2021-10-02 00:00:00	2021-11-14 00:00:00
+1164	Bring It On Again	2010	4	1	3	2021-09-30 00:00:00	2022-01-30 00:00:00
+1165	Nömadak TX	1993	5	3	5	2021-06-05 00:00:00	2021-10-30 00:00:00
+1166	Battle of Shaker Heights, The	1995	4	2	4	2021-08-09 00:00:00	2021-11-17 00:00:00
+1167	Goal! The Dream Begins (Goal!)	1994	2	2	1	2021-06-17 00:00:00	2021-09-22 00:00:00
+1168	Four Shades of Brown (Fyra nyanser av brunt)	1998	5	1	4	2021-08-30 00:00:00	2022-05-07 00:00:00
+1169	Lucy	1989	3	1	4	2021-08-12 00:00:00	2021-06-13 00:00:00
+1170	Between Two Worlds	2009	5	1	1	2021-07-14 00:00:00	2022-03-31 00:00:00
+1171	Empire of Passion (a.k.a. In the Realm of Passion) (a.k.a. Phantom Love) (Ai No Borei)	2011	5	4	4	2021-08-23 00:00:00	2021-07-13 00:00:00
+1172	Morning of the Earth	2006	3	5	2	2022-02-25 00:00:00	2022-01-06 00:00:00
+1173	The Forgotten Faces	1999	5	1	5	2021-07-16 00:00:00	2022-03-04 00:00:00
+1174	Drive Angry	1998	1	4	3	2021-07-25 00:00:00	2022-05-03 00:00:00
+1175	Irina Palm	1988	1	2	4	2022-03-07 00:00:00	2021-11-25 00:00:00
+1176	Letter, The	1994	2	2	3	2021-08-10 00:00:00	2021-11-24 00:00:00
+1177	Prince and the Pauper, The	2007	3	3	5	2021-06-19 00:00:00	2022-05-20 00:00:00
+1178	Geography Club	2000	1	2	4	2022-03-11 00:00:00	2021-12-31 00:00:00
+1179	Fever in the Blood, A	2009	3	1	5	2021-06-07 00:00:00	2021-07-24 00:00:00
+1180	That Day (Ce jour-là)	1990	4	3	5	2022-03-03 00:00:00	2022-02-15 00:00:00
+1181	Hole, The	2010	1	1	5	2021-09-28 00:00:00	2022-02-04 00:00:00
+1182	Of Freaks and Men (Pro urodov i lyudey)	1993	2	2	4	2022-04-29 00:00:00	2022-03-16 00:00:00
+1183	Mischief	1997	1	4	3	2022-01-05 00:00:00	2022-01-29 00:00:00
+1184	Body of Evidence	2006	2	2	2	2022-04-10 00:00:00	2021-08-30 00:00:00
+1185	Live Nude Girls Unite!	2010	5	2	4	2021-10-27 00:00:00	2021-11-17 00:00:00
+1186	Street Fight	1999	1	2	1	2021-12-23 00:00:00	2021-06-22 00:00:00
+1187	Far Cry	1997	5	3	1	2021-09-28 00:00:00	2021-12-10 00:00:00
+1188	Division III: Football's Finest	2009	5	1	1	2022-03-31 00:00:00	2021-12-21 00:00:00
+1189	Fast Food	1994	5	1	4	2022-01-30 00:00:00	2022-02-09 00:00:00
+1190	Double Tide	2005	3	4	1	2021-11-25 00:00:00	2022-02-12 00:00:00
+1191	Friday Night (Vendredi Soir)	1997	3	5	3	2022-02-05 00:00:00	2021-12-22 00:00:00
+1192	Oliver & Company	2000	5	3	5	2021-11-26 00:00:00	2022-03-29 00:00:00
+1193	Food of the Gods, The	2001	4	3	5	2021-06-04 00:00:00	2022-01-27 00:00:00
+1194	Carancho	2000	1	3	4	2021-06-27 00:00:00	2022-05-15 00:00:00
+1195	Nomi Song, The	1996	4	4	2	2021-06-24 00:00:00	2021-10-29 00:00:00
+1196	Alphaville (Alphaville, une étrange aventure de Lemmy Caution)	2002	4	5	5	2021-08-10 00:00:00	2022-01-06 00:00:00
+1197	Affair of Love, An (Liaison pornographique, Une)	1999	4	1	2	2021-07-13 00:00:00	2021-06-01 00:00:00
+1198	Saving Santa	1998	2	2	2	2022-05-25 00:00:00	2022-05-29 00:00:00
+1199	Narcissus	1999	1	1	4	2022-04-17 00:00:00	2022-01-07 00:00:00
+1200	American Tail, An	2008	3	2	4	2022-05-23 00:00:00	2022-04-24 00:00:00
+1201	Bright Leaves	1984	5	3	4	2021-11-15 00:00:00	2021-12-13 00:00:00
+1202	Strongest Man in the World, The	2003	4	2	4	2021-09-25 00:00:00	2022-03-18 00:00:00
+1203	Hell's Gate 11:11	1993	5	3	4	2021-07-16 00:00:00	2022-05-09 00:00:00
+1204	Live Free or Die	2000	4	5	1	2022-02-15 00:00:00	2021-06-15 00:00:00
+1205	Death Watch (La Mort en Direct)	2011	1	2	1	2021-12-18 00:00:00	2022-03-30 00:00:00
+1206	Nightwatching	2012	5	4	2	2021-08-16 00:00:00	2021-09-22 00:00:00
+1207	Zaza	2002	5	2	2	2021-11-15 00:00:00	2021-10-25 00:00:00
+1208	Before I Go to Sleep	1992	4	5	5	2021-10-17 00:00:00	2022-02-04 00:00:00
+1209	Wet Parade, The	1992	4	5	3	2022-04-23 00:00:00	2022-04-13 00:00:00
+1210	Monsturd	1992	2	3	1	2021-07-11 00:00:00	2021-10-06 00:00:00
+1211	Mudge Boy, The	2006	2	2	3	2021-09-15 00:00:00	2022-02-01 00:00:00
+1212	Miss Farkku-Suomi	2007	3	2	1	2021-10-08 00:00:00	2022-04-07 00:00:00
+1213	2 ou 3 choses que je sais d'elle (2 or 3 Things I Know About Her)	2005	5	5	3	2021-12-30 00:00:00	2021-09-25 00:00:00
+1214	Jerky Boys, The	2007	2	4	4	2021-08-21 00:00:00	2021-07-31 00:00:00
+1215	Wavelength	2005	2	3	5	2022-05-16 00:00:00	2022-02-06 00:00:00
+1216	À l'aventure	1990	1	1	5	2021-06-01 00:00:00	2021-11-11 00:00:00
+1217	Decade Under the Influence, A	2006	1	4	2	2021-06-22 00:00:00	2021-09-27 00:00:00
+1218	Best of Everything, The	1992	1	1	5	2022-04-25 00:00:00	2021-12-31 00:00:00
+1219	Eleventh Year, The (Odinnadtsatyy) 	2004	2	5	5	2022-01-09 00:00:00	2022-03-12 00:00:00
+1220	Night of the Demons	2004	3	4	3	2021-10-25 00:00:00	2021-08-02 00:00:00
+1221	Jungo Goes Bananas: Jungo III (Jungledyret Hugo: Fræk, flabet og fri)	2013	3	1	2	2021-09-04 00:00:00	2022-03-04 00:00:00
+1222	Hellion	2000	1	5	5	2021-09-09 00:00:00	2022-03-01 00:00:00
+1223	Super Troopers	1999	1	2	2	2021-10-22 00:00:00	2022-04-19 00:00:00
+1224	Once in the Life	2004	2	4	1	2021-06-27 00:00:00	2022-05-28 00:00:00
+1225	Viola	1998	4	5	4	2022-04-28 00:00:00	2021-09-25 00:00:00
+1226	Allan Quatermain and the Temple of Skulls	2012	1	5	1	2022-03-24 00:00:00	2021-08-22 00:00:00
+1227	Shamus	2004	1	5	2	2021-07-02 00:00:00	2021-07-14 00:00:00
+1228	Osama	2011	4	4	4	2021-06-09 00:00:00	2022-03-15 00:00:00
+1229	Ruby Red	1999	4	3	3	2021-06-29 00:00:00	2021-11-11 00:00:00
+1230	Bear with Me	2003	4	3	4	2021-08-14 00:00:00	2022-02-28 00:00:00
+1231	Fantastic Voyage	1999	2	4	4	2022-02-17 00:00:00	2021-07-17 00:00:00
+1232	Fright Night 2: New Blood	2002	4	2	1	2022-05-07 00:00:00	2022-05-15 00:00:00
+1233	Bronson	2002	4	1	2	2022-03-22 00:00:00	2022-03-29 00:00:00
+1234	Re-Animator	2003	2	3	2	2021-06-26 00:00:00	2022-04-18 00:00:00
+1235	Executioners from Shaolin	1992	2	4	3	2021-07-23 00:00:00	2022-03-22 00:00:00
+1236	Robber, The (Der Räuber)	2010	5	5	1	2022-01-07 00:00:00	2021-11-19 00:00:00
+1237	Once Upon a Forest	1986	3	4	4	2021-10-18 00:00:00	2021-08-01 00:00:00
+1238	Great Gatsby, The	2007	1	2	4	2021-10-13 00:00:00	2021-06-09 00:00:00
+1239	Minnie and Moskowitz	2000	5	3	4	2021-11-02 00:00:00	2022-04-04 00:00:00
+1240	Bishop's Wife, The	1998	4	1	3	2021-08-23 00:00:00	2021-07-16 00:00:00
+1241	The Six Million Dollar Man	1999	2	3	4	2021-11-21 00:00:00	2021-07-01 00:00:00
+1242	Blue Max, The	1997	1	4	4	2021-08-15 00:00:00	2022-03-27 00:00:00
+1243	Trail of the Lonesome Pine, The	1969	3	1	1	2022-01-08 00:00:00	2021-11-21 00:00:00
+1244	Under the Rainbow	2004	2	4	4	2021-08-31 00:00:00	2022-04-19 00:00:00
+1245	Bye-Bye	1994	2	3	4	2021-08-19 00:00:00	2021-12-19 00:00:00
+1246	Mississippi Grind	2002	4	5	4	2021-06-24 00:00:00	2022-02-22 00:00:00
+1247	Dragonball Evolution	1996	3	3	5	2021-06-21 00:00:00	2021-07-08 00:00:00
+1248	Ghost from the Machine (Phasma Ex Machina)	2006	2	2	2	2022-05-18 00:00:00	2021-09-25 00:00:00
+1249	We Have a Pope (Habemus Papam)	1996	1	5	5	2022-01-03 00:00:00	2022-03-10 00:00:00
+1250	Highway 	2008	2	3	4	2021-08-17 00:00:00	2022-01-19 00:00:00
+1251	Malice in Wonderland	1989	1	5	1	2021-06-16 00:00:00	2021-10-28 00:00:00
+1252	Victory	2003	3	1	3	2021-12-18 00:00:00	2022-04-19 00:00:00
+1253	Sharknado	1989	2	2	5	2022-05-26 00:00:00	2021-07-24 00:00:00
+1254	The Emperor of California	1996	1	2	1	2021-09-29 00:00:00	2021-09-30 00:00:00
+1255	Beyond Enemy Lines (Framom främsta linjen)	2010	3	4	2	2021-11-30 00:00:00	2021-08-19 00:00:00
+1256	Sunday in the Country, A (Un dimanche à la campagne)	2008	5	2	5	2022-03-26 00:00:00	2021-07-25 00:00:00
+1257	Pig Hunt 	1992	3	2	4	2022-03-04 00:00:00	2021-07-05 00:00:00
+1258	Code of Silence	2010	4	4	5	2021-06-08 00:00:00	2022-04-13 00:00:00
+1259	Forced Vengeance	1998	4	1	3	2021-11-15 00:00:00	2021-09-23 00:00:00
+1260	End of St. Petersburg, The (Konets Sankt-Peterburga)	2000	1	2	4	2022-04-10 00:00:00	2021-06-24 00:00:00
+1261	Police, Adjective (Politist, adj.)	2009	5	1	5	2021-10-23 00:00:00	2021-11-17 00:00:00
+1262	Angie	2011	3	1	5	2021-10-26 00:00:00	2022-03-27 00:00:00
+1263	Bandits (Bandidos)	1997	3	5	3	2022-02-16 00:00:00	2022-02-25 00:00:00
+1264	Net Worth	1998	4	3	1	2021-08-05 00:00:00	2022-01-07 00:00:00
+1265	C(r)ook (Basta - Rotwein Oder Totsein)	2001	1	2	1	2021-11-15 00:00:00	2021-05-31 00:00:00
+1266	The Perfect World of Kai	2011	3	4	5	2022-04-20 00:00:00	2022-02-03 00:00:00
+1267	Einstein and Eddington	1987	4	5	1	2021-11-27 00:00:00	2022-03-10 00:00:00
+1268	The Gardener	1992	2	1	2	2021-10-28 00:00:00	2021-12-06 00:00:00
+1269	Wuthering Heights	2006	3	3	5	2021-10-23 00:00:00	2021-12-27 00:00:00
+1270	Time Without Pity	1997	2	3	4	2021-08-11 00:00:00	2021-09-01 00:00:00
+1271	Silencers, The	1999	4	1	2	2021-12-28 00:00:00	2022-03-05 00:00:00
+1272	Bandolero!	2010	5	4	4	2022-03-20 00:00:00	2021-11-24 00:00:00
+1273	Golden Child, The	1992	2	4	2	2021-08-09 00:00:00	2021-09-30 00:00:00
+1274	Going Clear: Scientology and the Prison of Belief	1997	4	2	2	2022-02-12 00:00:00	2021-10-04 00:00:00
+1275	Old Gringo	1993	1	4	3	2021-12-30 00:00:00	2021-06-14 00:00:00
+1276	Monkey's Tale, A (Château des singes, Le)	2003	1	1	4	2021-12-11 00:00:00	2021-11-26 00:00:00
+1277	Freedom Writers	2010	4	1	1	2021-12-25 00:00:00	2021-08-12 00:00:00
+1278	Track of the Cat	2006	4	4	4	2022-04-30 00:00:00	2021-07-25 00:00:00
+1279	Emma's Bliss (Emmas Glück)	1994	5	4	5	2022-02-10 00:00:00	2022-01-15 00:00:00
+1280	Holy Motors	1996	4	4	4	2022-02-11 00:00:00	2022-03-17 00:00:00
+1281	I am Von Höfler (Variation on Werther - Private Hungary 15)	1991	5	4	4	2021-09-11 00:00:00	2021-06-30 00:00:00
+1282	Double Trouble	1995	5	1	3	2022-03-04 00:00:00	2021-10-12 00:00:00
+1283	Wizard, The	2003	5	5	1	2022-01-06 00:00:00	2021-06-25 00:00:00
+1284	Men Without Women	2008	1	1	4	2021-12-10 00:00:00	2021-07-25 00:00:00
+1285	Galaxy Express 999 (Ginga tetsudô Three-Nine)	2010	3	2	2	2022-01-18 00:00:00	2022-01-05 00:00:00
+1286	Star Wars: Episode III - Revenge of the Sith	2010	3	1	2	2021-08-03 00:00:00	2021-08-23 00:00:00
+1287	Letter Never Sent (Neotpravlennoye pismo)	1991	2	3	2	2022-05-17 00:00:00	2021-08-22 00:00:00
+1288	Darby's Rangers	1999	4	1	1	2022-03-25 00:00:00	2021-07-25 00:00:00
+1289	Lili's Apron	1992	5	4	1	2021-09-25 00:00:00	2022-01-11 00:00:00
+1290	Finisterrae	2011	4	2	3	2021-08-07 00:00:00	2022-05-22 00:00:00
+1291	Horror Planet (a.k.a. Inseminoid)	1990	3	5	2	2021-12-13 00:00:00	2022-01-06 00:00:00
+1292	Element of Crime, The (Forbrydelsens Element)	2005	3	4	3	2021-08-04 00:00:00	2021-08-25 00:00:00
+1293	Breath (Soom)	2001	5	2	3	2021-11-26 00:00:00	2021-06-16 00:00:00
+1294	Midsummer Night's Dream, A	1989	4	5	1	2021-11-27 00:00:00	2021-06-23 00:00:00
+1295	Super Sucker	2007	5	2	1	2022-03-04 00:00:00	2021-09-19 00:00:00
+1296	Final Destination 5	2007	2	3	1	2021-12-24 00:00:00	2022-02-19 00:00:00
+1297	Stranger, The (Agantuk) (Visitor, The)	2001	1	1	5	2021-06-18 00:00:00	2022-04-05 00:00:00
+1298	Murders in the Zoo	1991	1	3	2	2021-06-30 00:00:00	2021-11-16 00:00:00
+1299	Brubaker	1995	3	5	3	2022-03-05 00:00:00	2022-05-23 00:00:00
+1300	1984 (Nineteen Eighty-Four)	1990	4	4	2	2022-05-25 00:00:00	2022-02-26 00:00:00
+1301	From the Journals of Jean Seberg	2009	2	5	3	2022-04-14 00:00:00	2022-03-30 00:00:00
+1302	Jackass 2.5	2007	4	5	3	2022-04-30 00:00:00	2022-03-08 00:00:00
+1303	Brother (Brat)	2004	1	1	5	2022-03-24 00:00:00	2021-11-15 00:00:00
+1304	He Loves Me... He Loves Me Not (À la folie... pas du tout)	2011	3	3	2	2021-08-31 00:00:00	2022-02-09 00:00:00
+1305	Bring on the Night	2010	2	4	2	2021-07-05 00:00:00	2022-04-16 00:00:00
+1306	House on Haunted Hill	2004	1	5	1	2022-01-12 00:00:00	2021-06-30 00:00:00
+1307	The Magic Crystal	2005	3	2	3	2022-03-02 00:00:00	2022-02-20 00:00:00
+1308	Brainstorm (Bicho de Sete Cabeças)	2004	3	2	3	2021-10-18 00:00:00	2022-02-06 00:00:00
+1309	Grizzly Man	2008	3	3	1	2022-04-14 00:00:00	2021-11-20 00:00:00
+1310	Dylan Moran: Yeah, Yeah	1993	1	3	4	2021-06-09 00:00:00	2022-01-02 00:00:00
+1311	I Saw What You Did	1992	1	2	2	2022-03-12 00:00:00	2022-02-08 00:00:00
+1312	Final Fantasy VII: Advent Children	2003	5	3	1	2021-10-28 00:00:00	2021-09-26 00:00:00
+1313	Ray	1977	3	5	1	2021-12-03 00:00:00	2021-08-15 00:00:00
+1314	Cleanflix	2007	1	5	3	2021-07-18 00:00:00	2022-05-16 00:00:00
+1315	Of Love and Shadows	2006	5	5	2	2022-03-31 00:00:00	2021-09-29 00:00:00
+1316	Blue Valentine	2004	4	1	4	2021-06-23 00:00:00	2022-05-06 00:00:00
+1317	36 fillette	2001	4	4	3	2021-06-13 00:00:00	2021-11-08 00:00:00
+1318	Simon Birch	2006	4	5	3	2021-09-29 00:00:00	2021-07-17 00:00:00
+1319	A Gun for Jennifer	1997	2	5	5	2021-10-27 00:00:00	2021-10-31 00:00:00
+1320	Birds, the Bees and the Italians, The (Signore & signori)	2008	5	4	5	2022-05-26 00:00:00	2022-03-18 00:00:00
+1321	Man There Was, A (Terje Vigen)	2010	3	5	3	2021-06-26 00:00:00	2021-10-18 00:00:00
+1322	Running Out of Time (Am zin)	1994	2	5	4	2021-10-29 00:00:00	2021-08-30 00:00:00
+1323	Tiger Eyes	1992	1	3	2	2022-04-01 00:00:00	2021-07-11 00:00:00
+1324	Clint Eastwood: Out of the Shadows	2009	5	5	5	2022-02-16 00:00:00	2022-02-16 00:00:00
+1325	Porky's	2012	2	5	1	2022-04-05 00:00:00	2022-02-15 00:00:00
+1326	Countess from Hong Kong, A	1992	5	3	3	2021-12-11 00:00:00	2021-09-11 00:00:00
+1327	Beyond Justice	1986	1	4	1	2021-09-23 00:00:00	2021-11-30 00:00:00
+1328	Happy Feet Two	1996	4	3	4	2021-06-10 00:00:00	2022-03-08 00:00:00
+1329	Small Time Crooks	1991	4	5	4	2021-12-23 00:00:00	2021-12-19 00:00:00
+1330	Restless	1994	3	1	4	2021-06-08 00:00:00	2022-01-13 00:00:00
+1331	Flash Gordon Conquers the Universe	2011	4	1	3	2022-04-12 00:00:00	2021-09-26 00:00:00
+1332	Big Wednesday	2008	2	5	5	2021-09-05 00:00:00	2022-01-26 00:00:00
+1333	Crimes of the Future	1997	4	3	2	2021-10-14 00:00:00	2022-01-16 00:00:00
+1334	Mighty Macs, The	1991	1	2	1	2021-09-28 00:00:00	2021-07-14 00:00:00
+1335	Show Boat	2006	2	2	3	2022-01-21 00:00:00	2021-07-30 00:00:00
+1336	Almost an Angel	1999	3	5	4	2022-03-28 00:00:00	2021-11-25 00:00:00
+1337	Mother of Mine (Äideistä parhain)	1983	3	4	4	2022-05-28 00:00:00	2021-07-07 00:00:00
+1338	Little Engine That Could, The	2005	1	1	3	2021-09-29 00:00:00	2022-01-16 00:00:00
+1339	Informer, The	2004	1	2	4	2021-09-09 00:00:00	2021-12-10 00:00:00
+1340	Cimarron	2006	3	4	3	2022-02-05 00:00:00	2022-04-15 00:00:00
+1341	Meilleur espoir féminin	2001	2	3	4	2021-07-18 00:00:00	2022-03-16 00:00:00
+1342	Dracula: Prince of Darkness	1999	2	3	4	2022-04-10 00:00:00	2022-04-07 00:00:00
+1343	From Dad to Son	2011	4	1	3	2022-05-19 00:00:00	2021-11-03 00:00:00
+1344	Talking Picture, A (Um Filme Falado)	2003	2	5	3	2022-03-31 00:00:00	2021-06-28 00:00:00
+1345	Edge of Heaven, The (Auf der anderen Seite)	2012	5	2	5	2021-05-31 00:00:00	2022-04-22 00:00:00
+1346	6 Days to Air: The Making of South Park	1990	5	3	2	2021-10-07 00:00:00	2022-02-03 00:00:00
+1347	Great Sinner, The	2003	3	2	4	2022-03-23 00:00:00	2021-11-12 00:00:00
+1348	Prodigal Son, The (Tuhlaajapoika)	1997	4	5	5	2022-04-13 00:00:00	2021-11-30 00:00:00
+1349	Final Inquiry, The (Inquiry, The) (inchiesta, L')	1994	5	2	1	2022-04-14 00:00:00	2021-06-11 00:00:00
+1350	Our Vinyl Weighs a Ton: This Is Stones Throw Records	2009	3	5	4	2022-02-25 00:00:00	2022-05-01 00:00:00
+1351	Point, The	1987	1	2	2	2021-10-05 00:00:00	2021-10-26 00:00:00
+1352	Wrong Arm of the Law, The	1991	3	2	1	2022-04-19 00:00:00	2022-05-07 00:00:00
+1353	Love in Another Language (Baska Dilde Ask)	1995	4	3	5	2021-07-08 00:00:00	2021-10-30 00:00:00
+1354	Tough Ones, The (Häjyt)	2005	4	4	4	2022-01-23 00:00:00	2021-12-29 00:00:00
+1355	Violette (Violette Nozière)	1986	4	5	2	2021-08-08 00:00:00	2021-10-24 00:00:00
+1356	Jersey Boys	2008	2	4	1	2022-04-25 00:00:00	2022-04-18 00:00:00
+1357	Strawberries in the Supermarket (Jagoda u supermarketu) 	1992	3	2	3	2022-04-22 00:00:00	2022-04-21 00:00:00
+1358	Last American Hero, The	1987	2	2	3	2022-03-19 00:00:00	2022-04-14 00:00:00
+1359	Break Up	1992	5	3	2	2022-01-11 00:00:00	2021-10-12 00:00:00
+1360	Repeaters 	1994	3	3	4	2022-05-21 00:00:00	2022-03-22 00:00:00
+1361	Kivski Freski	1993	2	4	1	2022-03-22 00:00:00	2022-05-17 00:00:00
+1362	Grace Unplugged	1997	5	5	4	2021-10-24 00:00:00	2021-12-28 00:00:00
+1363	Unstrung Heroes	2004	5	1	2	2021-05-30 00:00:00	2021-07-26 00:00:00
+1364	Saint John of Las Vegas	1987	4	3	4	2021-06-30 00:00:00	2021-08-02 00:00:00
+1365	Tarzan the Fearless	1962	5	5	5	2021-11-04 00:00:00	2022-05-13 00:00:00
+1366	Rosewood Lane	1998	5	2	3	2021-12-30 00:00:00	2022-05-28 00:00:00
+1367	Noise	1999	1	1	3	2021-06-29 00:00:00	2021-10-06 00:00:00
+1368	Hail the Conquering Hero	2005	5	1	2	2021-12-31 00:00:00	2022-01-03 00:00:00
+1369	Education, An	1999	5	1	1	2022-04-22 00:00:00	2021-09-20 00:00:00
+1370	Armour of God II: Operation Condor (Operation Condor) (Fei ying gai wak)	1984	1	2	3	2022-04-23 00:00:00	2021-06-02 00:00:00
+1371	Vampire Bat, The	2002	5	4	3	2022-03-17 00:00:00	2021-11-24 00:00:00
+1372	Napoleon and Samantha	2008	5	5	2	2021-08-15 00:00:00	2022-02-21 00:00:00
+1373	Beauty in Trouble (Kráska v nesnázích)	1997	4	2	1	2021-07-22 00:00:00	2021-08-14 00:00:00
+1374	Crisis	1989	4	1	3	2021-07-13 00:00:00	2021-08-21 00:00:00
+1375	Happiest Days of Your Life, The	2001	3	4	5	2022-04-26 00:00:00	2021-07-14 00:00:00
+1376	Letter to Momo, A (Momo e no tegami)	1997	5	3	3	2022-04-19 00:00:00	2021-06-15 00:00:00
+1377	Anna Karenina	2002	4	5	1	2021-11-16 00:00:00	2021-06-22 00:00:00
+1378	Laughing Policeman, The	1989	2	1	4	2022-03-03 00:00:00	2022-01-21 00:00:00
+1379	Ponterosa	1987	2	4	3	2022-05-01 00:00:00	2021-11-12 00:00:00
+1380	Border Incident	2005	4	4	1	2022-04-11 00:00:00	2021-08-13 00:00:00
+1381	Family Band: The Cowsills Story 	1993	2	3	2	2022-05-25 00:00:00	2021-11-05 00:00:00
+1382	Forever	2006	1	2	1	2022-04-07 00:00:00	2021-09-08 00:00:00
+1383	Iceman, The	1987	1	5	5	2021-07-24 00:00:00	2021-10-29 00:00:00
+1384	Woman in Black, The	2008	4	2	2	2021-11-23 00:00:00	2022-01-17 00:00:00
+1385	Norbit	1999	2	2	5	2021-12-18 00:00:00	2021-07-14 00:00:00
+1386	Ulee's Gold	2012	4	4	4	2021-09-25 00:00:00	2021-12-12 00:00:00
+1387	Crash Reel, The	1996	3	1	1	2022-03-26 00:00:00	2021-10-15 00:00:00
+1388	Extraterrestrial (Extraterrestre)	1990	3	5	2	2021-11-03 00:00:00	2021-07-10 00:00:00
+1389	Flodder	2012	1	2	5	2021-12-19 00:00:00	2022-05-01 00:00:00
+1390	Planet of the Vampires (Terrore nello spazio)	1998	4	4	2	2021-08-25 00:00:00	2021-11-05 00:00:00
+1391	Mr. Deeds	1999	4	2	2	2021-10-14 00:00:00	2021-11-03 00:00:00
+1392	Orchestra Wives	1995	4	5	2	2021-05-31 00:00:00	2021-08-18 00:00:00
+1393	Chaser, The (Chugyeogja)	2009	5	2	5	2021-09-13 00:00:00	2022-01-15 00:00:00
+1394	Reluctant Debutante, The	1963	1	5	5	2022-02-20 00:00:00	2022-04-30 00:00:00
+1395	Rocketeer, The	2012	5	4	3	2021-12-06 00:00:00	2021-06-25 00:00:00
+1396	Spanish Apartment, The (L'auberge espagnole)	1995	2	5	3	2021-10-08 00:00:00	2022-04-19 00:00:00
+1397	Repeaters 	1992	4	2	5	2021-12-23 00:00:00	2021-11-08 00:00:00
+1398	Bookies	2003	4	1	1	2021-07-13 00:00:00	2022-02-01 00:00:00
+1399	Pastoral Hide and Seek (Den-en ni shisu)	1992	5	3	2	2021-10-04 00:00:00	2022-02-09 00:00:00
+1400	Outrage	2012	2	5	3	2022-04-08 00:00:00	2022-01-15 00:00:00
+1401	Toothless	2006	5	5	3	2021-08-30 00:00:00	2021-09-05 00:00:00
+1402	20th Century Boys - Chapter 1: Beginning of the End	1993	3	5	5	2022-02-27 00:00:00	2022-02-17 00:00:00
+1403	The Winslow Boy	2005	2	2	2	2022-05-06 00:00:00	2022-04-30 00:00:00
+1404	Imagine: John Lennon	2008	1	1	1	2022-03-27 00:00:00	2022-05-24 00:00:00
+1405	Moon-Spinners, The	1992	1	5	3	2021-08-22 00:00:00	2021-08-26 00:00:00
+1406	Place in the Sun, A (En plats i solen)	1994	2	3	2	2021-07-06 00:00:00	2021-12-10 00:00:00
+1407	Amar Akbar Anthony	2011	3	2	1	2022-01-26 00:00:00	2022-03-06 00:00:00
+1408	Gold of Rome (L'oro di Roma)	1986	1	5	1	2022-01-25 00:00:00	2021-12-04 00:00:00
+1409	Bridesmaids	1995	5	5	1	2021-11-02 00:00:00	2021-10-17 00:00:00
+1410	Skhizein	1996	1	4	5	2022-03-11 00:00:00	2021-07-03 00:00:00
+1411	Dinner Rush	1997	5	2	3	2022-03-04 00:00:00	2022-03-02 00:00:00
+1412	Good Year, A	2003	3	3	1	2021-10-14 00:00:00	2021-09-08 00:00:00
+1413	Rambling Rose	2006	5	5	4	2021-10-01 00:00:00	2022-05-23 00:00:00
+1414	Sunset Blvd. (a.k.a. Sunset Boulevard)	1984	1	1	3	2021-09-15 00:00:00	2021-06-01 00:00:00
+1415	Tom at the Farm (Tom à la ferme)	1993	2	2	5	2022-03-28 00:00:00	2022-03-14 00:00:00
+1416	Woman Who Wasn't There, The	1994	1	3	2	2021-07-04 00:00:00	2021-05-30 00:00:00
+1417	...tick... tick... tick...	2006	2	2	2	2021-11-27 00:00:00	2021-09-19 00:00:00
+1418	Sebastian	2003	2	2	3	2021-12-13 00:00:00	2022-04-05 00:00:00
+1419	Last Man on Earth, The (Ultimo uomo della Terra, L')	1999	4	4	5	2021-06-03 00:00:00	2021-09-01 00:00:00
+1420	Red Hill	1985	4	4	3	2022-05-17 00:00:00	2022-05-02 00:00:00
+1421	Smart Set, The	2005	2	1	5	2022-01-04 00:00:00	2022-03-16 00:00:00
+1422	Anatahan	2008	3	1	5	2021-08-13 00:00:00	2021-07-16 00:00:00
+1423	Fear and Loathing in Las Vegas	2013	3	1	3	2021-07-23 00:00:00	2021-11-12 00:00:00
+1424	Black Eagle	2000	2	5	2	2022-03-16 00:00:00	2021-06-03 00:00:00
+1425	Prince of Central Park, The	2010	4	1	5	2021-08-26 00:00:00	2021-08-17 00:00:00
+1426	Hurricane, The	2011	4	1	5	2021-11-22 00:00:00	2022-04-10 00:00:00
+1427	Five Pennies, The	1998	2	5	1	2021-11-26 00:00:00	2022-05-27 00:00:00
+1428	Love Crime (Crime d'amour)	2006	4	1	4	2022-04-04 00:00:00	2021-06-19 00:00:00
+1429	Defender, The (a.k.a. Bodyguard from Beijing, The) (Zhong Nan Hai bao biao)	2002	3	4	3	2021-10-23 00:00:00	2021-10-04 00:00:00
+1430	Psych-Out	1996	3	4	3	2021-09-08 00:00:00	2021-08-06 00:00:00
+1431	Campus Radio	2010	3	5	2	2022-02-02 00:00:00	2021-11-27 00:00:00
+1432	Everything	1997	4	4	2	2022-03-13 00:00:00	2022-01-05 00:00:00
+1433	Enforcer, The	1994	2	5	2	2022-03-27 00:00:00	2021-08-21 00:00:00
+1434	Let It Snow	1998	2	1	2	2021-09-11 00:00:00	2022-04-21 00:00:00
+1435	Something New	2000	1	5	2	2021-11-30 00:00:00	2021-08-06 00:00:00
+1436	Mother of George	1997	3	4	4	2021-06-19 00:00:00	2021-10-31 00:00:00
+1437	Hester Street	2008	4	1	2	2022-03-31 00:00:00	2022-01-07 00:00:00
+1438	The Little Death	2003	2	5	3	2022-05-02 00:00:00	2022-04-27 00:00:00
+1439	Little Engine That Could, The	2003	1	1	1	2021-08-13 00:00:00	2022-03-12 00:00:00
+1440	Mating Habits of the Earthbound Human, The	1967	1	1	3	2022-03-04 00:00:00	2021-08-17 00:00:00
+1441	Borrowers, The	2005	2	4	1	2021-06-19 00:00:00	2021-12-21 00:00:00
+1442	Berlin Alexanderplatz	1991	3	3	3	2021-10-21 00:00:00	2022-04-19 00:00:00
+1443	The Hellions	2011	2	5	1	2022-04-04 00:00:00	2021-07-01 00:00:00
+1444	Skeleton Key, The	1989	4	5	4	2021-10-23 00:00:00	2021-09-10 00:00:00
+1445	Amsterdamned	1994	3	3	5	2021-11-13 00:00:00	2022-04-08 00:00:00
+1446	Rainbow Valley	2007	4	3	5	2022-05-02 00:00:00	2022-01-06 00:00:00
+1447	Passion of Ayn Rand, The	2004	5	1	1	2021-10-12 00:00:00	2022-04-14 00:00:00
+1448	WALL·E	2012	3	5	2	2021-09-25 00:00:00	2021-08-22 00:00:00
+1449	Look Who's Talking Too	2006	1	1	1	2021-10-29 00:00:00	2021-07-31 00:00:00
+1450	Empire of the Ants	1994	4	1	4	2022-05-27 00:00:00	2022-05-10 00:00:00
+1451	Pelle Svanslös	1993	4	1	3	2022-05-26 00:00:00	2021-11-16 00:00:00
+1452	Cut	2012	4	5	5	2021-06-08 00:00:00	2021-10-17 00:00:00
+1453	She's the One	1999	1	1	1	2021-12-11 00:00:00	2021-07-05 00:00:00
+1454	Fun with Dick and Jane	2008	5	3	1	2021-11-21 00:00:00	2022-01-13 00:00:00
+1455	Little Romance, A	2002	3	5	5	2022-03-14 00:00:00	2022-03-08 00:00:00
+1456	Ricochet	2004	4	5	4	2022-02-22 00:00:00	2021-09-01 00:00:00
+1457	Rise of the Zombies	2010	1	1	4	2021-10-08 00:00:00	2021-07-30 00:00:00
+1458	Hearts of the West	2007	4	5	3	2022-05-27 00:00:00	2021-10-11 00:00:00
+1459	Tomorrow, When the War Began	1999	3	3	5	2021-10-27 00:00:00	2021-08-28 00:00:00
+1460	People Under the Stairs, The	1996	1	2	2	2021-10-20 00:00:00	2021-08-20 00:00:00
+1461	I Want to Look Like That Guy	1996	5	2	5	2022-01-21 00:00:00	2022-04-16 00:00:00
+1462	Exhibition	1995	3	5	1	2021-12-19 00:00:00	2022-01-31 00:00:00
+1463	Taboo (Gohatto)	1989	3	5	4	2022-04-13 00:00:00	2021-11-12 00:00:00
+1464	Citadel, The	1994	1	2	3	2021-12-05 00:00:00	2021-10-10 00:00:00
+1465	My Own Man	2010	1	3	1	2021-07-10 00:00:00	2021-09-02 00:00:00
+1466	Mrs. Henderson Presents	2010	5	2	4	2021-11-10 00:00:00	2021-07-18 00:00:00
+1467	Galapagos Affair: Satan Came to Eden, The	2000	4	2	4	2021-06-22 00:00:00	2022-03-10 00:00:00
+1468	Flash Gordon	1992	4	4	2	2022-05-16 00:00:00	2021-08-18 00:00:00
+1469	Pagemaster, The	1994	5	3	4	2021-12-22 00:00:00	2021-07-18 00:00:00
+1470	Something Real and Good	1992	3	5	2	2021-06-19 00:00:00	2022-03-03 00:00:00
+1471	Don't Tell Mom the Babysitter's Dead	2006	3	3	2	2021-10-25 00:00:00	2021-10-30 00:00:00
+1472	Rich Man's Wife, The	1998	3	5	2	2022-05-27 00:00:00	2021-07-14 00:00:00
+1473	Machete Maidens Unleashed!	2013	2	2	2	2022-01-28 00:00:00	2021-08-25 00:00:00
+1474	99 Homes	1999	5	4	3	2022-02-23 00:00:00	2021-12-15 00:00:00
+1475	Breathe In	2000	1	4	1	2021-11-30 00:00:00	2022-01-18 00:00:00
+1476	Business of Fancydancing, The	2000	3	5	5	2022-04-13 00:00:00	2022-01-13 00:00:00
+1477	Night Tide	2010	4	2	5	2021-10-03 00:00:00	2022-02-17 00:00:00
+1478	Bloody Murder 2: Closing Camp	1997	4	2	5	2022-04-10 00:00:00	2022-02-17 00:00:00
+1479	Other Woman, The	1997	2	3	1	2022-05-22 00:00:00	2021-10-27 00:00:00
+1480	Limitless	2007	1	4	1	2022-01-07 00:00:00	2022-05-17 00:00:00
+1481	Is Paris Burning? (Paris brûle-t-il?)	2001	2	3	1	2021-07-17 00:00:00	2021-07-16 00:00:00
+1482	Frozen Days	2003	5	2	1	2021-11-25 00:00:00	2022-05-22 00:00:00
+1483	For the Moment	1993	2	4	4	2021-07-05 00:00:00	2021-06-21 00:00:00
+1484	Holy Motors	2000	2	3	1	2021-10-03 00:00:00	2021-10-01 00:00:00
+1485	Iron Island (Jazireh Ahani)	2010	3	1	2	2022-04-23 00:00:00	2022-02-25 00:00:00
+1486	Article 99	2011	4	1	1	2022-01-27 00:00:00	2021-11-11 00:00:00
+1487	Repatriation	1991	2	3	2	2022-03-11 00:00:00	2022-03-21 00:00:00
+1488	Fitzwilly	1999	5	1	1	2021-09-16 00:00:00	2021-06-14 00:00:00
+1489	Blood into Wine	1964	2	3	1	2021-11-21 00:00:00	2021-08-19 00:00:00
+1490	Snow (Snijeg)	1967	2	3	3	2021-09-05 00:00:00	2021-12-01 00:00:00
+1491	Terry Fator: Live from Las Vegas	1999	5	5	2	2021-09-27 00:00:00	2022-04-25 00:00:00
+1492	She Hate Me	2011	3	1	1	2021-06-15 00:00:00	2022-04-10 00:00:00
+1493	Ong-Bak: The Thai Warrior (Ong Bak)	1991	1	2	4	2022-02-01 00:00:00	2022-02-20 00:00:00
+1494	Asterix & Obelix vs. Caesar (Astérix et Obélix contre César)	2003	1	1	5	2022-03-31 00:00:00	2022-04-30 00:00:00
+1495	Rules of Attraction, The	2000	4	4	5	2021-06-20 00:00:00	2022-03-22 00:00:00
+1496	15	1989	4	2	1	2021-11-07 00:00:00	2022-04-13 00:00:00
+1497	Light Gradient	2011	2	4	4	2021-07-22 00:00:00	2022-04-10 00:00:00
+1498	More Dead Than Alive	2002	3	3	4	2021-07-03 00:00:00	2022-05-19 00:00:00
+1499	Housebound	2009	3	3	5	2021-11-13 00:00:00	2021-12-10 00:00:00
+1500	Stolen Seas	1995	3	4	2	2022-04-01 00:00:00	2021-06-24 00:00:00
+1501	Christmas with the Kranks	2002	1	5	4	2022-02-05 00:00:00	2021-09-19 00:00:00
+1502	Transporter 2	2001	3	5	2	2022-03-17 00:00:00	2022-04-29 00:00:00
+1503	Closer	2004	5	5	4	2021-11-26 00:00:00	2021-10-01 00:00:00
+1504	I-See-You.Com	2011	4	1	3	2022-01-02 00:00:00	2022-03-19 00:00:00
+1505	Noose, The (Petla)	2003	5	4	4	2022-05-16 00:00:00	2021-10-16 00:00:00
+1506	Blood Work	2009	3	2	2	2022-02-22 00:00:00	2021-08-06 00:00:00
+1507	Kink	2003	2	2	4	2021-12-01 00:00:00	2021-09-29 00:00:00
+1508	To Hell and Back	1997	4	5	5	2021-12-27 00:00:00	2022-04-07 00:00:00
+1509	Hamsun	2006	5	4	4	2022-03-24 00:00:00	2021-07-21 00:00:00
+1510	Simple Twist of Fate, A	2001	2	3	4	2022-01-07 00:00:00	2021-11-28 00:00:00
+1511	City Limits	2007	5	2	5	2021-06-10 00:00:00	2021-12-20 00:00:00
+1512	Josephine	2012	3	3	4	2022-05-16 00:00:00	2022-04-27 00:00:00
+1513	Young Guns II	1994	4	1	3	2021-07-14 00:00:00	2022-05-15 00:00:00
+1514	Zift	1998	1	3	3	2022-02-06 00:00:00	2021-12-06 00:00:00
+1515	Ernest Rides Again	2001	1	5	1	2021-08-17 00:00:00	2022-02-27 00:00:00
+1516	Bass Ackwards	2006	2	4	3	2022-01-23 00:00:00	2021-08-24 00:00:00
+1517	Princess Protection Program	2004	5	2	2	2021-10-09 00:00:00	2021-07-28 00:00:00
+1518	Bandidas	2009	2	5	4	2021-06-25 00:00:00	2022-01-14 00:00:00
+1519	Ayn Rand: A Sense of Life	2000	2	1	4	2021-11-12 00:00:00	2021-09-13 00:00:00
+1520	House of the Rising Sun	2004	2	1	5	2021-11-25 00:00:00	2022-05-24 00:00:00
+1521	Subspecies	1994	2	1	4	2021-09-12 00:00:00	2021-06-15 00:00:00
+1522	Missing Person, The	1994	3	3	2	2022-03-03 00:00:00	2022-01-19 00:00:00
+1523	Great Muppet Caper, The	2005	4	2	2	2022-01-12 00:00:00	2021-12-25 00:00:00
+1524	Lay the Favorite	1997	4	3	1	2021-08-22 00:00:00	2022-05-25 00:00:00
+1525	If You Love (Jos rakastat)	1999	3	4	4	2022-04-28 00:00:00	2022-05-06 00:00:00
+1526	Dampfnudelblues	2000	5	3	5	2022-03-02 00:00:00	2021-09-03 00:00:00
+1527	Variety Lights	2010	3	5	2	2021-07-02 00:00:00	2022-02-08 00:00:00
+1528	Honor Among Thieves (Adieu l'ami) (Farewell, Friend)	2010	2	5	2	2022-05-06 00:00:00	2021-12-10 00:00:00
+1529	Father and Son (Otets i syn)	1995	2	4	5	2021-06-09 00:00:00	2021-10-16 00:00:00
+1530	Road North (Tie pohjoiseen)	2006	2	5	3	2021-08-30 00:00:00	2021-06-10 00:00:00
+1531	Love and Other Troubles	1988	2	1	5	2022-04-27 00:00:00	2021-07-06 00:00:00
+1532	High Anxiety	2000	1	4	1	2021-12-08 00:00:00	2021-10-24 00:00:00
+1533	Guy Named Joe, A	2006	1	5	1	2022-01-06 00:00:00	2022-05-26 00:00:00
+1534	Nick the Sting	1989	5	1	3	2022-03-26 00:00:00	2021-09-12 00:00:00
+1535	City Dark, The	1991	4	3	1	2022-03-16 00:00:00	2021-12-26 00:00:00
+1536	The Periwig-Maker	1998	1	3	5	2021-08-03 00:00:00	2021-09-28 00:00:00
+1537	Magic Christmas Tree, The	2009	3	5	1	2021-12-01 00:00:00	2022-04-15 00:00:00
+1538	3 Holiday Tails (Golden Christmas 2: The Second Tail, A)	2012	1	5	3	2022-01-18 00:00:00	2022-05-23 00:00:00
+1539	Just Wright	2007	3	1	3	2022-05-10 00:00:00	2021-09-04 00:00:00
+1540	Postcards From the Edge	1995	5	5	3	2022-03-20 00:00:00	2022-05-20 00:00:00
+1541	Black Magic (Meeting at Midnight) (Charlie Chan in Meeting at Midnight) (Charlie Chan in Black Magic)	2008	1	5	3	2021-08-11 00:00:00	2021-09-08 00:00:00
+1542	Middle of Nowhere	1996	1	3	3	2021-11-08 00:00:00	2021-08-05 00:00:00
+1543	Voyeur (Abel)	1985	3	5	2	2022-01-22 00:00:00	2022-03-10 00:00:00
+1544	You Killed Me First	2004	5	2	3	2022-04-24 00:00:00	2021-07-19 00:00:00
+1545	Journey 2: The Mysterious Island	2006	4	5	1	2021-08-08 00:00:00	2021-08-11 00:00:00
+1546	Pervert's Guide to Ideology, The	1988	3	3	2	2021-08-08 00:00:00	2021-08-29 00:00:00
+1547	Mr. Death: The Rise and Fall of Fred A. Leuchter, Jr.	2007	2	5	4	2021-08-31 00:00:00	2022-05-20 00:00:00
+1548	Farewell My Concubine (Ba wang bie ji)	2008	2	3	4	2022-03-25 00:00:00	2022-01-21 00:00:00
+1549	Twenty Days Without War (Dvadtsat dney bez voyny)	1996	4	3	1	2022-01-11 00:00:00	2021-06-21 00:00:00
+1550	Will It Snow For Christmas? (Y'aura-t-il de la neige à Noël?)	2000	3	3	5	2021-12-19 00:00:00	2021-10-02 00:00:00
+1551	Truth of Lie, The (Die Wahrheit der Lüge)	2008	5	3	5	2021-11-09 00:00:00	2021-12-30 00:00:00
+1552	Tarzan the Ape Man	2003	4	4	2	2021-12-25 00:00:00	2021-08-22 00:00:00
+1553	Hot Rods to Hell	2005	2	4	2	2022-05-02 00:00:00	2022-03-17 00:00:00
+1554	Thr3e (Three)	2007	5	3	3	2021-09-10 00:00:00	2021-07-14 00:00:00
+1555	Tom, Tom, the Piper's Son	1995	3	1	4	2022-05-09 00:00:00	2021-08-08 00:00:00
+1556	The New Girlfriend	2009	1	5	1	2021-11-07 00:00:00	2022-03-24 00:00:00
+1557	Racket, The	2010	3	3	3	2022-05-12 00:00:00	2021-11-21 00:00:00
+1558	Man Who Laughs, The	1989	1	2	1	2021-11-04 00:00:00	2022-02-12 00:00:00
+1559	Burnt by the Sun 2 (Utomlyonnye solntsem 2)	1990	1	4	2	2021-09-27 00:00:00	2022-04-14 00:00:00
+1560	Camp de Thiaroye	2008	3	4	1	2021-06-07 00:00:00	2021-10-05 00:00:00
+1561	Hollywood or Bust	2007	1	1	5	2021-10-07 00:00:00	2021-09-22 00:00:00
+1562	Short Time	1992	1	4	2	2021-10-13 00:00:00	2021-11-15 00:00:00
+1563	Advertising and the End of the World	2006	5	4	3	2021-07-25 00:00:00	2021-10-21 00:00:00
+1564	Storm Rider	2009	5	1	3	2021-10-29 00:00:00	2021-11-22 00:00:00
+1565	Annabel Takes a Tour (Annabel Takes a Trip)	1998	3	2	5	2022-03-11 00:00:00	2021-09-19 00:00:00
+1566	Early Years: Erik Nietzsche Part 1, The (De unge år: Erik Nietzsche)	2002	1	2	5	2022-05-16 00:00:00	2022-02-27 00:00:00
+1567	Irina Palm	1995	5	4	4	2021-09-27 00:00:00	2021-12-04 00:00:00
+1568	Katt Williams: Priceless: Afterlife	1909	5	3	3	2021-11-19 00:00:00	2021-10-02 00:00:00
+1569	Dark Truth, A (Truth, The)	1985	4	4	3	2021-05-30 00:00:00	2022-04-03 00:00:00
+1570	Soldier's Sweetheart, A	1996	4	1	3	2021-11-18 00:00:00	2021-10-14 00:00:00
+1571	Hesher	1989	4	2	5	2021-07-31 00:00:00	2022-02-23 00:00:00
+1572	Juarez	1997	2	4	5	2021-12-11 00:00:00	2021-12-21 00:00:00
+1573	7th Heaven (Seventh Heaven)	2003	3	4	1	2021-09-12 00:00:00	2021-06-28 00:00:00
+1574	Howl	2009	1	2	5	2021-06-04 00:00:00	2022-05-18 00:00:00
+1575	My Gun is Quick	2003	1	4	4	2022-05-19 00:00:00	2022-01-01 00:00:00
+1576	Playmobil: The Secret of Pirate Island	2003	2	4	5	2022-01-08 00:00:00	2022-03-14 00:00:00
+1577	Flatliners	2001	4	2	3	2021-07-28 00:00:00	2022-01-26 00:00:00
+1578	My Brother Is an Only Child (Mio fratello è figlio unico)	1986	3	4	1	2021-06-25 00:00:00	2021-08-25 00:00:00
+1579	Apartment, The	1986	5	3	5	2022-01-16 00:00:00	2021-10-17 00:00:00
+1580	Maîtresse (Mistress)	2003	5	5	1	2021-09-08 00:00:00	2021-12-02 00:00:00
+1581	The Tomb	2004	4	3	3	2021-08-25 00:00:00	2021-12-15 00:00:00
+1582	Breaking Upwards	1987	4	1	2	2021-06-22 00:00:00	2022-03-20 00:00:00
+1583	First Texan, The	1986	4	1	5	2022-02-19 00:00:00	2021-09-15 00:00:00
+1584	Bill Hicks: Relentless	2002	4	2	3	2021-08-31 00:00:00	2021-11-22 00:00:00
+1585	RKO 281	1989	2	2	5	2021-07-02 00:00:00	2021-06-09 00:00:00
+1586	Innocent Voices (Voces inocentes)	1988	2	4	1	2021-11-30 00:00:00	2021-08-17 00:00:00
+1587	R.S.V.P. 	1993	5	4	3	2022-02-15 00:00:00	2021-06-28 00:00:00
+1588	The Amazing Screw-On Head	2009	4	2	1	2021-08-06 00:00:00	2022-04-30 00:00:00
+1589	Last Action Hero	2010	2	1	4	2021-09-22 00:00:00	2022-03-22 00:00:00
+1590	Sign of Four, The	2004	4	2	5	2022-03-02 00:00:00	2022-05-21 00:00:00
+1591	Old Man and the Sea, The	2001	1	5	3	2022-05-27 00:00:00	2021-08-22 00:00:00
+1592	Thief and the Cobbler, The (a.k.a. Arabian Knight)	2012	3	1	3	2021-10-07 00:00:00	2021-11-30 00:00:00
+1593	Silent Sonata	1994	4	4	4	2021-08-03 00:00:00	2022-01-27 00:00:00
+1594	Coast Guard, The (Hae anseon)	1996	3	2	4	2022-05-01 00:00:00	2021-07-03 00:00:00
+1595	Brother Rat	1988	2	2	4	2022-04-18 00:00:00	2021-09-10 00:00:00
+1596	Seeking Asian Female	1992	2	1	1	2021-10-11 00:00:00	2022-03-06 00:00:00
+1597	Waltzes from Vienna	1993	3	5	4	2021-12-01 00:00:00	2022-04-14 00:00:00
+1598	Lost in Space	1998	4	2	5	2021-11-26 00:00:00	2021-07-30 00:00:00
+1599	Count Dracula (Nachts, wenn Dracula erwacht)	2005	1	4	5	2022-01-22 00:00:00	2022-05-06 00:00:00
+1600	Diggers	1995	3	1	5	2022-03-18 00:00:00	2022-04-27 00:00:00
+1601	Another Year	2001	4	4	5	2021-06-03 00:00:00	2022-04-15 00:00:00
+1602	Creature from Black Lake 	1988	4	5	3	2021-07-09 00:00:00	2021-12-23 00:00:00
+1603	Devdas	2003	5	3	4	2021-10-29 00:00:00	2022-01-10 00:00:00
+1604	Anne of Green Gables	2006	5	3	4	2021-10-23 00:00:00	2021-08-30 00:00:00
+1605	Chizuko's Younger Sister (Futari)	2011	4	4	1	2021-10-19 00:00:00	2022-03-06 00:00:00
+1606	Emma	1998	4	1	1	2021-10-09 00:00:00	2021-11-05 00:00:00
+1607	The Butter Battle Book	2005	2	1	4	2022-04-28 00:00:00	2022-02-21 00:00:00
+1608	Splitting Heirs	2012	4	4	4	2022-05-10 00:00:00	2021-07-06 00:00:00
+1609	My Last Day Without You (Nie mehr ohne Dich)	1992	1	4	4	2021-09-23 00:00:00	2021-08-30 00:00:00
+1610	Hurt	2002	2	5	1	2022-02-04 00:00:00	2022-04-20 00:00:00
+1611	Pop Redemption	2012	3	1	2	2022-02-04 00:00:00	2022-05-01 00:00:00
+1612	Creature from the Black Lagoon, The	2012	3	5	5	2022-03-30 00:00:00	2021-12-07 00:00:00
+1613	Funny Games U.S.	2007	4	4	1	2022-01-30 00:00:00	2021-07-30 00:00:00
+1614	Hit by Lightning	2001	4	4	4	2022-05-14 00:00:00	2021-12-23 00:00:00
+1615	Cremaster 3	2008	5	3	3	2021-11-01 00:00:00	2021-11-30 00:00:00
+1616	Christopher Columbus: The Discovery	1989	4	1	4	2021-08-17 00:00:00	2021-09-01 00:00:00
+1617	In the Navy	2009	3	2	4	2022-02-25 00:00:00	2021-07-27 00:00:00
+1618	Berserk	1994	1	1	4	2021-08-05 00:00:00	2021-09-18 00:00:00
+1619	The Fox and the Hare	1996	3	5	4	2021-06-19 00:00:00	2022-01-26 00:00:00
+1620	The War	1999	2	5	5	2021-08-06 00:00:00	2021-07-25 00:00:00
+1621	La Legge Violenta Della Squadra Anticrimine	1999	2	2	2	2021-06-01 00:00:00	2021-12-16 00:00:00
+1622	Railway Children, The	1988	2	4	5	2021-10-07 00:00:00	2022-01-13 00:00:00
+1623	Stranger's Heart, A	2011	5	5	1	2021-09-07 00:00:00	2022-03-10 00:00:00
+1624	20 Seconds of Joy	2010	5	2	5	2022-05-13 00:00:00	2021-08-10 00:00:00
+1625	The Hire: Star, The	2007	2	1	3	2021-06-08 00:00:00	2021-09-26 00:00:00
+1626	Paper Birds (Pájaros de papel)	2010	4	3	5	2022-02-13 00:00:00	2021-11-13 00:00:00
+1627	Fixed Bayonets!	2008	1	5	4	2021-06-20 00:00:00	2022-05-17 00:00:00
+1628	Tom & Viv	1998	3	3	3	2021-09-18 00:00:00	2021-06-20 00:00:00
+1629	Asylum Blackout	1996	4	2	2	2021-10-17 00:00:00	2021-09-07 00:00:00
+1630	True Grit	2007	3	1	5	2021-09-26 00:00:00	2021-11-07 00:00:00
+1631	Welcome Back, Mr. McDonald (Rajio no jikan)	2005	4	1	1	2021-11-27 00:00:00	2022-05-17 00:00:00
+1632	It's the Easter Beagle, Charlie Brown!	1998	3	5	1	2022-03-23 00:00:00	2021-10-12 00:00:00
+1633	Eros Plus Massacre (Erosu purasu Gyakusatsu)	2007	4	4	3	2021-12-21 00:00:00	2022-02-04 00:00:00
+1634	Why Are the Bells Ringing, Mitica? (a.k.a. Carnival Scenes) (De ce trag clopotele, Mitica?)	1995	1	3	1	2021-06-19 00:00:00	2021-06-07 00:00:00
+1635	Dead Hate the Living!, The	1996	4	3	1	2021-06-22 00:00:00	2021-09-10 00:00:00
+1636	King of Beggars (Mo jong yuen So Hat-Yi)	2000	2	1	4	2021-07-09 00:00:00	2022-02-09 00:00:00
+1637	Agony and the Ecstasy, The	2005	4	1	1	2021-09-17 00:00:00	2021-10-03 00:00:00
+1638	Blood on the Sun	2008	5	3	3	2022-03-23 00:00:00	2021-09-29 00:00:00
+1639	Cottage, The	2007	3	4	2	2021-08-29 00:00:00	2021-08-08 00:00:00
+1640	Bat Whispers, The	2003	3	3	2	2021-09-06 00:00:00	2021-08-05 00:00:00
+1641	Muppets Most Wanted	2008	5	1	5	2021-11-04 00:00:00	2022-01-31 00:00:00
+1642	Truth About Cats & Dogs, The	2002	2	1	3	2022-03-20 00:00:00	2021-07-30 00:00:00
+1643	Rockers	2008	2	1	5	2022-05-14 00:00:00	2021-08-27 00:00:00
+1644	Hollywood Shuffle	1988	3	1	1	2021-11-15 00:00:00	2022-04-07 00:00:00
+1645	Emperor and the Assassin, The (Jing ke ci qin wang)	1985	1	2	5	2021-09-02 00:00:00	2022-01-20 00:00:00
+1646	Chinese Ghost Story, A (Sinnui yauwan)	1990	4	2	1	2022-04-13 00:00:00	2021-11-04 00:00:00
+1647	Housefull 2	1989	3	3	1	2021-09-25 00:00:00	2022-05-15 00:00:00
+1648	Hollow Reed	2012	1	3	1	2022-02-01 00:00:00	2021-11-05 00:00:00
+1649	Brewster McCloud	2010	5	2	1	2022-04-19 00:00:00	2022-05-04 00:00:00
+1650	The Loft	2008	4	1	4	2021-08-05 00:00:00	2022-05-18 00:00:00
+1651	Russendisko	1988	2	3	1	2021-07-14 00:00:00	2021-08-29 00:00:00
+1652	Tell Me Something (Telmisseomding)	1987	2	4	4	2022-04-21 00:00:00	2021-12-14 00:00:00
+1653	588 Rue Paradis (Mother)	2006	3	4	1	2021-11-10 00:00:00	2021-08-08 00:00:00
+1654	Kung Fu Dunk	2009	4	3	3	2021-08-04 00:00:00	2022-05-02 00:00:00
+1655	The Boy in the Mirror	1994	2	3	2	2021-11-11 00:00:00	2021-10-18 00:00:00
+1656	Wolf	2001	2	5	2	2021-09-27 00:00:00	2021-12-03 00:00:00
+1657	Noel	1992	3	5	1	2022-03-09 00:00:00	2021-08-18 00:00:00
+1658	Jönssonligan på Mallorca	1992	3	3	1	2021-11-09 00:00:00	2021-06-29 00:00:00
+1659	Unlikely Weapon, An	2011	3	3	3	2022-04-21 00:00:00	2022-02-06 00:00:00
+1660	Night Nurse	1994	5	2	1	2022-05-29 00:00:00	2022-04-13 00:00:00
+1661	Flywheel	1999	2	4	2	2021-12-21 00:00:00	2022-04-07 00:00:00
+1662	Revenge of the Pink Panther	1992	3	1	5	2021-09-26 00:00:00	2021-09-13 00:00:00
+1663	Barfi!	2008	1	5	2	2021-12-15 00:00:00	2021-06-07 00:00:00
+1664	24th Day, The	2011	5	4	3	2021-11-16 00:00:00	2022-03-30 00:00:00
+1665	Three Resurrected Drunkards (Kaette kita yopparai)	2004	1	4	4	2022-03-18 00:00:00	2022-02-16 00:00:00
+1666	Andy Hardy's Double Life	2009	5	4	1	2021-10-22 00:00:00	2022-03-22 00:00:00
+1667	Cheerleaders, The	2009	2	1	2	2021-06-27 00:00:00	2021-12-22 00:00:00
+1668	Ice Castles	2007	3	4	5	2022-03-10 00:00:00	2021-07-09 00:00:00
+1669	Two-Way Stretch	2008	3	1	3	2022-04-14 00:00:00	2022-05-15 00:00:00
+1670	Main Event, The	2007	2	2	2	2022-04-11 00:00:00	2021-12-29 00:00:00
+1671	Buffalo Soldiers	2004	3	5	3	2021-06-17 00:00:00	2021-08-30 00:00:00
+1672	Amazon Women on the Moon	2010	5	4	1	2022-05-04 00:00:00	2021-09-16 00:00:00
+1673	Plot of Fear	2006	5	5	1	2021-10-07 00:00:00	2022-01-10 00:00:00
+1674	Hateship Loveship	1986	1	3	5	2021-12-03 00:00:00	2021-08-03 00:00:00
+1675	Lupin III: The Castle Of Cagliostro (Rupan sansei: Kariosutoro no shiro)	2009	2	2	3	2021-09-13 00:00:00	2021-07-18 00:00:00
+1676	Belle and Sebastien (Belle et Sébastien)	1992	4	5	3	2021-10-23 00:00:00	2022-05-29 00:00:00
+1677	Red Shoes, The	2010	2	5	1	2021-10-28 00:00:00	2021-10-16 00:00:00
+1678	51	2001	2	1	4	2022-04-22 00:00:00	2021-12-25 00:00:00
+1679	Journey of August King, The	2010	5	2	1	2021-12-30 00:00:00	2021-07-06 00:00:00
+1680	Outrage	1994	1	2	5	2021-09-18 00:00:00	2022-03-27 00:00:00
+1681	Flower & Garnet	1967	1	3	5	2022-04-21 00:00:00	2022-04-25 00:00:00
+1682	Tingler, The	2002	5	3	5	2022-04-29 00:00:00	2022-03-24 00:00:00
+1683	Back to the Future Part II	1994	3	2	3	2021-06-27 00:00:00	2022-05-09 00:00:00
+1684	Kill Me Again	2005	4	4	5	2021-11-17 00:00:00	2021-08-24 00:00:00
+1685	In Vanda's Room (No Quarto da Vanda)	1991	1	4	1	2022-04-18 00:00:00	2022-01-14 00:00:00
+1686	Nomad (Köshpendiler)	1967	2	1	5	2021-10-20 00:00:00	2022-04-30 00:00:00
+1687	In Bed (En la cama)	1993	3	5	4	2022-04-02 00:00:00	2021-11-12 00:00:00
+1688	War Comes to America (Why We Fight, 7)	1994	4	1	1	2022-02-24 00:00:00	2021-07-01 00:00:00
+1689	Idiots, The (Idioterne)	2002	4	2	5	2021-10-14 00:00:00	2022-04-21 00:00:00
+1690	Riding Giants	2012	1	5	4	2021-12-02 00:00:00	2022-04-25 00:00:00
+1691	Mechanic, The	2002	1	1	2	2022-05-23 00:00:00	2021-12-08 00:00:00
+1692	Fall of the Republic: The Presidency of Barack H. Obama	1990	2	4	3	2022-01-17 00:00:00	2021-09-03 00:00:00
+1693	Vampires Suck	2010	2	2	3	2021-10-28 00:00:00	2022-04-23 00:00:00
+1694	Wild Horse, Wild Ride	2009	3	3	3	2021-07-27 00:00:00	2022-01-04 00:00:00
+1695	Scarlet Letter, The	1992	1	3	4	2021-07-14 00:00:00	2021-11-26 00:00:00
+1696	Fistful of Dollars, A (Per un pugno di dollari)	2007	5	2	4	2022-04-11 00:00:00	2021-11-19 00:00:00
+1697	Art of War, The	1996	4	4	4	2021-06-16 00:00:00	2021-08-13 00:00:00
+1698	Plastic Paradise: The Great Pacific Garbage Patch	2006	4	2	2	2021-12-17 00:00:00	2022-04-11 00:00:00
+1699	House of the Spirits, The	2011	5	2	3	2021-07-06 00:00:00	2021-06-02 00:00:00
+1700	Romance in a Minor Key (Romanze in Moll)	1992	1	4	3	2021-08-25 00:00:00	2022-03-30 00:00:00
+1701	Honey, We Shrunk Ourselves	2007	5	2	5	2022-04-16 00:00:00	2021-12-26 00:00:00
+1702	A Girl Walks Home Alone at Night	1994	3	1	3	2021-10-28 00:00:00	2021-06-08 00:00:00
+1703	Love Song for Bobby Long, A	1999	4	4	5	2022-01-06 00:00:00	2022-01-05 00:00:00
+1704	Once Upon a Time in America	2005	1	1	1	2021-11-08 00:00:00	2021-09-21 00:00:00
+1705	Manchurian Candidate, The	1995	2	1	1	2022-01-05 00:00:00	2022-05-15 00:00:00
+1706	Raging Phoenix (Deu suay doo)	1993	1	2	2	2022-05-24 00:00:00	2021-11-18 00:00:00
+1707	Chinese Coffee	2000	5	5	5	2021-11-30 00:00:00	2022-04-04 00:00:00
+1708	Librarian, The: The Curse of the Judas Chalice	2003	4	5	3	2022-01-27 00:00:00	2022-03-26 00:00:00
+1709	Christmas with the Kranks	2008	2	3	1	2021-11-10 00:00:00	2021-12-21 00:00:00
+1710	Quartet	2009	3	2	3	2021-07-28 00:00:00	2021-08-20 00:00:00
+1711	All of Me	1997	1	1	4	2021-07-21 00:00:00	2022-01-15 00:00:00
+1712	Legend No. 17	2006	5	2	3	2021-07-08 00:00:00	2022-01-21 00:00:00
+1713	Rhapsody in August (Hachi-gatsu no kyôshikyoku)	1991	2	1	5	2021-11-08 00:00:00	2021-09-17 00:00:00
+1714	Louis C.K.: Shameless	2006	1	3	1	2022-04-25 00:00:00	2022-05-28 00:00:00
+1715	Bug	1985	1	4	3	2022-03-05 00:00:00	2022-04-29 00:00:00
+1716	Death in Buenos Aires (Muerte en Buenos Aires)	1997	5	5	2	2022-03-06 00:00:00	2021-07-29 00:00:00
+1717	Quintet	1988	3	1	5	2021-10-28 00:00:00	2022-04-02 00:00:00
+1718	Carry on Behind	1992	2	5	4	2022-02-04 00:00:00	2021-07-09 00:00:00
+1719	Discovery of Heaven, The	2005	4	5	3	2021-09-26 00:00:00	2022-05-23 00:00:00
+1720	Outpost: Black Sun	1985	5	2	1	2022-04-17 00:00:00	2021-10-14 00:00:00
+1721	Midnight's Children	1992	1	2	3	2021-10-19 00:00:00	2022-02-09 00:00:00
+1722	Snapper, The	2000	2	3	4	2022-02-26 00:00:00	2021-10-08 00:00:00
+1723	Stalingrad	2002	5	2	4	2022-05-29 00:00:00	2022-02-11 00:00:00
+1724	Alien	2008	1	2	2	2021-10-26 00:00:00	2021-08-14 00:00:00
+1725	The Gun That Won the West	1994	1	3	5	2021-09-08 00:00:00	2021-12-08 00:00:00
+1726	Hamlet	2000	5	5	5	2021-07-07 00:00:00	2022-02-16 00:00:00
+1727	Devour	1993	2	5	5	2022-05-21 00:00:00	2021-07-11 00:00:00
+1728	The Year Without a Santa Claus	2007	1	2	5	2021-12-15 00:00:00	2022-05-03 00:00:00
+1729	Fine Madness, A	1989	4	2	5	2021-09-15 00:00:00	2021-08-27 00:00:00
+1730	Red Dust	2008	1	4	1	2021-12-18 00:00:00	2022-02-23 00:00:00
+1731	Phineas and Ferb the Movie: Across the 2nd Dimension	2005	3	2	4	2021-10-20 00:00:00	2021-07-31 00:00:00
+1732	One Good Cop	2007	1	3	5	2021-08-25 00:00:00	2021-10-30 00:00:00
+1733	Daltry Calhoun	2007	4	5	2	2021-11-09 00:00:00	2022-03-09 00:00:00
+1734	Gauntlet, The	2003	1	2	4	2021-09-17 00:00:00	2021-12-08 00:00:00
+1735	The Testimony	2007	3	2	5	2021-08-04 00:00:00	2021-09-03 00:00:00
+1736	Dreamgirls	2012	3	3	2	2021-11-06 00:00:00	2021-08-23 00:00:00
+1737	Harrison's Flowers	2010	2	5	1	2022-04-12 00:00:00	2021-12-20 00:00:00
+1738	Before the Devil Knows You're Dead	1989	1	4	5	2022-05-21 00:00:00	2021-11-26 00:00:00
+1739	Twonky, The	1995	1	5	2	2022-04-27 00:00:00	2021-07-09 00:00:00
+1740	Wallace & Gromit: The Wrong Trousers	2012	4	5	3	2022-02-23 00:00:00	2022-03-16 00:00:00
+1741	Without Warning	2012	5	1	4	2022-01-01 00:00:00	2022-01-31 00:00:00
+1742	Domino	2011	5	5	3	2021-10-27 00:00:00	2021-08-19 00:00:00
+1743	Who Are the DeBolts? [And Where Did They Get 19 Kids?]	2007	1	3	3	2021-12-17 00:00:00	2021-06-30 00:00:00
+1744	Toxic Avenger, Part II, The	2006	5	5	3	2021-12-07 00:00:00	2022-03-15 00:00:00
+1745	Signal, The	2004	4	1	2	2022-01-29 00:00:00	2021-11-08 00:00:00
+1746	Mac and Me	2008	2	4	2	2022-01-25 00:00:00	2022-05-17 00:00:00
+1747	Knights of the Round Table	2003	5	1	1	2022-01-04 00:00:00	2021-11-18 00:00:00
+1748	Batman: Gotham Knight	2007	5	3	5	2021-07-11 00:00:00	2021-12-04 00:00:00
+1749	Grande école	1990	5	1	1	2022-05-28 00:00:00	2022-05-02 00:00:00
+1750	Geronimo: An American Legend	1995	3	5	3	2021-06-15 00:00:00	2022-03-22 00:00:00
+1751	Celestial Wives of the Meadow Mari (Nebesnye zheny lugovykh mari)	1993	4	4	3	2021-09-03 00:00:00	2022-01-15 00:00:00
+1752	Slumber Party '57	2011	5	4	5	2022-03-29 00:00:00	2021-08-04 00:00:00
+1753	Spend It All	2008	1	3	1	2022-01-19 00:00:00	2022-03-19 00:00:00
+1754	Hail Columbia!	1996	5	5	4	2022-05-16 00:00:00	2021-11-18 00:00:00
+1755	Modern Boy (Modeon boi)	2011	5	3	3	2022-03-15 00:00:00	2021-10-20 00:00:00
+1756	Skhizein	2006	1	5	3	2021-11-17 00:00:00	2022-01-13 00:00:00
+1757	Percy Jackson: Sea of Monsters	1999	5	4	3	2021-06-18 00:00:00	2021-09-25 00:00:00
+1758	She No Longer Talks, She Shoots	1993	5	3	3	2021-11-22 00:00:00	2022-03-27 00:00:00
+1759	Miracles - Mr. Canton and Lady Rose	2007	1	3	2	2021-11-07 00:00:00	2021-12-01 00:00:00
+1760	Lawyer Man	1992	3	4	5	2021-08-27 00:00:00	2021-08-07 00:00:00
+1761	Resurrected, The	1992	1	2	4	2022-03-08 00:00:00	2021-11-15 00:00:00
+1762	Queen of the Damned	2010	1	4	4	2022-01-28 00:00:00	2022-02-08 00:00:00
+1763	009 Re: Cyborg	2009	4	2	2	2021-12-23 00:00:00	2021-07-12 00:00:00
+1764	Zombie (a.k.a. Zombie 2: The Dead Are Among Us) (Zombi 2)	2001	1	1	2	2021-08-27 00:00:00	2022-03-01 00:00:00
+1765	Deceit	1988	1	4	1	2021-12-19 00:00:00	2021-07-10 00:00:00
+1766	Dreamer: Inspired by a True Story	1993	2	3	4	2022-05-19 00:00:00	2021-12-30 00:00:00
+1767	Tango Kabaree	1991	5	5	1	2022-02-26 00:00:00	2021-12-03 00:00:00
+1768	Westworld	2008	5	1	4	2021-12-12 00:00:00	2021-11-18 00:00:00
+1769	Blue in the Face	2007	4	4	2	2022-04-01 00:00:00	2022-02-03 00:00:00
+1770	Crac	2003	2	5	4	2021-11-17 00:00:00	2021-08-21 00:00:00
+1771	Viva	2006	3	1	3	2021-07-03 00:00:00	2022-01-12 00:00:00
+1772	Winnie the Pooh and Tigger Too	1994	5	1	1	2021-09-27 00:00:00	2021-09-20 00:00:00
+1773	Day and Night (Dag och natt)	2008	5	2	3	2021-08-05 00:00:00	2021-07-07 00:00:00
+1774	Bling Ring, The	1998	2	2	1	2022-03-30 00:00:00	2021-08-24 00:00:00
+1775	My Life	1994	2	4	1	2021-08-02 00:00:00	2022-01-06 00:00:00
+1776	Living and the Dead, The	1998	5	2	3	2022-03-23 00:00:00	2022-02-27 00:00:00
+1777	Passion of Anna, The (Passion, En)	1989	5	3	4	2022-05-17 00:00:00	2021-11-14 00:00:00
+1778	Thieves (Voleurs, Les)	2000	4	1	2	2022-02-07 00:00:00	2022-01-05 00:00:00
+1779	Vampire Hunter D	1988	3	3	1	2022-02-17 00:00:00	2021-09-28 00:00:00
+1780	Likeable Mister R, The (Simpaticul domn R)	1993	4	4	3	2021-08-12 00:00:00	2022-04-06 00:00:00
+1781	No Time for Nuts	2002	5	3	5	2021-09-16 00:00:00	2022-04-20 00:00:00
+1782	Kevin Smith: Sold Out - A Threevening with Kevin Smith	2002	5	5	4	2022-04-23 00:00:00	2021-09-05 00:00:00
+1783	Rat Savior, The (Izbavitelj)	2003	1	5	5	2022-04-30 00:00:00	2021-09-01 00:00:00
+1784	13 Lakes	2007	5	3	2	2021-08-05 00:00:00	2021-06-26 00:00:00
+1785	Hole in the Soul, A (Rupa u dusi)	2001	4	4	2	2022-04-14 00:00:00	2021-07-06 00:00:00
+1786	Batman & Mr. Freeze: Subzero	2003	4	4	3	2021-08-22 00:00:00	2022-04-15 00:00:00
+1787	Morgan Pålsson - världsreporter	2002	2	1	2	2021-09-16 00:00:00	2021-11-08 00:00:00
+1788	Sophie's World (Sofies verden)	2006	2	2	5	2021-06-04 00:00:00	2022-04-06 00:00:00
+1789	And So It Is	1999	4	5	1	2022-02-20 00:00:00	2021-10-19 00:00:00
+1790	Tarda estate	1994	2	5	2	2021-10-17 00:00:00	2022-05-04 00:00:00
+1791	Porn Theater (Chatte à deux têtes, La)	2009	3	3	5	2021-06-25 00:00:00	2022-04-25 00:00:00
+1792	Pigs with a P.38	2011	5	5	2	2021-09-14 00:00:00	2021-12-14 00:00:00
+1793	Power of Kangwon Province, The (Kangwon-do ui him)	2008	3	3	4	2021-09-25 00:00:00	2022-05-12 00:00:00
+1794	Ruins	2005	2	3	4	2021-10-17 00:00:00	2022-01-21 00:00:00
+1795	Erasing David	2005	5	2	2	2021-09-23 00:00:00	2022-05-01 00:00:00
+1796	Small Change (Argent de poche, L')	1992	4	5	4	2021-06-16 00:00:00	2021-10-11 00:00:00
+1797	Mad Max	2002	5	3	1	2021-08-16 00:00:00	2021-08-25 00:00:00
+1798	Dolce Vita, La	2001	3	1	5	2021-06-19 00:00:00	2021-11-25 00:00:00
+1799	Grandmother	1991	3	2	5	2021-10-02 00:00:00	2021-08-21 00:00:00
+1800	Roadie	2012	2	1	4	2022-05-04 00:00:00	2021-07-03 00:00:00
+1801	Bonjour Monsieur Shlomi (Ha-Kochavim Shel Shlomi)	1991	4	3	4	2021-12-17 00:00:00	2021-08-04 00:00:00
+1802	Pinocchio and the Emperor of the Night	2009	3	4	5	2022-02-26 00:00:00	2022-05-28 00:00:00
+1803	Thirty Day Princess	1992	2	4	5	2021-08-11 00:00:00	2021-11-24 00:00:00
+1804	Venus & Fleur	1996	4	5	5	2022-01-23 00:00:00	2022-02-05 00:00:00
+1805	Prophet, the Gold and the Transylvanians, The (Profetul, aurul si Ardelenii)	2009	4	3	5	2021-07-08 00:00:00	2021-06-13 00:00:00
+1806	Hombre	1993	4	4	1	2021-12-08 00:00:00	2022-02-12 00:00:00
+1807	Masquerade	1996	2	4	2	2022-05-10 00:00:00	2021-06-05 00:00:00
+1808	Dracula	1993	4	4	5	2022-02-27 00:00:00	2022-03-02 00:00:00
+1809	Wonderland	2005	5	4	2	2021-11-24 00:00:00	2022-01-23 00:00:00
+1810	Welcome to the Jungle	1997	1	2	3	2021-07-08 00:00:00	2022-01-02 00:00:00
+1811	Man in the Chair	1994	2	3	3	2022-01-07 00:00:00	2021-10-11 00:00:00
+1812	What's the Worst That Could Happen?	1999	5	1	1	2021-12-09 00:00:00	2021-08-21 00:00:00
+1813	To Be Takei	1997	1	5	2	2021-12-31 00:00:00	2021-07-17 00:00:00
+1814	Last Supper, The	2003	2	1	1	2022-05-29 00:00:00	2021-07-17 00:00:00
+1815	Boulevard	2003	2	2	2	2021-06-14 00:00:00	2021-12-22 00:00:00
+1816	Man Apart, A	2008	5	5	3	2021-07-08 00:00:00	2022-03-18 00:00:00
+1817	Fat People (Gordos)	2010	5	5	1	2021-06-15 00:00:00	2021-11-09 00:00:00
+1818	Spirited Away (Sen to Chihiro no kamikakushi)	1985	3	1	5	2021-11-21 00:00:00	2021-08-11 00:00:00
+1819	Tourist, The	1996	3	4	4	2021-11-24 00:00:00	2022-03-09 00:00:00
+1820	Evil Dead II (Dead by Dawn)	2013	1	5	5	2021-10-25 00:00:00	2021-11-23 00:00:00
+1821	Penguins of Madagascar	2007	2	2	1	2021-12-30 00:00:00	2021-11-05 00:00:00
+1822	Fast, Cheap & Out of Control	2011	5	4	4	2021-11-07 00:00:00	2021-12-30 00:00:00
+1823	Red Hill	1966	3	3	5	2022-03-04 00:00:00	2022-03-23 00:00:00
+1824	Babysitters, The	1997	3	4	2	2021-10-02 00:00:00	2021-12-10 00:00:00
+1825	Godzilla's Revenge (Gojira-Minira-Gabara: Oru Kaijû Daishingeki) (All Monsters Attack)	1993	3	3	3	2022-01-23 00:00:00	2022-01-31 00:00:00
+1826	Anna Lucasta	2000	5	5	2	2021-07-01 00:00:00	2021-12-25 00:00:00
+1827	Clandestine Childhood	2009	3	4	2	2022-02-10 00:00:00	2021-08-08 00:00:00
+1828	Leap Year	1999	4	5	2	2021-12-31 00:00:00	2021-06-07 00:00:00
+1829	Buddy Holly Story, The	1990	5	1	1	2022-04-28 00:00:00	2022-05-08 00:00:00
+1830	Prison (Fängelse) 	2009	5	3	1	2022-05-18 00:00:00	2021-11-29 00:00:00
+1831	Man with the Gun	1998	5	2	2	2022-03-22 00:00:00	2022-05-03 00:00:00
+1832	Standing Up	2001	2	3	5	2021-12-01 00:00:00	2021-11-22 00:00:00
+1833	Frida	2009	4	3	4	2021-06-15 00:00:00	2021-11-15 00:00:00
+1834	Uncle Boonmee Who Can Recall His Past Lives (Loong Boonmee raleuk chat)	1993	4	1	1	2022-03-03 00:00:00	2022-04-03 00:00:00
+1835	Source, The	2011	3	4	4	2022-02-23 00:00:00	2022-03-17 00:00:00
+1836	Man of My Life, The (L'homme de sa vie)	2003	2	3	3	2021-06-28 00:00:00	2021-12-05 00:00:00
+1837	The Man Who Lived Again	1987	2	1	2	2022-04-07 00:00:00	2021-12-31 00:00:00
+1838	Dare	2007	1	4	5	2021-11-13 00:00:00	2022-01-18 00:00:00
+1839	Killers	1994	1	2	1	2022-03-24 00:00:00	2021-07-26 00:00:00
+1840	Good Evening, Mr. Wallenberg (God afton, Herr Wallenberg)	2004	1	5	5	2021-08-26 00:00:00	2021-08-11 00:00:00
+1841	96 Minutes 	2012	3	2	1	2021-08-09 00:00:00	2022-05-19 00:00:00
+1842	Incident at Loch Ness	1988	3	3	1	2021-08-18 00:00:00	2022-05-22 00:00:00
+1843	Dear Brigitte	1994	2	2	1	2021-06-24 00:00:00	2021-11-14 00:00:00
+1844	Truth or Die 	2005	3	3	2	2022-01-14 00:00:00	2021-12-20 00:00:00
+1845	Perfectly Normal	1991	2	3	1	2022-01-13 00:00:00	2022-05-10 00:00:00
+1846	India Song	2005	3	1	2	2021-12-11 00:00:00	2021-09-27 00:00:00
+1847	Full Metal Jacket	2003	3	4	5	2022-02-09 00:00:00	2022-04-03 00:00:00
+1848	Turner & Hooch	2006	1	3	2	2022-05-18 00:00:00	2022-01-26 00:00:00
+1849	Snake Eyes	2011	1	2	5	2021-10-19 00:00:00	2022-05-03 00:00:00
+1850	Philadelphia Experiment II	2005	5	1	4	2022-01-29 00:00:00	2022-04-11 00:00:00
+1851	Teheran 43: Spy Ring (a.k.a. Assassination Attempt) (Tegeran-43)	2003	2	3	2	2021-08-13 00:00:00	2021-08-22 00:00:00
+1852	Blackbird	2002	4	2	4	2021-09-19 00:00:00	2021-07-21 00:00:00
+1853	Death to Smoochy	2010	4	4	1	2021-07-22 00:00:00	2021-07-25 00:00:00
+1854	D-Day	2006	1	5	1	2022-02-26 00:00:00	2021-11-14 00:00:00
+1855	Emitai	2010	2	3	2	2021-09-04 00:00:00	2022-05-29 00:00:00
+1856	Croupier	1989	2	4	4	2022-01-24 00:00:00	2021-06-05 00:00:00
+1857	Along Came a Spider	2004	1	1	5	2021-07-28 00:00:00	2022-01-05 00:00:00
+1858	Batman: The Dark Knight Returns, Part 2	2009	2	1	2	2022-01-26 00:00:00	2021-09-04 00:00:00
+1859	Prayer for the Dying, A	2000	3	3	1	2021-12-15 00:00:00	2021-10-25 00:00:00
+1860	Gappa: The Triphibian Monsters (AKA Monster from a Prehistoric Planet) (Daikyojû Gappa)	2009	4	5	3	2021-10-08 00:00:00	2021-09-17 00:00:00
+1861	American Reunion (American Pie 4)	2009	2	5	5	2021-11-10 00:00:00	2021-09-06 00:00:00
+1862	The Gamers	2012	4	5	3	2022-05-25 00:00:00	2021-08-01 00:00:00
+1863	Villa Rides!	1994	4	1	5	2021-10-11 00:00:00	2021-06-27 00:00:00
+1864	Toy Story 2	2009	5	3	5	2022-03-05 00:00:00	2021-09-09 00:00:00
+1865	Dead Awake	1990	5	3	4	2022-02-08 00:00:00	2022-02-21 00:00:00
+1866	Blueprint for Murder, A	2007	5	3	4	2021-10-28 00:00:00	2021-08-06 00:00:00
+1867	Christmas on Mars	2000	5	1	3	2021-09-06 00:00:00	2021-06-27 00:00:00
+1868	Crawlspace	1997	3	1	5	2022-01-26 00:00:00	2022-05-21 00:00:00
+1869	One Bright Shining Moment	2000	3	3	3	2021-10-16 00:00:00	2021-12-01 00:00:00
+1870	Crocodile Dundee in Los Angeles	2008	3	2	4	2022-02-28 00:00:00	2022-05-01 00:00:00
+1871	Bluebeard (Barbe-Bleue)	2011	2	5	4	2022-05-13 00:00:00	2021-12-22 00:00:00
+1872	Cassandra Crossing, The	2001	2	2	3	2022-03-21 00:00:00	2022-02-25 00:00:00
+1873	Bronies: The Extremely Unexpected Adult Fans of My Little Pony	2005	3	1	2	2022-03-05 00:00:00	2021-11-23 00:00:00
+1874	Pleasure of Being Robbed, The	2012	2	4	5	2021-07-24 00:00:00	2022-02-26 00:00:00
+1875	Barefoot	2008	4	5	3	2022-05-11 00:00:00	2022-04-16 00:00:00
+1876	Katie Tippel (Keetje Tippel)	2009	4	5	5	2021-09-15 00:00:00	2022-02-28 00:00:00
+1877	Not for or Against (Quite the Contrary) (Ni pour, ni contre (bien au contraire))	1985	4	5	5	2022-01-10 00:00:00	2022-04-16 00:00:00
+1878	Against All Odds	1996	4	5	5	2021-08-19 00:00:00	2021-06-16 00:00:00
+1879	Outrageous Fortune	1992	1	4	3	2021-06-20 00:00:00	2021-06-17 00:00:00
+1880	Welcome to the Jungle	2006	1	1	2	2021-11-06 00:00:00	2021-12-15 00:00:00
+1881	Looking for Lenny 	2010	5	4	5	2021-12-23 00:00:00	2022-02-25 00:00:00
+1882	End Game	1988	1	5	5	2022-05-03 00:00:00	2022-01-08 00:00:00
+1883	Perfect Score, The	2001	3	1	5	2021-08-05 00:00:00	2022-01-21 00:00:00
+1884	Cooler, The	2004	3	2	1	2021-07-10 00:00:00	2021-08-01 00:00:00
+1885	Scooby-Doo! WrestleMania Mystery	2005	5	3	1	2021-07-02 00:00:00	2021-06-24 00:00:00
+1886	Romance & Cigarettes	2002	1	5	5	2021-12-29 00:00:00	2021-09-10 00:00:00
+1887	Rumble in Hong Kong (Nu jing cha) (Heroine, The)	2005	1	3	5	2021-06-11 00:00:00	2021-11-01 00:00:00
+1888	Lawn Dogs	2011	4	3	3	2021-09-09 00:00:00	2022-02-14 00:00:00
+1889	House by the Cemetery, The (Quella villa accanto al cimitero)	2000	2	5	4	2021-07-12 00:00:00	2021-10-14 00:00:00
+1890	A Mulher Invisível	2006	4	2	2	2021-07-14 00:00:00	2021-08-24 00:00:00
+1891	A Fight For	2012	5	3	3	2022-03-19 00:00:00	2022-03-29 00:00:00
+1892	Playground	2011	3	2	5	2021-10-05 00:00:00	2021-12-23 00:00:00
+1893	Executive Action	1989	4	1	3	2021-11-02 00:00:00	2022-01-11 00:00:00
+1894	Roadside Prophets	1998	2	4	4	2022-01-20 00:00:00	2022-03-24 00:00:00
+1895	Man with No Shadow, The (Homme sans ombre, L')	2008	4	4	5	2022-04-18 00:00:00	2021-08-26 00:00:00
+1896	Born to Dance	2003	3	3	5	2021-10-24 00:00:00	2021-07-28 00:00:00
+1897	Exiled (Fong juk)	2007	3	5	4	2022-03-25 00:00:00	2021-07-25 00:00:00
+1898	Each Dawn I Die	2012	5	4	4	2022-03-29 00:00:00	2022-03-20 00:00:00
+1899	Ugly, Dirty and Bad (Brutti sporchi e cattivi)	2001	4	4	2	2022-01-21 00:00:00	2021-11-07 00:00:00
+1900	Double Jeopardy	1994	5	1	1	2021-08-30 00:00:00	2021-09-08 00:00:00
+1901	Trinity: Gambling for High Stakes (Odds and Evens) (Pari e dispari)	1995	3	4	5	2021-08-01 00:00:00	2022-03-08 00:00:00
+1902	Send a Bullet (Manda Bala)	2012	5	3	1	2021-06-26 00:00:00	2021-07-02 00:00:00
+1903	Whitey: United States of America v. James J. Bulger	2008	5	5	1	2021-07-15 00:00:00	2022-01-27 00:00:00
+1904	City Slickers II: The Legend of Curly's Gold	2001	2	5	1	2021-06-09 00:00:00	2022-03-12 00:00:00
+1905	Painted Lady	1972	2	2	1	2021-06-24 00:00:00	2022-03-14 00:00:00
+1906	Good Guys and the Bad Guys, The	2008	5	2	1	2022-04-21 00:00:00	2021-09-27 00:00:00
+1907	Scream 2	1990	5	1	5	2022-04-11 00:00:00	2021-09-25 00:00:00
+1908	Purple Butterfly (Zi hudie)	1985	5	4	5	2021-11-02 00:00:00	2021-12-22 00:00:00
+1909	Murder, He Says	1997	1	3	2	2022-04-03 00:00:00	2021-12-29 00:00:00
+1910	I Love You, Beth Cooper	2002	2	2	1	2021-06-23 00:00:00	2021-06-16 00:00:00
+1911	Bling: A Planet Rock	1999	1	2	1	2022-03-25 00:00:00	2022-03-31 00:00:00
+1912	41-Year-Old Virgin Who Knocked Up Sarah Marshall and Felt Superbad About It, The	1996	1	5	5	2021-06-23 00:00:00	2022-03-02 00:00:00
+1913	Alabama Moon	2012	2	4	3	2022-01-28 00:00:00	2022-01-11 00:00:00
+1914	Place in the Sun, A (En plats i solen)	2007	3	2	5	2021-10-25 00:00:00	2021-11-28 00:00:00
+1915	Frankenweenie	2011	3	2	5	2021-07-05 00:00:00	2021-09-30 00:00:00
+1916	Miraculum	2003	5	2	5	2021-10-27 00:00:00	2022-03-10 00:00:00
+1917	My Science Project	2011	5	3	2	2022-05-23 00:00:00	2022-01-01 00:00:00
+1918	Black Balloon, The	1989	5	3	1	2022-02-08 00:00:00	2021-05-30 00:00:00
+1919	Playing for Keeps	2000	1	5	3	2022-02-11 00:00:00	2022-02-01 00:00:00
+1920	Land of the Blind	1994	4	2	1	2021-08-18 00:00:00	2021-10-20 00:00:00
+1921	It Runs in the Family	2005	3	4	2	2022-02-16 00:00:00	2021-06-24 00:00:00
+1922	The Hire: Follow, The	1997	5	4	4	2021-06-19 00:00:00	2022-03-23 00:00:00
+1923	Back to the Garden, Flower Power Comes Full Circle	1986	4	1	3	2022-01-02 00:00:00	2021-08-21 00:00:00
+1924	Midnight Lace	1992	2	1	1	2021-06-15 00:00:00	2021-11-04 00:00:00
+1925	Amu	1986	3	1	3	2022-02-03 00:00:00	2022-03-23 00:00:00
+1926	S.W.A.T.: Firefight	1987	5	3	2	2022-02-11 00:00:00	2022-03-04 00:00:00
+1927	50/50	2005	2	1	2	2021-07-04 00:00:00	2022-03-14 00:00:00
+1928	Only God Knows (Sólo Dios Sabe)	1998	1	1	4	2021-06-11 00:00:00	2021-06-14 00:00:00
+1929	Across the Tracks	1990	3	5	4	2021-07-04 00:00:00	2021-07-14 00:00:00
+1930	Slumber Party '57	2002	2	1	1	2021-12-23 00:00:00	2021-09-25 00:00:00
+1931	Boys	1995	5	4	5	2021-10-15 00:00:00	2021-10-16 00:00:00
+1932	Food of the Gods II	1984	4	5	1	2022-02-09 00:00:00	2021-06-03 00:00:00
+1933	Wagon Master	2005	4	3	2	2021-07-19 00:00:00	2022-05-14 00:00:00
+1934	Act of Violence	2006	4	1	2	2021-09-15 00:00:00	2021-06-10 00:00:00
+1935	Police Academy 3: Back in Training	1999	4	3	1	2021-06-06 00:00:00	2021-11-11 00:00:00
+1936	Budd Boetticher: A Man Can Do That	2002	2	2	4	2021-12-30 00:00:00	2021-08-27 00:00:00
+1937	The Cat's Out	2003	1	1	3	2021-06-06 00:00:00	2022-05-24 00:00:00
+1938	Latin Music USA	2010	4	1	3	2021-07-16 00:00:00	2021-07-11 00:00:00
+1939	World According to Dick Cheney, The 	1999	5	3	4	2021-12-23 00:00:00	2021-09-14 00:00:00
+1940	Big Town, The	1997	2	3	3	2022-05-15 00:00:00	2021-11-21 00:00:00
+1941	Cure for Love, A (Lekarstwo na milosc)	1996	2	1	3	2022-04-09 00:00:00	2021-08-19 00:00:00
+1942	Confessions of a Nazi Spy	1958	1	4	2	2022-02-23 00:00:00	2021-10-25 00:00:00
+1943	Surviving Christmas	2002	4	2	4	2021-09-25 00:00:00	2021-10-03 00:00:00
+1944	Empire of Passion (a.k.a. In the Realm of Passion) (a.k.a. Phantom Love) (Ai No Borei)	1967	2	5	1	2022-01-13 00:00:00	2022-03-17 00:00:00
+1945	Hudson Hawk	1989	4	5	4	2021-08-05 00:00:00	2021-07-02 00:00:00
+1946	Fat, Sick & Nearly Dead 2	1994	5	3	1	2021-06-01 00:00:00	2021-11-24 00:00:00
+1947	Used Cars	2010	2	5	4	2022-05-26 00:00:00	2022-03-27 00:00:00
+1948	Front of the Class	2005	1	5	2	2021-09-20 00:00:00	2021-08-07 00:00:00
+1949	Mighty, The	1992	5	3	4	2021-12-24 00:00:00	2021-09-24 00:00:00
+1950	Fahrenheit 9/11	2012	2	1	4	2021-11-28 00:00:00	2021-09-15 00:00:00
+1951	Furry Vengeance	1988	4	3	4	2021-06-19 00:00:00	2021-09-22 00:00:00
+1952	Hit, The	2010	4	5	5	2022-01-30 00:00:00	2021-08-10 00:00:00
+1953	It Happened on Fifth Avenue	2009	4	5	3	2021-06-20 00:00:00	2022-03-15 00:00:00
+1954	Zulu Dawn	2012	1	4	4	2021-09-09 00:00:00	2021-12-26 00:00:00
+1955	Hedd Wyn	2012	5	1	3	2021-06-17 00:00:00	2022-05-11 00:00:00
+1956	Leatherheads	2005	3	1	3	2021-11-01 00:00:00	2021-06-20 00:00:00
+1957	Bobby Deerfield	2011	3	1	5	2021-07-17 00:00:00	2021-09-13 00:00:00
+1958	Murphy's Romance	1998	4	4	5	2021-10-19 00:00:00	2021-10-03 00:00:00
+1959	Nickelodeon	1989	5	5	4	2021-09-18 00:00:00	2021-09-29 00:00:00
+1960	Stage Fright	2004	5	1	2	2021-08-19 00:00:00	2022-04-15 00:00:00
+1961	Fiancee, The (Parineeta)	2011	4	2	1	2022-05-16 00:00:00	2022-01-30 00:00:00
+1962	Souper, Le (Supper, The)	2006	5	4	3	2022-03-17 00:00:00	2022-02-14 00:00:00
+1963	Tart	1999	2	5	3	2021-10-07 00:00:00	2022-04-05 00:00:00
+1964	Godzilla vs. King Ghidorah (Gojira vs. Kingu Gidorâ)	2005	5	2	5	2021-09-10 00:00:00	2022-03-07 00:00:00
+1965	Return of Django (Son of Django) (Figlio di Django, Il)	2003	2	2	3	2021-07-26 00:00:00	2022-05-01 00:00:00
+1966	Room at the Top	2011	3	5	3	2022-02-08 00:00:00	2021-09-18 00:00:00
+1967	Dragonfly	1995	5	3	2	2021-12-31 00:00:00	2022-05-19 00:00:00
+1968	Fool There Was, A	2002	1	2	3	2022-01-20 00:00:00	2022-02-28 00:00:00
+1969	...All the Marbles (California Dolls, The)	1993	3	1	2	2022-05-07 00:00:00	2021-09-03 00:00:00
+1970	Inquisitor, The (a.k.a. Under Suspicion) (Garde à vue)	1998	2	4	1	2022-02-06 00:00:00	2022-03-28 00:00:00
+1971	SS Experiment Love Camp (Lager SSadis Kastrat Kommandantur)	1993	2	2	4	2021-10-18 00:00:00	2022-02-17 00:00:00
+1972	12 Years a Slave	2003	1	4	2	2021-10-20 00:00:00	2021-08-16 00:00:00
+1973	Decoy Bride, The	2006	1	4	2	2021-09-24 00:00:00	2021-12-15 00:00:00
+1974	Batman Unmasked: The Psychology of the Dark Knight	2008	3	3	3	2021-07-22 00:00:00	2022-03-18 00:00:00
+1975	Young Lieutenant, The (Le petit lieutenant)	1994	3	1	5	2021-06-05 00:00:00	2021-11-11 00:00:00
+1976	Dumb and Dumber To	2007	1	3	2	2021-07-25 00:00:00	2022-05-21 00:00:00
+1977	Butchered	1998	1	2	1	2021-07-14 00:00:00	2022-01-28 00:00:00
+1978	Jack the Giant Killer	2000	5	2	2	2022-04-14 00:00:00	2022-02-27 00:00:00
+1979	Tangled	1988	2	1	3	2021-12-31 00:00:00	2021-06-20 00:00:00
+1980	Jewel Robbery	1958	5	2	5	2022-04-07 00:00:00	2021-07-29 00:00:00
+1981	Hoodoo Ann	1966	4	5	5	2021-09-11 00:00:00	2021-09-27 00:00:00
+1982	Wild Women	1991	5	2	4	2022-02-11 00:00:00	2021-08-20 00:00:00
+1983	Woman in The Septic Tank, The (Ang Babae sa septic tank)	1993	1	5	2	2021-06-22 00:00:00	2021-10-17 00:00:00
+1984	Heartburn	2013	5	5	5	2021-08-22 00:00:00	2021-06-28 00:00:00
+1985	19th Wife, The	2010	5	2	2	2022-05-19 00:00:00	2021-08-07 00:00:00
+1986	Our Song	1998	1	1	4	2022-05-19 00:00:00	2021-10-17 00:00:00
+1987	Paimen, piika ja emäntä	2012	1	1	2	2022-04-16 00:00:00	2022-03-28 00:00:00
+1988	Dragon Seed	1993	3	5	2	2022-04-30 00:00:00	2022-03-14 00:00:00
+1989	Clone (Womb)	2006	2	1	3	2022-03-16 00:00:00	2022-03-01 00:00:00
+1990	Deadly Tower, The	2003	1	1	3	2021-11-24 00:00:00	2021-11-01 00:00:00
+1991	Adventure in Baltimore	1989	3	4	5	2021-10-21 00:00:00	2022-05-07 00:00:00
+1992	Boys Town	2008	3	2	1	2021-11-01 00:00:00	2021-09-07 00:00:00
+1993	Sleuth	2006	2	3	4	2022-03-11 00:00:00	2022-02-01 00:00:00
+1994	Hearts and Minds	1977	4	1	2	2022-02-03 00:00:00	2021-09-07 00:00:00
+1995	Balance, La	2003	1	3	3	2021-07-06 00:00:00	2021-08-17 00:00:00
+1996	Broken Arrow	2011	5	4	5	2021-07-02 00:00:00	2021-06-03 00:00:00
+1997	Samsara	1989	4	1	4	2021-09-07 00:00:00	2022-03-30 00:00:00
+1998	Case départ	2002	4	2	3	2022-01-22 00:00:00	2021-12-17 00:00:00
+1999	Colpo in canna	2001	2	4	3	2021-06-18 00:00:00	2021-12-14 00:00:00
+2000	Biggles	1996	2	1	2	2021-10-21 00:00:00	2021-06-06 00:00:00
+2001	Chromophobia	2000	5	4	1	2022-03-06 00:00:00	2022-05-02 00:00:00
+2002	Farewell to Arms, A	2002	4	1	3	2022-04-14 00:00:00	2021-09-01 00:00:00
+2003	Girl Who Talked to Dolphins, The	1991	5	4	1	2021-09-30 00:00:00	2021-09-24 00:00:00
+2004	Road to Morocco	2011	2	3	2	2021-12-30 00:00:00	2022-03-19 00:00:00
+2005	Toast of New Orleans, The	2009	3	2	5	2022-05-19 00:00:00	2022-01-15 00:00:00
+2006	Jane Eyre	1999	5	5	1	2021-08-31 00:00:00	2022-02-15 00:00:00
+2007	Dirty Movie	2008	3	2	2	2022-03-13 00:00:00	2022-01-11 00:00:00
+2008	American Reunion (American Pie 4)	2012	5	3	5	2022-03-13 00:00:00	2021-09-30 00:00:00
+2009	Screwed	1999	4	1	5	2021-06-11 00:00:00	2021-10-28 00:00:00
+2010	Beauty #2	1993	3	2	1	2021-10-02 00:00:00	2022-03-20 00:00:00
+2011	Ascent of Money, The	2010	4	2	1	2022-03-26 00:00:00	2022-02-13 00:00:00
+2012	Tokyo Story (Tôkyô monogatari)	2010	1	1	4	2022-04-18 00:00:00	2022-01-15 00:00:00
+2013	Blue Like Jazz	2003	2	2	3	2021-06-08 00:00:00	2021-11-28 00:00:00
+2014	Electra Glide in Blue	2010	2	1	4	2022-01-27 00:00:00	2021-08-24 00:00:00
+2015	...And Justice for All	2011	1	4	4	2022-03-10 00:00:00	2021-12-12 00:00:00
+2016	Isi & Disi: Amor a lo bestia	1986	4	5	5	2021-08-15 00:00:00	2022-02-21 00:00:00
+2017	Dog Run	2009	4	4	4	2021-08-21 00:00:00	2022-01-25 00:00:00
+2018	Bathory	1995	2	4	4	2021-06-14 00:00:00	2021-08-02 00:00:00
+2019	Love God?, The	2004	2	2	5	2021-12-23 00:00:00	2021-12-13 00:00:00
+2020	Forsaking All Others	2008	5	4	5	2022-04-07 00:00:00	2021-10-29 00:00:00
+2021	Returner (Ritaanaa)	2008	4	2	5	2021-11-23 00:00:00	2021-10-08 00:00:00
+2022	Elephant in the Living Room, The	2011	4	3	5	2022-03-31 00:00:00	2022-01-27 00:00:00
+2023	About Elly (Darbareye Elly)	2007	3	5	3	2022-04-13 00:00:00	2021-08-22 00:00:00
+2024	Badman's Country	2012	1	5	1	2021-10-20 00:00:00	2021-07-16 00:00:00
+2025	Foo Fighters: Back and Forth	2012	3	1	1	2022-04-17 00:00:00	2021-07-26 00:00:00
+2026	Planes: Fire & Rescue	2012	3	5	5	2021-11-28 00:00:00	2021-06-09 00:00:00
+2027	Where Is the Friend's Home? (Where Is My Friend's House?) (Khane-ye doust kodjast?)	2000	2	1	2	2021-08-28 00:00:00	2021-10-11 00:00:00
+2028	Finding a Family	2001	1	1	5	2022-03-16 00:00:00	2022-02-05 00:00:00
+2029	Magic in the Water	2009	3	1	5	2021-12-11 00:00:00	2021-06-25 00:00:00
+2030	Two Women (Ciociara, La)	2006	5	2	2	2021-09-11 00:00:00	2021-09-18 00:00:00
+2031	She's Gotta Have It	2002	1	3	5	2022-03-12 00:00:00	2021-06-01 00:00:00
+2032	Blind Fury	1985	4	1	4	2022-03-10 00:00:00	2021-09-09 00:00:00
+2033	Jackass Presents: Bad Grandpa .5	2006	1	5	1	2022-01-05 00:00:00	2021-06-24 00:00:00
+2034	Private	2008	1	5	2	2021-07-06 00:00:00	2021-10-15 00:00:00
+2035	Landscape Suicide	2000	2	5	1	2021-10-13 00:00:00	2022-03-02 00:00:00
+2036	The Prince	2007	1	4	3	2022-05-16 00:00:00	2022-02-24 00:00:00
+2037	Night Train	2001	3	1	5	2021-09-07 00:00:00	2021-12-30 00:00:00
+2038	Pushover	1965	3	1	4	2022-05-14 00:00:00	2021-12-06 00:00:00
+2039	Facing the Giants	2002	2	5	5	2021-07-11 00:00:00	2022-05-07 00:00:00
+2040	Fever Pitch	2011	3	1	2	2021-08-27 00:00:00	2021-06-17 00:00:00
+2041	Blue and the Gray, The	1988	3	3	1	2021-08-16 00:00:00	2022-02-08 00:00:00
+2042	Nanny McPhee	2010	4	2	3	2022-03-03 00:00:00	2022-02-27 00:00:00
+2043	Fear	1988	2	4	2	2021-11-11 00:00:00	2021-09-21 00:00:00
+2044	International, The	1995	4	2	4	2021-06-05 00:00:00	2021-09-25 00:00:00
+2045	Clean	2008	1	2	1	2022-01-10 00:00:00	2021-08-09 00:00:00
+2046	Kicking and Screaming	2002	3	5	2	2021-08-22 00:00:00	2021-06-13 00:00:00
+2047	Basket Case 3: The Progeny	1995	4	2	3	2021-08-17 00:00:00	2021-06-20 00:00:00
+2048	Ten Shrews, The (Kymmenen riivinrautaa)	2011	5	3	3	2022-03-23 00:00:00	2021-08-27 00:00:00
+2049	Design for Living	1992	3	3	2	2022-04-23 00:00:00	2021-10-14 00:00:00
+2050	Bella	1998	2	3	3	2022-04-06 00:00:00	2021-11-26 00:00:00
+2051	Private Lessons (Élève libre)	2003	4	1	5	2021-09-17 00:00:00	2021-06-17 00:00:00
+2052	Nicotina	2004	2	3	5	2021-06-13 00:00:00	2021-06-27 00:00:00
+2053	Enemy Within, The (O ehthros mou)	2008	5	5	1	2021-10-05 00:00:00	2022-04-16 00:00:00
+2054	Suspicious River	2003	2	3	5	2021-09-13 00:00:00	2022-05-06 00:00:00
+2055	I Know What I Saw	1986	4	5	4	2021-10-04 00:00:00	2022-05-29 00:00:00
+2056	The Adventures of Hercules	1993	3	5	4	2021-09-24 00:00:00	2022-02-23 00:00:00
+2057	Atomic Submarine, The	2010	5	4	4	2021-12-10 00:00:00	2022-04-19 00:00:00
+2058	Fall of the Roman Empire, The	2003	2	2	3	2021-10-25 00:00:00	2022-05-04 00:00:00
+2059	Shanghai Calling	2011	3	1	2	2021-11-12 00:00:00	2021-11-28 00:00:00
+2060	Head Above Water	2012	1	2	4	2021-12-17 00:00:00	2021-07-28 00:00:00
+2061	College Road Trip	2010	5	1	1	2022-05-04 00:00:00	2022-05-20 00:00:00
+2062	Next	1998	4	5	4	2022-02-17 00:00:00	2021-06-11 00:00:00
+2063	Bizarre	2006	5	3	1	2022-01-17 00:00:00	2021-09-18 00:00:00
+2064	See You Tomorrow, Everyone	2012	4	5	5	2021-12-27 00:00:00	2022-05-10 00:00:00
+2065	The Phantom Light	2001	5	4	1	2021-11-18 00:00:00	2022-01-02 00:00:00
+2066	Starship Troopers: Invasion	2006	3	3	5	2022-02-06 00:00:00	2022-05-15 00:00:00
+2067	Hider in the House	2002	2	2	5	2022-01-07 00:00:00	2021-11-07 00:00:00
+2068	Fiancee, The (Parineeta)	1998	4	5	5	2022-02-12 00:00:00	2022-05-13 00:00:00
+2069	Yeh Jawaani Hai Deewani	1967	1	2	4	2022-04-29 00:00:00	2022-04-11 00:00:00
+2070	Little Lord Fauntleroy	2009	3	1	4	2021-11-22 00:00:00	2021-12-08 00:00:00
+2071	Wild Side	1996	5	3	4	2021-09-18 00:00:00	2022-02-06 00:00:00
+2072	Global Metal	2001	4	5	3	2021-09-08 00:00:00	2021-09-25 00:00:00
+2073	Throw Away Your Books, Rally in the Streets	1995	3	1	3	2021-07-20 00:00:00	2022-02-16 00:00:00
+2074	Das Experiment (Experiment, The)	1994	5	2	3	2022-03-11 00:00:00	2021-07-14 00:00:00
+2075	Amish Grace	2007	2	2	2	2022-02-27 00:00:00	2022-01-30 00:00:00
+2076	Pebble and the Penguin, The	2011	3	1	1	2021-12-01 00:00:00	2021-12-14 00:00:00
+2077	Fangs of the Living Dead (Malenka)	2010	4	2	1	2022-02-20 00:00:00	2022-02-08 00:00:00
+2078	Smiley	2008	5	3	5	2022-05-08 00:00:00	2022-03-09 00:00:00
+2079	Eternally Yours	2005	4	4	1	2022-03-10 00:00:00	2021-06-23 00:00:00
+2080	The Inner Circle	1998	5	5	4	2022-04-08 00:00:00	2022-02-25 00:00:00
+2081	Wounds, The (Rane)	1985	4	4	5	2021-09-09 00:00:00	2021-06-29 00:00:00
+2082	Quiet Man, The	2004	4	5	3	2022-04-06 00:00:00	2021-06-17 00:00:00
+2083	Awakening, The	2010	1	5	4	2021-11-03 00:00:00	2021-10-04 00:00:00
+2084	Black Tights (1-2-3-4 ou Les Collants noirs)	1988	5	5	2	2022-03-12 00:00:00	2021-10-01 00:00:00
+2085	Manufacturing Reality: Slavoj Zizek and the Reality of the Virtual (Slavoj Zizek: The Reality of the Virtual)	1998	5	3	1	2022-04-23 00:00:00	2021-08-17 00:00:00
+2086	Anne of Green Gables: The Sequel (a.k.a. Anne of Avonlea)	2002	4	1	2	2021-07-15 00:00:00	2021-09-01 00:00:00
+2087	Stones in Exile	1991	4	2	3	2021-06-29 00:00:00	2021-09-02 00:00:00
+2088	Rabbit Test	2009	2	1	2	2021-08-18 00:00:00	2021-11-01 00:00:00
+2089	Australian Atomic Confessions	1999	1	2	4	2021-06-26 00:00:00	2021-07-15 00:00:00
+2090	Redwood Highway	2008	4	5	1	2022-03-24 00:00:00	2021-10-13 00:00:00
+2091	Don't Look Back	2009	3	5	1	2021-11-05 00:00:00	2022-03-31 00:00:00
+2092	Good Morning, Night (Buongiorno, notte)	2012	4	3	1	2022-02-24 00:00:00	2021-06-22 00:00:00
+2093	Tyler Perry's Madea's Witness Protection	2007	1	4	3	2021-11-18 00:00:00	2022-02-12 00:00:00
+2094	Guys and Dolls	2006	3	3	1	2021-10-07 00:00:00	2021-07-31 00:00:00
+2095	Two of Us, The (Le vieil homme et l'enfant)	2005	4	3	2	2021-10-29 00:00:00	2021-10-30 00:00:00
+2096	Object of My Affection, The	2009	3	2	5	2022-01-23 00:00:00	2022-03-27 00:00:00
+2097	Paradise, Hawaiian Style	2002	3	5	4	2022-02-25 00:00:00	2021-06-18 00:00:00
+2098	That's Entertainment, Part II	2013	1	3	2	2022-01-07 00:00:00	2021-12-10 00:00:00
+2099	Ilsa, She Wolf of the SS	1999	1	1	4	2021-06-06 00:00:00	2022-05-17 00:00:00
+2100	Jim Gaffigan: Obsessed	2010	2	3	3	2022-03-26 00:00:00	2022-04-25 00:00:00
+2101	Four Eyes and Six-Guns	1997	1	3	5	2021-10-11 00:00:00	2021-09-12 00:00:00
+2102	Urban Ghost Story	2012	3	4	2	2021-10-01 00:00:00	2022-02-02 00:00:00
+2103	Vacancy	2006	1	3	3	2022-01-20 00:00:00	2021-10-22 00:00:00
+2104	Desire: The Vampire	2009	2	4	1	2021-11-10 00:00:00	2022-05-18 00:00:00
+2105	Renoir	2009	3	4	4	2022-03-24 00:00:00	2021-08-24 00:00:00
+2106	Earth Girls Are Easy	2004	5	2	3	2021-11-23 00:00:00	2022-01-09 00:00:00
+2107	Housemaid, The (Hanyo)	2011	1	4	2	2022-05-27 00:00:00	2021-11-21 00:00:00
+\.
+
+
+--
+-- Data for Name: genres; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.genres (id, name, description, created_at, updated_at) FROM stdin;
+1	Comedy|Drama	vel enim sit amet nunc viverra dapibus nulla suscipit ligula in lacus curabitur at ipsum ac tellus	2021-08-16 00:00:00	2021-10-02 00:00:00
+2	Drama|Romance	integer a nibh in quis justo maecenas rhoncus aliquam lacus morbi quis	2021-08-26 00:00:00	2022-05-11 00:00:00
+3	Drama|Romance	donec quis orci eget orci vehicula condimentum curabitur in libero ut massa	2021-09-20 00:00:00	2021-10-24 00:00:00
+4	Comedy|Romance	vel enim sit amet nunc viverra dapibus nulla suscipit ligula in lacus curabitur at ipsum ac tellus semper interdum mauris	2022-03-08 00:00:00	2022-01-04 00:00:00
+6	Sci-fi	test Genre	2022-05-30 06:11:28.85856	2022-05-30 06:11:43.707494
+\.
+
+
+--
+-- Data for Name: producers; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.producers (id, name, born, created_at, updated_at) FROM stdin;
+1	Sven Feaver	3265 Farmco Terrace	2021-11-25 00:00:00	2022-03-14 00:00:00
+3	Gray Trimnell	71190 Saint Paul Trail	2021-12-20 00:00:00	2021-07-09 00:00:00
+4	Dominick McAuley	11566 Corscot Crossing	2022-03-03 00:00:00	2022-02-14 00:00:00
+5	Gan Firminger	87 North Avenue	2021-10-02 00:00:00	2021-11-11 00:00:00
+2	Alonso Toghill	4 Division Park 	2021-09-11 00:00:00	2022-05-30 05:52:36.587161
+6	Adit Gustiana R	Cilampeni	2022-05-30 06:14:43.449792	2022-05-30 06:14:43.449792
+\.
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.schema_migrations (version) FROM stdin;
+20220528131052
+20220529075130
+20220529075313
+20220529075439
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.users (id, email, name, password_digest, created_at, updated_at) FROM stdin;
+1	adit.gustianar@gmail.com	Adit Gustiana R	$2a$12$JEHfNvGq5/dg2f859OtkHeaKjIFChTKHAlMluE6KnD8vCe50dSPo6	2022-05-29 12:39:18.428717	2022-05-30 06:28:02.379056
+\.
+
+
+--
+-- Name: films_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.films_id_seq', 2107, true);
+
+
+--
+-- Name: genres_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.genres_id_seq', 6, true);
+
+
+--
+-- Name: producers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.producers_id_seq', 6, true);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 1, true);
+
+
+--
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: films films_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.films
+    ADD CONSTRAINT films_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: genres genres_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.genres
+    ADD CONSTRAINT genres_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: producers producers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.producers
+    ADD CONSTRAINT producers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

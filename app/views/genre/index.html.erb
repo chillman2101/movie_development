@@ -1,0 +1,38 @@
+  <% if Current.user %>
+  
+<div class="container">
+    <%= link_to  add_genre_path, class:'btn btn-primary btn-rounded' do %>
+     <span class="fa fa-plus-square "> Add Genre</span>
+    <%end%>
+	<table id="example" class="table table-striped table-bordered" style="width: 1000px;">
+		<thead>
+			<th>Genre Name</th>
+			<th>Description</th>
+      <th>Action</th>
+		</thead>
+		<tbody>
+			
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#example').DataTable({
+  ajax: {
+    url: '/get_datagenre',
+    dataSrc: '',
+    serverSide: true,
+  },
+  columns: [
+    {title: 'Genre Name', data: 'name'},
+    {title: 'Description', data: 'description'},
+      {title: 'Action',data: 'id', render: function(data, type, row){return "<a href='"+ data + "/genre/edit/'>Edit</a> "}},
+  ]
+});
+  });
+</script>
+    <% else %>
+    <%= link_to 'Sign Up', sign_up_path %>
+    or
+    <%= link_to 'Login', sign_in_path %>
+  <% end %>
